@@ -25,6 +25,11 @@ class Event extends Model
         return $this->belongsTo(Page::class);
     }
 
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
+    }
+
     public function users()
     {
         return $this->belongsToMany(User::class);

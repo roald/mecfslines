@@ -18,4 +18,9 @@ class Block extends Model
     {
         return $this->belongsTo(Page::class);
     }
+
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
+    }
 }

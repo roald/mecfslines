@@ -14,4 +14,9 @@ class Membership extends Model
     {
         return $this->hasMany(Subscription::class);
     }
+
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
+    }
 }
