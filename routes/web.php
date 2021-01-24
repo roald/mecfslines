@@ -2,6 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ActionController;
+use App\Http\Controllers\BlockController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\MembershipController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\TagController;
+use App\Http\Controllers\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,5 +29,27 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+
+Route::prefix('admin')->middleware(['auth'])->group(function () {
+    Route::get('pages/{page}/remove', [PageController::class, 'remove'])->name('pages.remove');
+    Route::resource('pages', PageController::class);
+    Route::get('blocks/{block}/remove', [BlockController::class, 'remove'])->name('blocks.remove');
+    Route::resource('pages.blocks', BlockController::class)->shallow();
+    Route::resource('blocks.actions', ActionController::class)->shallow();
+
+    Route::get('events/{event}/remove', [EventController::class, 'remove'])->name('events.remove');
+    Route::get('memberships/{membership}/remove', [MembershipController::class, 'remove'])->name('memberships.remove');
+    Route::resources([
+        'events' => EventController::class,
+        'memberships' => MembershipController::class,
+        'orders' => OrderController::class,
+        'products' => ProductController::class,
+        'tags' => TagController::class,
+        'subscriptions' => SubscriptionsController::class,
+        'users' => UserController::class
+    ]);
+    Route::resource('orders.payments', PaymentController::class)->shallow();
+});
 
 require __DIR__.'/auth.php';
