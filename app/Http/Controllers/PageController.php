@@ -2,84 +2,56 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PageRequest;
 use App\Models\Page;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $pages = Page::orderBy('order', 'asc')->get();
+        return view('pages.index')->with('pages', $pages);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $page = new Page([
+            'order' => Page::max('order') + 1,
+        ]);
+        return view('pages.edit')->with('page', $page);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(PageRequest $request)
     {
-        //
+        $page = Page::create($request->all());
+        return redirect()->route('pages.show', $page);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Page  $page
-     * @return \Illuminate\Http\Response
-     */
     public function show(Page $page)
     {
-        //
+        return view('pages.show')->with('page', $page);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Page  $page
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Page $page)
     {
-        //
+        return view('pages.edit')->with('page', $page);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Page  $page
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Page $page)
+    public function update(PageRequest $request, Page $page)
     {
-        //
+        $page->fill($request->all())->save();
+        return redirect()->route('pages.show', $page);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Page  $page
-     * @return \Illuminate\Http\Response
-     */
+    public function remove(Page $page)
+    {
+        return view('pages.remove')->with('page', $page);
+    }
+
     public function destroy(Page $page)
     {
-        //
+        $page->forceDelete();
+        return redirect()->route('pages.index');
     }
 }

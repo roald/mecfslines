@@ -2,84 +2,54 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ActionRequest;
 use App\Models\Action;
+use App\Models\Block;
+use App\Models\Page;
 use Illuminate\Http\Request;
 
 class ActionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(Block $block)
     {
-        //
+        return redirect()->route('blocks.show', $block);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create(Block $block)
     {
-        //
+        $action = new Action(['block' => $block]);
+        $pages = Page::orderBy('title', 'asc')->get();
+        return view('actions.edit')->with('action', $action)->with('pages', $pages);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(ActionRequest $request, Block $block)
     {
-        //
+        $action = new Action($request->all());
+        $block->actions()->save($action);
+        return redirect()->route('actions.show', $action);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Action  $action
-     * @return \Illuminate\Http\Response
-     */
     public function show(Action $action)
     {
-        //
+        return redirect()->route('blocks.show', $action->block);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Action  $action
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Action $action)
     {
-        //
+        $pages = Page::orderBy('title', 'asc')->get();
+        return view('actions.edit')->with('action', $action)->with('pages', $pages);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Action  $action
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Action $action)
+    public function update(ActionRequest $request, Action $action)
     {
-        //
+        $action->fill($request->all())->save();
+        return redirect()->route('actions.show', $action);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Action  $action
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Action $action)
     {
-        //
+        $block = $action->block;
+        $action->delete();
+        return redirect()->route('blocks.show', $block);
     }
 }

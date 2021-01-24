@@ -2,84 +2,53 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SubscriptionRequest;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
 
 class SubscriptionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        return redirect()->route('users.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $subscription = new Subscription();
+        return view('subscriptions.edit')->with('subscription', $subscription);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(SubscriptionRequest $request)
     {
-        //
+        $subscription = Subscription::create($request->all());
+        return redirect()->route('subscriptions.show', $subscription);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Subscription  $subscription
-     * @return \Illuminate\Http\Response
-     */
     public function show(Subscription $subscription)
     {
-        //
+        return view('subscriptions.show')->with('subscription', $subscription);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Subscription  $subscription
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Subscription $subscription)
     {
-        //
+        return view('subscriptions.edit')->with('subscription', $subscription);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Subscription  $subscription
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Subscription $subscription)
+    public function update(SubscriptionRequest $request, Subscription $subscription)
     {
-        //
+        $subscription->fill($request->all())->save();
+        return redirect()->route('subscriptions.show', $subscription);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Subscription  $subscription
-     * @return \Illuminate\Http\Response
-     */
+    public function remove(Subscription $subscription)
+    {
+        return view('subscriptions.remove')->with('subscription', $subscription);
+    }
+
     public function destroy(Subscription $subscription)
     {
-        //
+        $subscription->delete();
+        return redirect()->route('subscriptions.index');
     }
 }

@@ -2,84 +2,59 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BlockRequest;
 use App\Models\Block;
+use App\Models\Page;
 use Illuminate\Http\Request;
 
 class BlockController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function index(Page $page)
     {
-        //
+        return redirect()->route('pages.show', $page);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create(Page $page)
     {
-        //
+        $block = new Block([
+            'page' => $page,
+            'order' => $page->blocks()->max('order') + 1,
+        ]);
+        return view('blocks.edit')->with('block', $block);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(BlockRequest $request, Page $page)
     {
-        //
+        $block = new Block($request->all());
+        $page->blocks()->save($block);
+        return redirect()->route('blocks.show', $block);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Block  $block
-     * @return \Illuminate\Http\Response
-     */
     public function show(Block $block)
     {
-        //
+        return view('blocks.show')->with('block', $block);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Block  $block
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Block $block)
     {
-        //
+        return view('blocks.edit')->with('block', $block);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Block  $block
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Block $block)
+    public function update(BlockRequest $request, Block $block)
     {
-        //
+        $block->fill($request->all())->save();
+        return redirect()->route('blocks.show', $block);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Block  $block
-     * @return \Illuminate\Http\Response
-     */
+    public function remove(Block $block)
+    {
+        return view('blocks.remove')->with('block', $block);
+    }
+
     public function destroy(Block $block)
     {
-        //
+        $page = $block->page;
+        $block->delete();
+        return redirect()->route('pages.blocks.index', $page);
     }
 }

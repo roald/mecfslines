@@ -2,84 +2,54 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MembershipRequest;
 use App\Models\Membership;
 use Illuminate\Http\Request;
 
 class MembershipController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $memberships = Membership::orderBy('name', 'asc')->get();
+        return view('memberships.index')->with('memberships', $memberships);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $membership = new Membership();
+        return view('memberships.edit')->with('membership', $membership);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(MembershipRequest $request)
     {
-        //
+        $membership = Membership::create($request->all());
+        return redirect()->route('memberships.show', $membership);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Membership  $membership
-     * @return \Illuminate\Http\Response
-     */
     public function show(Membership $membership)
     {
-        //
+        return view('memberships.show')->with('membership', $membership);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Membership  $membership
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Membership $membership)
     {
-        //
+        return view('memberships.edit')->with('membership', $membership);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Membership  $membership
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Membership $membership)
+    public function update(MembershipRequest $request, Membership $membership)
     {
-        //
+        $membership->fill($request->all())->save();
+        return redirect()->route('memberships.show', $membership);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Membership  $membership
-     * @return \Illuminate\Http\Response
-     */
+    public function remove(Membership $membership)
+    {
+        return view('memberships.remove')->with('membership', $membership);
+    }
+
     public function destroy(Membership $membership)
     {
-        //
+        $membership->delete();
+        return redirect()->route('memberships.index');
     }
 }
