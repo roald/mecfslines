@@ -10,6 +10,10 @@ class Page extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = ['title', 'slug', 'description', 'order', 'menu', 'status', 'type'];
+
+    public static $stati = ['active', 'concept'];
+
     public function actions()
     {
         return $this->hasMany(Action::class);

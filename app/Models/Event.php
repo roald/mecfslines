@@ -10,10 +10,14 @@ class Event extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = ['title', 'slug', 'type', 'description', 'started_at', 'ended_at'];
+
     protected $casts = [
         'started_at' => 'datetime',
         'ended_at' => 'datetime',
     ];
+
+    public static $types = ['default'];
 
     public function orders()
     {

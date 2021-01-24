@@ -23,6 +23,7 @@ class CreatePagesTable extends Migration
             $table->text('description')->nullable();
 
             $table->string('status', 25)->default('active');
+            $table->integer('order')->default(1);
             $table->boolean('menu')->default(false);
 
             $table->softDeletes();

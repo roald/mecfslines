@@ -10,6 +10,9 @@ class Product extends Model
 {
     use HasFactory, SoftDeletes;
 
+    public static $stati = ['available', 'unavailable', 'hidden'];
+    public static $types = ['product'];
+
     public function orders()
     {
         return $this->belongsToMany(Order::class);

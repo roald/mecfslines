@@ -9,6 +9,10 @@ class Action extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['block', 'type', 'action', 'target', 'order', 'role'];
+
+    public static $types = ['page', 'url'];
+
     public function block()
     {
         return $this->belongsTo(Block::class);

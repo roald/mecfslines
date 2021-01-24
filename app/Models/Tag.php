@@ -9,6 +9,10 @@ class Tag extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'type', 'description', 'slug'];
+
+    public static $types = ['keyword'];
+
     public function blocks()
     {
         return $this->morphedByMany(Block::class, 'taggable');

@@ -9,6 +9,10 @@ class Block extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['page', 'type', 'order', 'heading', 'topic', 'body'];
+
+    public static $types = ['header', 'text', 'footer'];
+
     public function actions()
     {
         return $this->hasMany(Action::class);
