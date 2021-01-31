@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EventRequest;
 use App\Models\Event;
+use App\Models\Page;
 
 class EventController extends Controller
 {
@@ -50,5 +51,22 @@ class EventController extends Controller
     {
         $event->forceDelete();
         return redirect()->route('events.index');
+    }
+
+    public function createBlock(Event $event)
+    {
+        if( is_null($event->page) ) {
+            $page = Page::create([
+                'title' => $event->title,
+                'slug' => 'event_'. $event->id,
+                'order' => 1,
+                'type' => 'event',
+            ]);
+            $event->page_id = $page->id;
+            $event->save();
+            $event->refresh();
+        }
+
+        return redirect()->route('pages.blocks.create', $event->page);
     }
 }

@@ -41,6 +41,7 @@ Route::prefix('admin')->middleware(['verified', 'auth.admin'])->group(function (
     Route::resource('pages.blocks', BlockController::class)->shallow();
     Route::resource('blocks.actions', ActionController::class)->shallow();
 
+    Route::get('events/{event}/blocks/create', [EventController::class, 'createBlock'])->name('events.blocks.create');
     Route::get('events/{event}/remove', [EventController::class, 'remove'])->name('events.remove');
     Route::get('memberships/{membership}/remove', [MembershipController::class, 'remove'])->name('memberships.remove');
     Route::get('products/{product}/remove', [ProductController::class, 'remove'])->name('products.remove');

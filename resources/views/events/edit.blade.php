@@ -19,7 +19,7 @@
             <ol class="flex items-center space-x-4">
               <li>
                 <div>
-                  <a href="{{ route('events.index') }}" class="text-sm font-medium text-gray-500 hover:text-gray-700">{{ __('events') }}</a>
+                  <a href="{{ route('events.index') }}" class="text-sm font-medium text-gray-500 hover:text-gray-700">{{ __('Events') }}</a>
                 </div>
               </li>
               @if( $event->exists )

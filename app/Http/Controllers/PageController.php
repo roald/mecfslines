@@ -9,7 +9,7 @@ class PageController extends Controller
 {
     public function index()
     {
-        $pages = Page::orderBy('order', 'asc')->get();
+        $pages = Page::where('type', 'page')->orderBy('order', 'asc')->get();
         return view('pages.index')->with('pages', $pages);
     }
 
@@ -29,6 +29,8 @@ class PageController extends Controller
 
     public function show(Page $page)
     {
+        if( $page->type == 'event' ) return redirect()->route('events.show', $page->event);
+
         return view('pages.show')->with('page', $page);
     }
 
