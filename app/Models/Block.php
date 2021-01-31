@@ -11,7 +11,12 @@ class Block extends Model
 
     protected $fillable = ['page', 'type', 'order', 'heading', 'topic', 'body'];
 
-    public static $types = ['header', 'text', 'footer'];
+    public static $types = [
+        'general' => ['header', 'text', 'footer'],
+        'events' => ['event-list', 'event-detail'],
+        'products' => ['product-list', 'product-detail'],
+        'memberships' => ['membership-list'],
+    ];
 
     public function actions()
     {

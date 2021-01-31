@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\Block;
+use Illuminate\Support\Arr;
 
 class BlockRequest extends BaseRequest
 {
@@ -24,7 +25,7 @@ class BlockRequest extends BaseRequest
     public function rules()
     {
         return [
-            'type' => 'required|in:'. join(',', Block::$types),
+            'type' => 'required|in:'. join(',', Arr::flatten(Block::$types)),
             'order' => 'required|integer|min:1',
             'heading' => 'required|min:3',
             'topic' => '',
