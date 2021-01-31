@@ -44,6 +44,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     Route::get('events/{event}/remove', [EventController::class, 'remove'])->name('events.remove');
     Route::get('memberships/{membership}/remove', [MembershipController::class, 'remove'])->name('memberships.remove');
     Route::get('products/{product}/remove', [ProductController::class, 'remove'])->name('products.remove');
+    Route::get('users/{user}/remove', [UserController::class, 'remove'])->name('users.remove');
     Route::resources([
         'events' => EventController::class,
         'memberships' => MembershipController::class,

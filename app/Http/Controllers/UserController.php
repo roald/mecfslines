@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -15,31 +15,38 @@ class UserController extends Controller
 
     public function create()
     {
-        //
+        return redirect()->route('users.index');
     }
 
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $user = User::create($request->allValidated());
+        return redirect()->route('users.show', $user);
     }
 
     public function show(User $user)
     {
-        //
+        return view('users.show')->with('user', $user);
     }
 
     public function edit(User $user)
     {
-        //
+        return view('users.edit')->with('user', $user);
     }
 
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
-        //
+        $user->fill($request->allValidated())->save();
+        return redirect()->route('users.show', $user);
+    }
+
+    public function remove(User $user)
+    {
+        return redirect()->route('users.show', $user);
     }
 
     public function destroy(User $user)
     {
-        //
+        return redirect()->route('users.show', $user);
     }
 }
