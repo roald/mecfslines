@@ -148,6 +148,15 @@
                   </div>
 
                   <div class="col-span-6">
+                    <label for="page_status" class="block text-sm font-medium text-gray-700">{{ __('status') }}</label>
+                    <select name="status" id="page_status" class="mt-1 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                      @foreach(App\Models\Page::$stati as $status)
+                        <option value="{{ $status }}" @if(old('status', $page->status) == $status) selected @endif>{{ __($status) }}</option>
+                      @endforeach
+                    </select>
+                  </div>
+
+                  <div class="col-span-6">
                     <div class="text-sm font-medium text-gray-700">{{ __('Menu') }}</div>
                     <div class="flex items-start mt-1">
                       <div class="h-5 flex items center">
