@@ -138,7 +138,12 @@
 
                   <div class="col-span-6">
                     <label for="membership_price" class="block text-sm font-medium text-gray-700">{{ __('Price') }}</label>
-                    <input type="number" name="price" id="membership_price" value="{{ old('price', $membership->price) }}" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" min="0" step="0.01">
+                    <div class="mt-1 relative rounded-md shadow-sm">
+                      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <span class="text-gray-500 sm:text-sm">€</span>
+                      </div>
+                      <input type="number" name="price" id="membership_price" value="{{ old('price', $membership->price) }}" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 sm:text-sm border-gray-300 rounded-md" min="0" step="0.01">
+                    </div>
                   </div>
 
                   <div class="col-span-6">
