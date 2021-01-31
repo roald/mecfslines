@@ -34,7 +34,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 
-Route::prefix('admin')->middleware(['auth'])->group(function () {
+Route::prefix('admin')->middleware(['verified', 'auth.admin'])->group(function () {
     Route::get('pages/{page}/remove', [PageController::class, 'remove'])->name('pages.remove');
     Route::resource('pages', PageController::class);
     Route::get('blocks/{block}/remove', [BlockController::class, 'remove'])->name('blocks.remove');
