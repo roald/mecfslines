@@ -8,6 +8,9 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 
@@ -40,13 +43,14 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
 
     Route::get('events/{event}/remove', [EventController::class, 'remove'])->name('events.remove');
     Route::get('memberships/{membership}/remove', [MembershipController::class, 'remove'])->name('memberships.remove');
+    Route::get('products/{product}/remove', [ProductController::class, 'remove'])->name('products.remove');
     Route::resources([
         'events' => EventController::class,
         'memberships' => MembershipController::class,
         'orders' => OrderController::class,
         'products' => ProductController::class,
         'tags' => TagController::class,
-        'subscriptions' => SubscriptionsController::class,
+        'subscriptions' => SubscriptionController::class,
         'users' => UserController::class
     ]);
     Route::resource('orders.payments', PaymentController::class)->shallow();

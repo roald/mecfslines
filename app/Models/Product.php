@@ -10,6 +10,8 @@ class Product extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = ['name', 'slug', 'description', 'price', 'type', 'status'];
+
     public static $stati = ['available', 'unavailable', 'hidden'];
     public static $types = ['product'];
 
