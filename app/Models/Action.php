@@ -9,7 +9,7 @@ class Action extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['block', 'type', 'action', 'target', 'order', 'role'];
+    protected $fillable = ['block', 'type', 'action', 'target', 'page_id', 'order', 'role'];
 
     public static $types = ['page', 'url'];
 
