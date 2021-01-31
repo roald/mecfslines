@@ -21,7 +21,7 @@ class CreateBlocksTable extends Migration
 
             $table->string('heading', 100);
             $table->string('topic', 50)->nullable();
-            $table->text('body');
+            $table->text('body')->nullable();
 
             $table->timestamps();
         });

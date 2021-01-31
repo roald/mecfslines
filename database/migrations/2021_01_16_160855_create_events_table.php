@@ -20,7 +20,7 @@ class CreateEventsTable extends Migration
             $table->string('title', 190);
             $table->string('slug', 50);
             $table->string('type', 50);
-            $table->text('description');
+            $table->text('description')->nullable();
 
             $table->dateTime('started_at');
             $table->dateTime('ended_at');

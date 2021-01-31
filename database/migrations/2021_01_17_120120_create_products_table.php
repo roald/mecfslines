@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
 
             $table->string('name', 100);
             $table->string('slug', 50);
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->decimal('price', 5, 2);
             $table->string('type', 25);
             $table->string('status', 25);
