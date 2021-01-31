@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TagRequest;
 use App\Models\Tag;
-use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
@@ -22,7 +21,7 @@ class TagController extends Controller
 
     public function store(TagRequest $request)
     {
-        $tag = Tag::create($request->all());
+        $tag = Tag::create($request->allValidated());
         return redirect()->route('tags.show', $tag);
     }
 
@@ -38,7 +37,7 @@ class TagController extends Controller
 
     public function update(TagRequest $request, Tag $tag)
     {
-        $tag->fill($request->all())->save();
+        $tag->fill($request->allValidated())->save();
         return redirect()->route('tags.show', $tag);
     }
 

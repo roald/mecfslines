@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderRequest;
 use App\Models\Order;
-use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
@@ -22,7 +21,7 @@ class OrderController extends Controller
 
     public function store(OrderRequest $request)
     {
-        $order = Order::create($request->all());
+        $order = Order::create($request->allValidated());
         return redirect()->route('orders.show', $order);
     }
 
@@ -38,7 +37,7 @@ class OrderController extends Controller
 
     public function update(OrderRequest $request, Order $order)
     {
-        $order->fill($request->all())->save();
+        $order->fill($request->allValidated())->save();
         return redirect()->route('orders.show', $order);
     }
 

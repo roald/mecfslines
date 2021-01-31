@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use App\Models\Membership;
-use Illuminate\Foundation\Http\FormRequest;
 
-class MembershipRequest extends FormRequest
+class MembershipRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.

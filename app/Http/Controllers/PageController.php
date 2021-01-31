@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PageRequest;
 use App\Models\Page;
-use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
@@ -24,7 +23,7 @@ class PageController extends Controller
 
     public function store(PageRequest $request)
     {
-        $page = Page::create($request->all());
+        $page = Page::create($request->allValidated());
         return redirect()->route('pages.show', $page);
     }
 
@@ -40,7 +39,7 @@ class PageController extends Controller
 
     public function update(PageRequest $request, Page $page)
     {
-        $page->fill($request->all())->save();
+        $page->fill($request->allValidated())->save();
         return redirect()->route('pages.show', $page);
     }
 

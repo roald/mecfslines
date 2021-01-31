@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use App\Models\Action;
-use Illuminate\Foundation\Http\FormRequest;
 
-class ActionRequest extends FormRequest
+class ActionRequest extends BaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BlockRequest;
 use App\Models\Block;
 use App\Models\Page;
-use Illuminate\Http\Request;
 
 class BlockController extends Controller
 {
@@ -25,7 +24,7 @@ class BlockController extends Controller
 
     public function store(BlockRequest $request, Page $page)
     {
-        $block = new Block($request->all());
+        $block = new Block($request->allValidated());
         $page->blocks()->save($block);
         return redirect()->route('blocks.show', $block);
     }
@@ -42,7 +41,7 @@ class BlockController extends Controller
 
     public function update(BlockRequest $request, Block $block)
     {
-        $block->fill($request->all())->save();
+        $block->fill($request->allValidated())->save();
         return redirect()->route('blocks.show', $block);
     }
 

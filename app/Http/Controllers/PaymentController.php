@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PaymentRequest;
 use App\Models\Order;
 use App\Models\Payment;
-use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
@@ -22,7 +21,7 @@ class PaymentController extends Controller
 
     public function store(PaymentRequest $request, Order $order)
     {
-        $payment = new Payment($request->all());
+        $payment = new Payment($request->allValidated());
         $order->payments()->save($payment);
         return redirect()->route('payments.show', $payment);
     }
@@ -39,7 +38,7 @@ class PaymentController extends Controller
 
     public function update(PaymentRequest $request, Payment $payment)
     {
-        $payment->fill($request->all())->save();
+        $payment->fill($request->allValidated())->save();
         return redirect()->route('payments.show', $payment);
     }
 

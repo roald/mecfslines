@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MembershipRequest;
 use App\Models\Membership;
-use Illuminate\Http\Request;
 
 class MembershipController extends Controller
 {
@@ -22,7 +21,7 @@ class MembershipController extends Controller
 
     public function store(MembershipRequest $request)
     {
-        $membership = Membership::create($request->all());
+        $membership = Membership::create($request->allValidated());
         return redirect()->route('memberships.show', $membership);
     }
 
@@ -38,7 +37,7 @@ class MembershipController extends Controller
 
     public function update(MembershipRequest $request, Membership $membership)
     {
-        $membership->fill($request->all())->save();
+        $membership->fill($request->allValidated())->save();
         return redirect()->route('memberships.show', $membership);
     }
 

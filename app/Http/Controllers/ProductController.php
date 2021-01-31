@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
 use App\Models\Product;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -22,7 +21,7 @@ class ProductController extends Controller
 
     public function store(ProductRequest $request)
     {
-        $product = Product::create($request->all());
+        $product = Product::create($request->allValidated());
         return redirect()->route('products.show', $product);
     }
 
@@ -38,7 +37,7 @@ class ProductController extends Controller
 
     public function update(ProductRequest $request, Product $product)
     {
-        $product->fill($request->all())->save();
+        $product->fill($request->allValidated())->save();
         return redirect()->route('products.show', $product);
     }
 

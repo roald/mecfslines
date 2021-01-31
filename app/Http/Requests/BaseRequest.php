@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Block;
+use Illuminate\Foundation\Http\FormRequest;
 
-class BlockRequest extends BaseRequest
+class BaseRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class BlockRequest extends BaseRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -24,11 +24,18 @@ class BlockRequest extends BaseRequest
     public function rules()
     {
         return [
-            'type' => 'required|in:'. join(',', Block::$types),
-            'order' => 'required|integer|min:1',
-            'heading' => 'required|min:3',
-            'topic' => '',
-            'body' => '',
+            //
         ];
+    }
+
+    /**
+     * Return validated variables from the request
+     *
+     * @return array
+     */
+    public function allValidated()
+    {
+        $keys = array_keys($this->rules());
+        return $this->only($keys);
     }
 }

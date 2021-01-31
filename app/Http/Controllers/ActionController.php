@@ -6,7 +6,6 @@ use App\Http\Requests\ActionRequest;
 use App\Models\Action;
 use App\Models\Block;
 use App\Models\Page;
-use Illuminate\Http\Request;
 
 class ActionController extends Controller
 {
@@ -24,7 +23,7 @@ class ActionController extends Controller
 
     public function store(ActionRequest $request, Block $block)
     {
-        $action = new Action($request->all());
+        $action = new Action($request->allValidated());
         $block->actions()->save($action);
         return redirect()->route('actions.show', $action);
     }
@@ -42,7 +41,7 @@ class ActionController extends Controller
 
     public function update(ActionRequest $request, Action $action)
     {
-        $action->fill($request->all())->save();
+        $action->fill($request->allValidated())->save();
         return redirect()->route('actions.show', $action);
     }
 

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SubscriptionRequest;
 use App\Models\Subscription;
-use Illuminate\Http\Request;
 
 class SubscriptionController extends Controller
 {
@@ -21,7 +20,7 @@ class SubscriptionController extends Controller
 
     public function store(SubscriptionRequest $request)
     {
-        $subscription = Subscription::create($request->all());
+        $subscription = Subscription::create($request->allValidated());
         return redirect()->route('subscriptions.show', $subscription);
     }
 
@@ -37,7 +36,7 @@ class SubscriptionController extends Controller
 
     public function update(SubscriptionRequest $request, Subscription $subscription)
     {
-        $subscription->fill($request->all())->save();
+        $subscription->fill($request->allValidated())->save();
         return redirect()->route('subscriptions.show', $subscription);
     }
 

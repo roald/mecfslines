@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EventRequest;
 use App\Models\Event;
-use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
@@ -22,7 +21,7 @@ class EventController extends Controller
 
     public function store(EventRequest $request)
     {
-        $event = Event::create($request->all());
+        $event = Event::create($request->allValidated());
         return redirect()->route('events.show', $event);
     }
 
@@ -38,7 +37,7 @@ class EventController extends Controller
 
     public function update(EventRequest $request, Event $event)
     {
-        $event->fill($request->all())->save();
+        $event->fill($request->allValidated())->save();
         return redirect()->route('events.show', $event);
     }
 
