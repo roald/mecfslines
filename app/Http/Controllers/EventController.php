@@ -62,8 +62,7 @@ class EventController extends Controller
                 'order' => 1,
                 'type' => 'event',
             ]);
-            $event->page_id = $page->id;
-            $event->save();
+            $page->event()->save($event);
             $event->refresh();
         }
 

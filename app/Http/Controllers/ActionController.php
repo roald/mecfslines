@@ -16,7 +16,10 @@ class ActionController extends Controller
 
     public function create(Block $block)
     {
-        $action = new Action(['block' => $block]);
+        $action = new Action([
+            'block' => $block,
+            'order' => $block->actions()->max('order') + 1,
+        ]);
         $pages = Page::orderBy('title', 'asc')->get();
         return view('actions.edit')->with('action', $action)->with('pages', $pages);
     }
