@@ -83,12 +83,11 @@
                 {{ __('Parent') }}
               </dt>
               <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                @switch( $block->page->type )
-                @case( 'page' )
+                @if( $block->page->type == 'page' )
                   <a href="{{ route('pages.show', $block->page) }}" class="font-medium text-indigo-600 text-indigo-500">{{ $block->page->title }}</a>
-                @case( 'event' )
+                @elseif( $block->page->type == 'event' )
                   <a href="{{ route('events.show', $block->page->event) }}" class="font-medium text-indigo-600 text-indigo-500">{{ $block->page->event->title }}</a>
-                @endswitch
+                @endif
               </dd>
             </div>
             <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
