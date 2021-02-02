@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 
@@ -50,5 +51,13 @@ class ProductController extends Controller
     {
         $product->delete();
         return redirect()->route('products.index');
+    }
+
+    public function tagging(Request $request, Product $product)
+    {
+        $request->validate(['tag_id' => 'required|exists:tags,id']);
+        if( $request->method() == 'POST' ) $product->tags()->attach($request->tag_id);
+        elseif( $request->method() == 'DELETE' ) $product->tags()->detach($request->tag_id);
+        return redirect()->route('products.show', $product);
     }
 }

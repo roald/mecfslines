@@ -46,6 +46,7 @@ Route::prefix('admin')->middleware(['verified', 'auth.admin'])->group(function (
     Route::get('events/{event}/remove', [EventController::class, 'remove'])->name('events.remove');
     Route::any('events/{event}/tagging', [EventController::class, 'tagging'])->name('events.tagging');
     Route::get('memberships/{membership}/remove', [MembershipController::class, 'remove'])->name('memberships.remove');
+    Route::any('products/{product}/tagging', [ProductController::class, 'tagging'])->name('products.tagging');
     Route::get('products/{product}/remove', [ProductController::class, 'remove'])->name('products.remove');
     Route::get('users/{user}/remove', [UserController::class, 'remove'])->name('users.remove');
     Route::resources([
