@@ -38,11 +38,13 @@ Route::prefix('admin')->middleware(['verified', 'auth.admin'])->group(function (
     Route::get('pages/{page}/remove', [PageController::class, 'remove'])->name('pages.remove');
     Route::resource('pages', PageController::class);
     Route::get('blocks/{block}/remove', [BlockController::class, 'remove'])->name('blocks.remove');
+    Route::any('blocks/{block}/tagging', [BlockController::class, 'tagging'])->name('blocks.tagging');
     Route::resource('pages.blocks', BlockController::class)->shallow();
     Route::resource('blocks.actions', ActionController::class)->shallow();
 
     Route::get('events/{event}/blocks/create', [EventController::class, 'createBlock'])->name('events.blocks.create');
     Route::get('events/{event}/remove', [EventController::class, 'remove'])->name('events.remove');
+    Route::any('events/{event}/tagging', [EventController::class, 'tagging'])->name('events.tagging');
     Route::get('memberships/{membership}/remove', [MembershipController::class, 'remove'])->name('memberships.remove');
     Route::get('products/{product}/remove', [ProductController::class, 'remove'])->name('products.remove');
     Route::get('users/{user}/remove', [UserController::class, 'remove'])->name('users.remove');

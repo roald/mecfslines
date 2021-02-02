@@ -189,4 +189,8 @@
     </div>
   </div>
 
+  <div class="py-6">
+    <x-tags :object="$event"></x-tags>
+  </div>
+
 </x-app-layout>

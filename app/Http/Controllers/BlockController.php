@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\BlockRequest;
 use App\Models\Block;
 use App\Models\Page;
@@ -55,5 +56,13 @@ class BlockController extends Controller
         $page = $block->page;
         $block->delete();
         return redirect()->route('pages.blocks.index', $page);
+    }
+
+    public function tagging(Request $request, Block $block)
+    {
+        $request->validate(['tag_id' => 'required|exists:tags,id']);
+        if( $request->method() == 'POST' ) $block->tags()->attach($request->tag_id);
+        elseif( $request->method() == 'DELETE' ) $block->tags()->detach($request->tag_id);
+        return redirect()->route('blocks.show', $block);
     }
 }

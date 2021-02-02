@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\EventRequest;
 use App\Models\Event;
 use App\Models\Page;
@@ -67,5 +68,13 @@ class EventController extends Controller
         }
 
         return redirect()->route('pages.blocks.create', $event->page);
+    }
+
+    public function tagging(Request $request, Event $event)
+    {
+        $request->validate(['tag_id' => 'required|exists:tags,id']);
+        if( $request->method() == 'POST' ) $event->tags()->attach($request->tag_id);
+        elseif( $request->method() == 'DELETE' ) $event->tags()->detach($request->tag_id);
+        return redirect()->route('events.show', $event);
     }
 }
