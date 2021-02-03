@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActionController;
 use App\Http\Controllers\BlockController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\MediaController;
 use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PageController;
@@ -39,8 +40,10 @@ Route::prefix('admin')->middleware(['verified', 'auth.admin'])->group(function (
     Route::resource('pages', PageController::class);
     Route::get('blocks/{block}/remove', [BlockController::class, 'remove'])->name('blocks.remove');
     Route::any('blocks/{block}/tagging', [BlockController::class, 'tagging'])->name('blocks.tagging');
+    Route::post('blocks/{block}/upload', [BlockController::class, 'upload'])->name('blocks.upload');
     Route::resource('pages.blocks', BlockController::class)->shallow();
     Route::resource('blocks.actions', ActionController::class)->shallow();
+    Route::resource('media', MediaController::class)->except(['index', 'create', 'store']);
 
     Route::get('events/{event}/blocks/create', [EventController::class, 'createBlock'])->name('events.blocks.create');
     Route::get('events/{event}/remove', [EventController::class, 'remove'])->name('events.remove');

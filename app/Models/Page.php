@@ -5,10 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Page extends Model
+class Page extends Model implements HasMedia
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, InteractsWithMedia;
 
     protected $fillable = ['title', 'slug', 'description', 'order', 'menu', 'status', 'type'];
 
@@ -47,5 +50,16 @@ class Page extends Model
     public function tag()
     {
         return $this->hasOne(Tag::class);
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('media')
+            ->acceptsMimeTypes(['image/jpeg', 'image/png'])
+            ->singleFile()
+            ->registerMediaConversions(function (Media $media) {
+                $this->addMediaConversion('thumb')->width('400')->height('400');
+                $this->addMediaConversion('large')->width('1000')->height('1000');
+            });
     }
 }

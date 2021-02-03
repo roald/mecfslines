@@ -17,20 +17,37 @@
           </nav>
           <nav class="hidden sm:flex" aria-label="Breadcrumb">
             <ol class="flex items-center space-x-4">
-              <li>
-                <div>
-                  <a href="{{ route('pages.index') }}" class="text-sm font-medium text-gray-500 hover:text-gray-700">{{ __('Pages') }}</a>
-                </div>
-              </li>
-              <li>
-                <div class="flex items-center">
-                  <!-- Heroicon name: chevron-right -->
-                  <svg class="flex-shrink-0 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                  </svg>
-                  <a href="{{ route('pages.show', $block->page) }}" aria-current="page" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">{{ $block->page->title }}</a>
-                </div>
-              </li>
+              @if( $block->page->type == 'event' )
+                <li>
+                  <div>
+                    <a href="{{ route('events.index') }}" class="text-sm font-medium text-gray-500 hover:text-gray-700">{{ __('Events') }}</a>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center">
+                    <!-- Heroicon name: chevron-right -->
+                    <svg class="flex-shrink-0 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                    </svg>
+                    <a href="{{ route('events.show', $block->page->event) }}" aria-current="page" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">{{ $block->page->event->title }}</a>
+                  </div>
+                </li>
+              @else
+                <li>
+                  <div>
+                    <a href="{{ route('pages.index') }}" class="text-sm font-medium text-gray-500 hover:text-gray-700">{{ __('Pages') }}</a>
+                  </div>
+                </li>
+                <li>
+                  <div class="flex items-center">
+                    <!-- Heroicon name: chevron-right -->
+                    <svg class="flex-shrink-0 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                    </svg>
+                    <a href="{{ route('pages.show', $block->page) }}" aria-current="page" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">{{ $block->page->title }}</a>
+                  </div>
+                </li>
+              @endif
               <li>
                 <div class="flex items-center">
                   <!-- Heroicon name: chevron-right -->
@@ -46,7 +63,7 @@
         <div class="mt-2 md:flex md:items-center md:justify-between">
           <div class="flex-1 min-w-0">
             <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
-              {{ $block->page->title }} - {{ $block->heading }}
+              {{ $block->heading }}
             </h2>
           </div>
           <div class="mt-4 flex-shrink-0 flex md:mt-0 md:ml-4">
@@ -66,7 +83,6 @@
   <div class="py-6">
     <div class="max-w-7xl mx-auto">
 
-      <!-- This example requires Tailwind CSS v2.0+ -->
       <div class="bg-white shadow overflow-hidden sm:rounded-lg">
         <div class="px-4 py-5 sm:px-6">
           <h3 class="text-lg leading-6 font-medium text-gray-900">
@@ -140,7 +156,7 @@
   <div class="py-6">
     <div class="max-w-7xl mx-auto">
 
-      <div class="bg-white shadow overflow-hidden rounded-md">
+      <div class="bg-white shadow overflow-hidden sm:rounded-lg">
         <ul class="divide-y divide-gray-200">
           <li class="px-6 py-4">
             <div class="-ml-4 -mt-4 flex justify-between items-center flex-wrap sm:flex-nowrap">
@@ -200,7 +216,69 @@
   </div>
 
   <div class="py-6">
-    <x-tags :object="$block"></x-tags>
+    <div class="mx-w-7xl mx-auto">
+
+      <div class="bg-white shadow overflow-hidden sm:rounded-lg divide-y divide-gray-200">
+        <div class="px-4 py-5 sm:p-6">
+          <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
+            <div class="ml-4 mt-2">
+              <h3 class="text-lg leading-6 font-medium text-gray-900">{{ __('Images') }}</h3>
+            </div>
+            <div class="ml-4 mt-2 flex-shrink-0">
+              <form action="{{ route('blocks.upload', $block) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="flex justify-between flex-wrap sm:flex-nowrap text-sm font-medium">
+                  <label for="page_media" class="text-gray-700">{{ __('Upload image') }}</label>
+                  <span class="text-gray-500">{{ __('(JPG / PNG image and max. 10MB)') }}</span>
+                </div>
+                <div class="mt-1 flex rounded-md shadow-sm">
+                  <div class="shadow-sm border border-gray-300 w-full rounded-l-md">
+                    <input type="file" id="page_media" name="media" class="bg-gray-50 sm:text-sm border-transparent rounded-md">
+                  </div>
+                  <button type="submit" class="-ml-px px-3 py-1 border-border-gray-300 bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 text-sm font-medium rounded-r-md text-white">
+                    {{ __('Upload') }}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        @if( $block->getMedia('media')->count() > 0 )
+          <div class="px-4 py-5 sm:p-6 flex">
+            @foreach( $block->getMedia('media') as $media )
+              <div class="mr-4 shadow rounded-lg overflow-hidden">
+                <img src="{{ $media->getUrl('thumb') }}" alt="{{ $media->name }}" class="h-48 block rounded-t-lg object-cover">
+                <div class="flex w-full rounded-b-lg font-medium text-sm">
+                  <a href="{{ route('media.edit', $media) }}" class="px-3 py-2 flex-auto bg-gray-50 text-gray-600 hover:bg-gray-100 flex justify-center">
+                    <svg class="h-4 w-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                    </svg>
+                    {{ __('Edit') }}
+                  </a>
+                  <form action="{{ route('media.destroy', $media) }}" method="POST" class="flex-auto">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="px-3 py-2 w-full bg-red-50 text-gray-600 hover:bg-red-100 flex justify-center">
+                      <svg class="h-4 w-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                      </svg>
+                      {{ __('Delete') }}
+                    </button>
+                  </form>
+                </div>
+              </div>
+            @endforeach
+          </div>
+        @endif
+      </div>
+
+    </div>
+  </div>
+
+  <div class="py-6">
+    <div class="mx-w-7xl mx-auto">
+      <x-tags :object="$block"></x-tags>
+    </div>
   </div>
 
 </x-app-layout>

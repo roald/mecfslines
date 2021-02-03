@@ -24,6 +24,7 @@ class PageController extends Controller
     public function store(PageRequest $request)
     {
         $page = Page::create($request->allValidated());
+        if( $request->hasFile('media') ) $page->addMediaFromRequest('media')->toMediaCollection('media');
         return redirect()->route('pages.show', $page);
     }
 
@@ -42,6 +43,8 @@ class PageController extends Controller
     public function update(PageRequest $request, Page $page)
     {
         $page->fill($request->allValidated())->save();
+        if( $request->has('remove_media') ) $page->getFirstMedia('media')->delete();
+        if( $request->hasFile('media') ) $page->addMediaFromRequest('media')->toMediaCollection('media');
         return redirect()->route('pages.show', $page);
     }
 

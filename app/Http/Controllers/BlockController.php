@@ -65,4 +65,10 @@ class BlockController extends Controller
         elseif( $request->method() == 'DELETE' ) $block->tags()->detach($request->tag_id);
         return redirect()->route('blocks.show', $block);
     }
+
+    public function upload(Request $request, Block $block)
+    {
+        if( $request->hasFile('media') ) $block->addMediaFromRequest('media')->toMediaCollection('media');
+        return redirect()->route('blocks.show', $block);
+    }
 }

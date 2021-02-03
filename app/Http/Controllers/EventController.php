@@ -24,6 +24,7 @@ class EventController extends Controller
     public function store(EventRequest $request)
     {
         $event = Event::create($request->allValidated());
+        if( $request->hasFile('media') ) $event->addMediaFromRequest('media')->toMediaCollection('media');
         return redirect()->route('events.show', $event);
     }
 
@@ -40,6 +41,8 @@ class EventController extends Controller
     public function update(EventRequest $request, Event $event)
     {
         $event->fill($request->allValidated())->save();
+        if( $request->has('remove_media') ) $event->getFirstMedia('media')->delete();
+        if( $request->hasFile('media') ) $event->addMediaFromRequest('media')->toMediaCollection('media');
         return redirect()->route('events.show', $event);
     }
 

@@ -70,7 +70,7 @@
   <div class="py-6">
     <div class="max-w-7xl mx-auto">
 
-      <form action="{{ $page->exists ? route('pages.update', $page) : route('pages.store') }}" method="POST">
+      <form action="{{ $page->exists ? route('pages.update', $page) : route('pages.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         @if( $page->exists )
           @method('PATCH')
@@ -166,6 +166,53 @@
                         <label for="page_menu" class="font-medium text-gray-700">{{ __('Show page in menu') }}</label>
                       </div>
                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6">
+            <div class="md:grid md:grid-cols-3 md:gap-6">
+              <div class="md:col-span-1">
+
+                <h3 class="text-lg font-medium leading-6 text-gray-900">{{ __('Image') }}</h3>
+                <p class="mt-1 text-sm text-gray-500">
+                  {{ __('Linked image for this page.') }}
+                </p>
+              </div>
+              <div class="mt-5 md:mt-0 md:col-span-2">
+                <div class="grid grid-cols-6 gap-6">
+                  @if ($page->hasMedia('media'))
+                    <div class="col-span-6 flex">
+                      <div class="w-full">
+                        <div class="text-sm font-medium text-gray-700">{{ __('Remove media') }}</div>
+                        <div class="flex items-start mt-1">
+                          <div class="h-5 flex items center">
+                            <input type="checkbox" id="page_remove_media" name="remove_media" @if(old('remove_media')) checked @endif class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
+                          </div>
+                          <div class="ml-3 text-sm">
+                            <label for="page_remove_media" class="font-medium text-gray-700">
+                              <span>{{ __('Remove file') }}:</span>
+                              <span class="font-bold">{{ $page->getFirstMedia('media')->file_name }}</span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="ml-4 flex-shrink-0">
+                        <img src="{{ $page->getFirstMediaUrl('media', 'thumb') }}" class="h-32 border border-gray-300 rounded-md">
+                      </div>
+                    </div>
+                  @endif
+
+                  <div class="col-span-6">
+                    <label for="page_media" class="block text-sm font-medium text-gray-700">{{ __('Upload image') }}</label>
+                    <div class="mt-1 shadow-sm border border-gray-300 block w-full rounded-md">
+                      <input type="file" id="page_media" name="media" class="bg-gray-50 sm:text-sm border-transparent rounded-md">
+                    </div>
+                    <p class="mt-2 text-sm text-gray-500">
+                      {{ __('Select your JPG / PNG image to link to this page (max. 10MB).')}}
+                    </p>
                   </div>
                 </div>
               </div>
