@@ -25,6 +25,8 @@ class WebsiteController extends Controller
     {
         $page->load(['blocks' => function ($query) {
             $query->orderBy('order', 'asc');
+        }, 'blocks.actions' => function ($query) {
+            $query->orderBy('order', 'asc');
         }]);
         return view('website.page')->with('page', $page);
     }
