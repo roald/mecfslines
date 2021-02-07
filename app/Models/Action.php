@@ -22,4 +22,15 @@ class Action extends Model
     {
         return $this->belongsTo(Page::class);
     }
+
+    public function link()
+    {
+        if( $this->type == 'url' ) {
+            return $this->target;
+        } elseif( $this->type == 'page' ) {
+            return route('web.page', $this->page);
+        } else {
+            abort(404);
+        }
+    }
 }

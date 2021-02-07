@@ -14,6 +14,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WebsiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,10 +27,11 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', [WebsiteController::class, 'homepage'])->name('web.home');
+Route::get('page/{page:slug}', [WebsiteController::class, 'page'])->name('web.page');
+Route::get('event/{event:slug}', [WebsiteController::class, 'event'])->name('web.event');
+Route::get('product/{product:slug}', [WebsiteController::class, 'product'])->name('web.product');
+Route::get('tag/{tag:slug}', [WebsiteController::class, 'tag'])->name('web.tag');
 
 Route::prefix('admin')->middleware(['verified', 'auth.admin'])->group(function () {
     Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
