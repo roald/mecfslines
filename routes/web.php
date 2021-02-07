@@ -30,12 +30,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
 
 Route::prefix('admin')->middleware(['verified', 'auth.admin'])->group(function () {
+    Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
+
     Route::get('pages/{page}/remove', [PageController::class, 'remove'])->name('pages.remove');
     Route::resource('pages', PageController::class);
     Route::get('blocks/{block}/remove', [BlockController::class, 'remove'])->name('blocks.remove');
