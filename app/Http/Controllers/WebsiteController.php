@@ -35,7 +35,7 @@ class WebsiteController extends Controller
     {
         if( is_null($event->page) ) return redirect()->route('web.home');
 
-        return $this->page($page);
+        return $this->page($event->page);
     }
 
     public function product(Product $product)
