@@ -175,6 +175,15 @@
                     <label for="block_order" class="block text-sm font-medium text-gray-700">{{ __('Order') }}</label>
                     <input type="number" name="order" id="block_order" value="{{ old('order', $block->order) }}" min="1" step="1" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                   </div>
+
+                  <div class="col-span-6">
+                    <label for="block_grant" class="block text-sm font-medium text-gray-700">{{ __('Grant') }}</label>
+                    <select name="grant" id="block_grant" class="mt-1 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                      @foreach(App\Models\Block::$grants as $grant)
+                        <option value="{{ $grant }}" @if(old('grant', $block->grant) == $grant) selected @endif>{{ __($grant) }}</option>
+                      @endforeach
+                    </select>
+                  </div>
                 </div>
               </div>
             </div>

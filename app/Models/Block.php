@@ -12,7 +12,9 @@ class Block extends Model implements HasMedia
 {
     use HasFactory, HasMediaTrait;
 
-    protected $fillable = ['page', 'type', 'order', 'heading', 'topic', 'body'];
+    protected $fillable = ['page', 'type', 'order', 'heading', 'topic', 'body', 'grant'];
+
+    public static $grants = ['all', 'public', 'user'];
 
     public static $types = [
         'general' => ['header', 'text', 'footer'],

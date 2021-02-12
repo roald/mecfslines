@@ -8,6 +8,7 @@ use App\Models\Event;
 use App\Models\Page;
 use App\Models\Product;
 use App\Models\Tag;
+use Auth;
 
 class WebsiteController extends Controller
 {
@@ -23,8 +24,10 @@ class WebsiteController extends Controller
 
     public function page(Page $page)
     {
-        $page->load(['blocks' => function ($query) {
-            $query->orderBy('order', 'asc');
+        $grants = Auth::check() ? ['all', 'user'] : ['all', 'public'];
+
+        $page->load(['blocks' => function ($query) use ($grants) {
+            $query->whereIn('grant', $grants)->orderBy('order', 'asc');
         }, 'blocks.actions' => function ($query) {
             $query->orderBy('order', 'asc');
         }]);

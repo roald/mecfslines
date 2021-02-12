@@ -30,6 +30,7 @@ class BlockRequest extends BaseRequest
             'heading' => 'required|min:3',
             'topic' => '',
             'body' => '',
+            'grant' => 'required|in:'. join(',', Block::$grants),
         ];
     }
 }
