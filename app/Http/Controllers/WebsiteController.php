@@ -24,7 +24,7 @@ class WebsiteController extends Controller
 
     public function page(Page $page)
     {
-        $grants = Auth::check() ? ['all', 'user'] : ['all', 'public'];
+        $grants = $this->grants($page);
 
         $page->load(['blocks' => function ($query) use ($grants) {
             $query->whereIn('grant', $grants)->orderBy('order', 'asc');
@@ -52,5 +52,14 @@ class WebsiteController extends Controller
     {
         if( $tag->page ) return redirect()->route('web.page', $tag->page);
         else return redirect()->route('web.home');
+    }
+
+    private function grants($page)
+    {
+        if( Auth::check() ) {
+            return ['all', 'user'];
+        } else {
+            return ['all', 'public'];
+        }
     }
 }
