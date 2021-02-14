@@ -54,6 +54,7 @@ class BlockController extends Controller
     public function destroy(Block $block)
     {
         $page = $block->page;
+        $block->actions()->delete();
         $block->delete();
         return redirect()->route('pages.blocks.index', $page);
     }

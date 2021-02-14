@@ -165,6 +165,10 @@
           </div>
 
           <div class="flex justify-end">
+            @if( $action->exists )
+              <a href="#" class="mr-3 bg-red-600 py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" onclick="event.preventDefault(); document.getElementById('removeActionForm').submit();">{{ __('Delete') }}</a>
+            @endif
+
             <a href="{{ $action->exists ? route('actions.show', $action) : route('blocks.actions.index', $action->block) }}" class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
               {{ __('Cancel') }}
             </a>
@@ -176,6 +180,12 @@
 
       </form>
 
+      @if( $action->exists )
+        <form id="removeActionForm" method="POST" action="{{ route('actions.destroy', $action) }}">
+          @csrf
+          @method('DELETE')
+        </form>
+      @endif
     </div>
   </div>
 
