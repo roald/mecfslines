@@ -28,6 +28,11 @@ class Order extends Model
         return $this->belongsToMany(Product::class);
     }
 
+    public function subscriptions()
+    {
+        return $this->belongsToMany(Subscription::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

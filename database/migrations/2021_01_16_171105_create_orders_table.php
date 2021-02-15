@@ -19,7 +19,7 @@ class CreateOrdersTable extends Migration
 
             $table->decimal('amount', 5, 2);
             $table->string('status', 25);
-            $table->dateTime('payed_at');
+            $table->dateTime('payed_at')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

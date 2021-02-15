@@ -19,8 +19,8 @@ class CreateSubscriptionsTable extends Migration
             $table->foreignId('user_id')->onDelete('CASCADE')->constrained();
             $table->foreignId('order_id')->onDelete('CASCADE')->constrained();
 
-            $table->dateTime('started_at');
-            $table->dateTime('ended_at');
+            $table->dateTime('started_at')->nullable();
+            $table->dateTime('ended_at')->nullable();
 
             $table->softDeletes();
             $table->timestamps();
