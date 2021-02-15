@@ -34,9 +34,6 @@
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       {{ __('Date / time') }}
                     </th>
-                    <th scope="col" class="relative px-6 py-3">
-                      <span class="sr-only">{{ __('Edit') }}</span>
-                    </th>
                   </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
@@ -54,9 +51,6 @@
                         @else
                           {{ __('Pending') }}
                         @endif
-                      </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="{{ route('orders.edit', $order) }}" class="text-indigo-600 hover:text-indigo-900">{{ __('Edit') }}</a>
                       </td>
                     </tr>
                   @empty
