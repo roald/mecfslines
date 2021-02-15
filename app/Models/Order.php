@@ -30,7 +30,7 @@ class Order extends Model
 
     public function subscriptions()
     {
-        return $this->belongsToMany(Subscription::class);
+        return $this->hasMany(Subscription::class);
     }
 
     public function user()
