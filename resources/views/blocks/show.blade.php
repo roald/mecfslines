@@ -67,6 +67,9 @@
             </h2>
           </div>
           <div class="mt-4 flex-shrink-0 flex md:mt-0 md:ml-4">
+            <a href="{{ route('web.page', $block->page) }}" class="ml-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+              {{ __('Preview') }}
+            </a>
             <a href="{{ route('blocks.remove', $block) }}" class="ml-3 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
               {{ __('Delete') }}
             </a>
