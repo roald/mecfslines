@@ -65,9 +65,9 @@ Route::prefix('admin')->middleware(['verified', 'auth.admin'])->group(function (
         'orders' => OrderController::class,
         'products' => ProductController::class,
         'tags' => TagController::class,
-        'subscriptions' => SubscriptionController::class,
         'users' => UserController::class
     ]);
+    Route::resource('users.subscriptions', SubscriptionController::class)->shallow()->only(['show']);
     Route::resource('orders.payments', PaymentController::class)->shallow()->only(['index', 'show']);
 });
 

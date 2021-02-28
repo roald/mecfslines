@@ -65,7 +65,7 @@
                 {{ __('Date') }}
               </dt>
               <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ $order->created_at->isoFormat('LLLL') }}
+                {{ $order->created_at->isoFormat('LLL') }}
               </dd>
             </div>
             <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -121,7 +121,7 @@
                         <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                         </svg>
-                        <span>{{ $payment->created_at->isoFormat('LLLL') }}</span>
+                        <span>{{ $payment->created_at->isoFormat('LLL') }}</span>
                       </div>
                     </div>
                   </div>
@@ -145,7 +145,7 @@
 
   <div class="py-6">
     <div class="max-w-7xl mx-auto">
-      <div class="grid grid-cols-1 sm:grid-cols-2 sm:gap-12">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
         <div class="bg-white shadow overflow-hidden sm:rounded-lg">
           <ul class="divide-y divide-gray-200">
             <li class="bg-gray-50 px-6 py-2 text-lg font-bold text-gray-900">{{ __('Memberships') }}</li>
