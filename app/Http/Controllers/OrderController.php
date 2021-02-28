@@ -80,6 +80,8 @@ class OrderController extends Controller
             'amount' => $order->amount,
             'status' => 'open',
         ]);
+        $order->status = 'open';
+        $order->save();
         return redirect($payment->getCheckoutUrl(), 303);
     }
 }
