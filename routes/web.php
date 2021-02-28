@@ -37,6 +37,7 @@ Route::get('tag/{tag:slug}', [WebsiteController::class, 'tag'])->name('web.tag')
 Route::prefix('my')->middleware(['auth'])->group(function () {
     Route::get('orders', [OrderController::class, 'mine'])->name('orders.mine');
     Route::get('orders/{order}', [OrderController::class, 'detail'])->name('orders.detail');
+    Route::get('orders/{order}/pay', [OrderController::class, 'pay'])->name('orders.pay');
 });
 
 Route::prefix('admin')->middleware(['verified', 'auth.admin'])->group(function () {

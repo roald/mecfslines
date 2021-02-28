@@ -46,10 +46,10 @@
                         € {{ number_format($order->amount, 2, ',', '.') }}
                       </td>
                       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        @if( $order->payed_at )
-                          {{ $order->payed_at->format('d F j, H:i') }}
+                        @if( $order->isCompleted() )
+                          {{ $order->payed_at->isoFormat('LLL') }}
                         @else
-                          {{ __('Pending') }}
+                          {{ __($order->status) }}
                         @endif
                       </td>
                     </tr>

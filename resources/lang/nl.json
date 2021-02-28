@@ -1,0 +1,28 @@
+{
+  "active": "actief",
+  "canceled": "afgebroken",
+  "expired": "verlopen",
+  "failed": "mislukt",
+  "paid": "betaald",
+  "pending": "lopende",
+
+  "Amount": "Bedrag",
+  "Date / time": "Datum / tijd",
+  "Description": "Beschrijving",
+  "Events": "Evenementen",
+  "Log out": "Uitloggen",
+  "Membership": "Lidmaatschap",
+  "Memberships": "Lidmaatschappen",
+  "My orders": "Mijn bestellingen",
+  "No products": "Geen producten",
+  "Order": "Bestelling",
+  "Orders": "Bestellingen",
+  "Pages": "Pagina's",
+  "Pay": "Betaal",
+  "Payment": "Betaling",
+  "Payments": "Betalingen",
+  "Products": "Producten",
+  "Status": "Status",
+  "User": "Gebruiker",
+  "Users": "Gebruikers"
+}

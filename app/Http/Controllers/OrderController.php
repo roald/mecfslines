@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderRequest;
 use App\Models\Order;
+use App\Models\Payment;
+use Auth;
 
 class OrderController extends Controller
 {
@@ -45,5 +47,39 @@ class OrderController extends Controller
     {
         $order->delete();
         return redirect()->route('orders.index');
+    }
+
+    public function mine()
+    {
+        $orders = Auth::user()->orders()->orderBy('updated_at', 'desc')->get();
+        return view('profile.orders')->with('orders', $orders);
+    }
+
+    public function detail(Order $order)
+    {
+        if( Auth::user()->id != $order->user_id ) abort(403);
+
+        return view('profile.payment')->with('order', $order);
+    }
+
+    public function pay(Order $order)
+    {
+        // Verify access
+        if( Auth::user()->id != $order->user_id ) abort(403);
+        if( $order->isCompleted() ) return redirect()->route('orders.detail', $order);
+
+        // Check active payments
+        foreach( $order->payments as $payment ) {
+            $checkout = $payment->getCheckoutUrl();
+            if( $checkout ) return redirect($checkout, 303);
+        }
+
+        // Create new Payment
+        $payment = $order->payments()->create([
+            'description' => __('Order') ." #". $order->id,
+            'amount' => $order->amount,
+            'status' => 'open',
+        ]);
+        return redirect($payment->getCheckoutUrl(), 303);
     }
 }

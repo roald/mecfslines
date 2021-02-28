@@ -36,12 +36,25 @@
 
         </nav>
         <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-          <a href="{{ route('login') }}" class="px-4 py-2 whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900 bg-gray-200 hover:bg-gray-300 rounded-md">
-            {{ __('Sign in')}}
-          </a>
-          <a href="{{ route('register') }}" class="ml-2 whitespace-nowrap px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
-            {{ __('Sign up') }}
-          </a>
+          @auth
+            <a href="{{ route('orders.mine') }}" class="px-4 py-2 whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900 bg-gray-200 hover:bg-gray-300 rounded-md">
+              {{ __('My orders')}}
+            </a>
+            @if( Auth::user()->isAdmin() )
+              <a href="{{ route('dashboard') }}" class="ml-2 whitespace-nowrap px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+                {{ __('Dashboard') }}
+              </a>
+            @endif
+          @endauth
+
+          @guest
+            <a href="{{ route('login') }}" class="px-4 py-2 whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900 bg-gray-200 hover:bg-gray-300 rounded-md">
+              {{ __('Sign in')}}
+            </a>
+            <a href="{{ route('register') }}" class="ml-2 whitespace-nowrap px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+              {{ __('Sign up') }}
+            </a>
+          @endguest
         </div>
       </div>
     </div>

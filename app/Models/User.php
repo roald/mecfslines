@@ -47,4 +47,19 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->subscriptions()->where('ended_at', '>', Carbon::now())->count() > 0;
     }
+
+    public function mollie()
+    {
+        // Return existing Mollie customer ID
+        if( $this->mollie_id ) return $this->mollie_id;
+
+        // Create new Mollie customer
+        $mollie = mollie()->customers()->create([
+            'name'  => $this->name,
+            'email' => $this->email,
+        ]);
+        $this->mollie_id = $mollie->id;
+        $this->save();
+        return $this->mollie->id;
+    }
 }
