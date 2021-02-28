@@ -13,39 +13,18 @@ class PaymentController extends Controller
         return redirect()->route('orders.show', $order);
     }
 
-    public function create(Order $order)
-    {
-        $payment = new Payment(['order' => $order]);
-        return view('payments.edit')->with('payment', $payment);
-    }
-
-    public function store(PaymentRequest $request, Order $order)
-    {
-        $payment = new Payment($request->allValidated());
-        $order->payments()->save($payment);
-        return redirect()->route('payments.show', $payment);
-    }
-
     public function show(Payment $payment)
     {
         return view('payments.show')->with('payment', $payment);
     }
 
-    public function edit(Payment $payment)
+    public function mollie(Payment $payment)
     {
-        return view('payments.edit')->with('payment', $payment);
-    }
+        if( empty($payment->reference) ) {
+            return redirect()->route('payments.show', $payment);
+        }
 
-    public function update(PaymentRequest $request, Payment $payment)
-    {
-        $payment->fill($request->allValidated())->save();
-        return redirect()->route('payments.show', $payment);
-    }
-
-    public function destroy(Payment $payment)
-    {
-        $order = $payment->order;
-        $payment->delete();
-        return redirect()->route('orders.payments.index', $order);
+        $mollie = mollie()->payments()->get($payment->reference);
+        return redirect($mollie->_links->dashboard->href);
     }
 }

@@ -14,6 +14,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WebhookController;
 use App\Http\Controllers\WebsiteController;
 
 /*
@@ -33,6 +34,11 @@ Route::get('event/{event:slug}', [WebsiteController::class, 'event'])->name('web
 Route::get('product/{product:slug}', [WebsiteController::class, 'product'])->name('web.product');
 Route::get('tag/{tag:slug}', [WebsiteController::class, 'tag'])->name('web.tag');
 
+Route::prefix('my')->middleware(['auth'])->group(function () {
+    Route::get('orders', [OrderController::class, 'mine'])->name('orders.mine');
+    Route::get('orders/{order}', [OrderController::class, 'detail'])->name('orders.detail');
+});
+
 Route::prefix('admin')->middleware(['verified', 'auth.admin'])->group(function () {
     Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
 
@@ -49,6 +55,7 @@ Route::prefix('admin')->middleware(['verified', 'auth.admin'])->group(function (
     Route::get('events/{event}/remove', [EventController::class, 'remove'])->name('events.remove');
     Route::any('events/{event}/tagging', [EventController::class, 'tagging'])->name('events.tagging');
     Route::get('memberships/{membership}/remove', [MembershipController::class, 'remove'])->name('memberships.remove');
+    Route::get('payments/{payment}/mollie', [PaymentController::class, 'mollie'])->name('payments.mollie');
     Route::any('products/{product}/tagging', [ProductController::class, 'tagging'])->name('products.tagging');
     Route::get('products/{product}/remove', [ProductController::class, 'remove'])->name('products.remove');
     Route::get('users/{user}/remove', [UserController::class, 'remove'])->name('users.remove');
@@ -61,7 +68,9 @@ Route::prefix('admin')->middleware(['verified', 'auth.admin'])->group(function (
         'subscriptions' => SubscriptionController::class,
         'users' => UserController::class
     ]);
-    Route::resource('orders.payments', PaymentController::class)->shallow();
+    Route::resource('orders.payments', PaymentController::class)->shallow()->only(['index', 'show']);
 });
+
+Route::any('webhooks/mollie', [WebhookController::class, 'mollie'])->name('webhooks.mollie');
 
 require __DIR__.'/auth.php';
