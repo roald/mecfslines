@@ -60,6 +60,6 @@ class User extends Authenticatable implements MustVerifyEmail
         ]);
         $this->mollie_id = $mollie->id;
         $this->save();
-        return $this->mollie->id;
+        return $this->mollie_id;
     }
 }
