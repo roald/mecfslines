@@ -31,7 +31,7 @@ class WebhookController extends Controller
             $order = $payment->order;
             if( !$order->isCompleted() ) {
                 $order->status = $mollie->status;
-                if( $mollie->status == 'paid' ) $order->payed_at = Carbon::now();
+                if( $mollie->status == 'paid' ) $order->payed_at = $mollie->paidAt;
                 $order->save();
 
                 // Active Subscriptions
