@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9b542fe234940ce473dc635014c1b76e",
+    "content-hash": "e93fc05873deabafdb5a554006c00c8b",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -5506,6 +5506,65 @@
                 }
             ],
             "time": "2021-01-27T10:15:41+00:00"
+        },
+        {
+            "name": "thiagocordeiro/laravel-translator",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/thiagocordeiro/laravel-translator.git",
+                "reference": "67131f184df8b5353221d4852e2c7232ccdb02f3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/thiagocordeiro/laravel-translator/zipball/67131f184df8b5353221d4852e2c7232ccdb02f3",
+                "reference": "67131f184df8b5353221d4852e2c7232ccdb02f3",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "laravel/framework": ">=5.4.0",
+                "php": "^7.2"
+            },
+            "require-dev": {
+                "composer/composer": "^1.8",
+                "phpstan/phpstan": "^0.11.8",
+                "phpunit/phpunit": "^8.0",
+                "slevomat/coding-standard": "^5.0",
+                "squizlabs/php_codesniffer": "^3.4"
+            },
+            "type": "project",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Translator\\Framework\\TranslatorServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Translator\\": "src/"
+                },
+                "files": [
+                    "src/Framework/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thiago Cordeiro",
+                    "email": "thiagoguetten@gmail.com"
+                }
+            ],
+            "description": "Search translation keys and insert into json to be translated",
+            "support": {
+                "issues": "https://github.com/thiagocordeiro/laravel-translator/issues",
+                "source": "https://github.com/thiagocordeiro/laravel-translator/tree/master"
+            },
+            "time": "2020-09-08T18:06:01+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",

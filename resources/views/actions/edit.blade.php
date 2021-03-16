@@ -156,7 +156,7 @@
                   </div>
 
                   <div class="col-span-6">
-                    <label for="action_order" class="block text-sm font-medium text-gray-700">{{ __('Order') }}</label>
+                    <label for="action_order" class="block text-sm font-medium text-gray-700">{{ __('Action order') }}</label>
                     <input type="number" name="order" id="action_order" value="{{ old('order', $action->order) }}" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                   </div>
                 </div>

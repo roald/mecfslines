@@ -172,7 +172,7 @@
                   </div>
 
                   <div class="col-span-6">
-                    <label for="block_order" class="block text-sm font-medium text-gray-700">{{ __('Order') }}</label>
+                    <label for="block_order" class="block text-sm font-medium text-gray-700">{{ __('Block order') }}</label>
                     <input type="number" name="order" id="block_order" value="{{ old('order', $block->order) }}" min="1" step="1" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                   </div>
 

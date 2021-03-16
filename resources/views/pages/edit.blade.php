@@ -143,12 +143,12 @@
                   </div>
 
                   <div class="col-span-6">
-                    <label for="page_order" class="block text-sm font-medium text-gray-700">{{ __('Order') }}</label>
+                    <label for="page_order" class="block text-sm font-medium text-gray-700">{{ __('Page order') }}</label>
                     <input type="number" name="order" id="page_order" value="{{ old('order', $page->order) }}" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                   </div>
 
                   <div class="col-span-6">
-                    <label for="page_status" class="block text-sm font-medium text-gray-700">{{ __('status') }}</label>
+                    <label for="page_status" class="block text-sm font-medium text-gray-700">{{ __('Status') }}</label>
                     <select name="status" id="page_status" class="mt-1 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
                       @foreach(App\Models\Page::$stati as $status)
                         <option value="{{ $status }}" @if(old('status', $page->status) == $status) selected @endif>{{ __($status) }}</option>

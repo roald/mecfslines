@@ -15,7 +15,8 @@
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
         "mollie/laravel-mollie": "^2.0",
-        "spatie/laravel-medialibrary": "^7.0.0"
+        "spatie/laravel-medialibrary": "^7.0.0",
+        "thiagocordeiro/laravel-translator": "^1.1"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
