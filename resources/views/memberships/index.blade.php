@@ -31,10 +31,10 @@
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       {{ __('Name') }}
                     </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">
                       {{ __('Duration') }}
                     </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">
                       {{ __('Price') }}
                     </th>
                     <th scope="col" class="relative px-6 py-3">
@@ -45,13 +45,13 @@
                 <tbody class="bg-white divide-y divide-gray-200">
                   @forelse( $memberships as $membership )
                     <tr>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        <a href="{{ route('memberships.show', $membership) }}">{{ $membership->name }}</a>
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-bold">
+                        <a href="{{ route('memberships.show', $membership) }}" class="text-indigo-600 hover:text-indigo-900">{{ $membership->name }}</a>
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden md:table-cell">
                         {{ __($membership->duration) }}
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden sm:table-cell">
                         € {{ number_format($membership->price, 2, ',', '.') }}
                       </td>
                       <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">

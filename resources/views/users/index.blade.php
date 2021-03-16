@@ -31,10 +31,10 @@
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       {{ __('Name') }}
                     </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">
                       {{ __('Email') }}
                     </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">
                       {{ __('Type') }}
                     </th>
                     <th scope="col" class="relative px-6 py-3">
@@ -45,13 +45,13 @@
                 <tbody class="bg-white divide-y divide-gray-200">
                   @forelse( $users as $user )
                     <tr>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        <a href="{{ route('users.show', $user) }}">{{ $user->name }}</a>
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-bold">
+                        <a href="{{ route('users.show', $user) }}" class="text-indigo-600 hover:text-indigo-900">{{ $user->name }}</a>
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden md:table-cell">
                         {{ $user->email }}
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden sm:table-cell">
                         {{ __(ucfirst($user->role)) }}
                       </td>
                       <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">

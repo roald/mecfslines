@@ -32,10 +32,7 @@
 			                {{ __('Name') }}
 			              </th>
 			              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-			                {{ __('Type') }}
-			              </th>
-			              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-			                {{ __('Status') }}
+			                {{ __('Price') }}
 			              </th>
 			              <th scope="col" class="relative px-6 py-3">
 			                <span class="sr-only">{{ __('Edit') }}</span>
@@ -45,14 +42,11 @@
 			          <tbody class="bg-white divide-y divide-gray-200">
 			          	@forelse( $products as $product )
 				            <tr>
-				              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-				                <a href="{{ route('products.show', $product) }}">{{ $product->name }}</a>
+				              <td class="px-6 py-4 whitespace-nowrap text-sm font-bold">
+				                <a href="{{ route('products.show', $product) }}" class="text-indigo-600 hover:text-indigo-900">{{ $product->name }}</a>
 				              </td>
 				              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-				                {{ $product->type }}
-				              </td>
-				              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-				                {{ $product->status }}
+				                € {{ number_format($product->price, 2, ',', '.') }}
 				              </td>
 				              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
 				                <a href="{{ route('products.edit', $product) }}" class="text-indigo-600 hover:text-indigo-900">{{ __('Edit') }}</a>

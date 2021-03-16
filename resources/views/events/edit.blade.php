@@ -153,12 +153,12 @@
 
                   <div class="col-span-6">
                     <label for="event_started_at" class="block text-sm font-medium text-gray-700">{{ __('Starts at') }}</label>
-                    <input type="date" name="started_at" id="event_started_at" value="{{ old('started_at', $event->started_at) }}" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="{{ Carbon\Carbon::now()->format('Y-m-d H:i') }}">
+                    <input type="date" name="started_at" id="event_started_at" value="{{ old('started_at', $event->started_at) }}" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="{{ Carbon\Carbon::now()->isoFormat('YYYY-MM-DD H:mm') }}">
                   </div>
 
                   <div class="col-span-6">
                     <label for="event_ended_at" class="block text-sm font-medium text-gray-700">{{ __('Ends at') }}</label>
-                    <input type="date" name="ended_at" id="event_ended_at" value="{{ old('ended_at', $event->ended_at) }}" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="{{ Carbon\Carbon::now()->format('Y-m-d H:i') }}">
+                    <input type="date" name="ended_at" id="event_ended_at" value="{{ old('ended_at', $event->ended_at) }}" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="{{ Carbon\Carbon::now()->isoFormat('YYYY-MM-DD H:mm') }}">
                   </div>
                 </div>
               </div>

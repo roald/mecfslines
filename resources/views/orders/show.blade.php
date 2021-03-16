@@ -146,55 +146,59 @@
   <div class="py-6">
     <div class="max-w-7xl mx-auto">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-          <ul class="divide-y divide-gray-200">
-            <li class="bg-gray-50 px-6 py-2 text-lg font-bold text-gray-900">{{ __('Memberships') }}</li>
-            @forelse( $order->subscriptions as $subscription )
-              <li>
-                <a href="{{ route('memberships.show', $subscription->membership) }}" class="block hover:bg-gray-50">
-                  <div class="px-6 py-4 flex justify-between items-center">
-                    <div class="flex-1">
-                      {{ $subscription->membership->name }}
+        @if( env('TALC_MEMBERSHIPS') )
+          <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+            <ul class="divide-y divide-gray-200">
+              <li class="bg-gray-50 px-6 py-2 text-lg font-bold text-gray-900">{{ __('Memberships') }}</li>
+              @forelse( $order->subscriptions as $subscription )
+                <li>
+                  <a href="{{ route('memberships.show', $subscription->membership) }}" class="block hover:bg-gray-50">
+                    <div class="px-6 py-4 flex justify-between items-center">
+                      <div class="flex-1">
+                        {{ $subscription->membership->name }}
+                      </div>
+                      <div class="ml-5 flex-shrink-0">
+                        <!-- Heroicon name: solid/chevron-right -->
+                        <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                        </svg>
+                      </div>
                     </div>
-                    <div class="ml-5 flex-shrink-0">
-                      <!-- Heroicon name: solid/chevron-right -->
-                      <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                      </svg>
-                    </div>
-                  </div>
-                </a>
-              </li>
-            @empty
-              <li class="px-6 py-2 text-center text-gray-500">{{ __('No subscriptions') }}</li>
-            @endforelse
-          </ul>
-        </div>
+                  </a>
+                </li>
+              @empty
+                <li class="px-6 py-2 text-center text-gray-500">{{ __('No subscriptions') }}</li>
+              @endforelse
+            </ul>
+          </div>
+        @endif
 
-        <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-          <ul class="divide-y divide-gray-200">
-            <li class="bg-gray-50 px-6 py-2 text-lg font-bold text-gray-900">{{ __('Products') }}</li>
-            @forelse( $order->products as $product )
-              <li>
-                <a href="{{ route('products.show', $product) }}" class="block hover:bg-gray-50">
-                  <div class="px-6 py-4 flex justify-between items-center">
-                    <div class="flex-1">
-                      {{ $product->name }}
+        @if( env('TALC_PRODUCTS') )
+          <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+            <ul class="divide-y divide-gray-200">
+              <li class="bg-gray-50 px-6 py-2 text-lg font-bold text-gray-900">{{ __('Products') }}</li>
+              @forelse( $order->products as $product )
+                <li>
+                  <a href="{{ route('products.show', $product) }}" class="block hover:bg-gray-50">
+                    <div class="px-6 py-4 flex justify-between items-center">
+                      <div class="flex-1">
+                        {{ $product->name }}
+                      </div>
+                      <div class="ml-5 flex-shrink-0">
+                        <!-- Heroicon name: solid/chevron-right -->
+                        <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                          <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                        </svg>
+                      </div>
                     </div>
-                    <div class="ml-5 flex-shrink-0">
-                      <!-- Heroicon name: solid/chevron-right -->
-                      <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                      </svg>
-                    </div>
-                  </div>
-                </a>
-              </li>
-            @empty
-              <li class="px-6 py-4 text-center text-gray-500">{{ __('No products') }}</li>
-            @endforelse
-          </ul>
-        </div>
+                  </a>
+                </li>
+              @empty
+                <li class="px-6 py-4 text-center text-gray-500">{{ __('No products') }}</li>
+              @endforelse
+            </ul>
+          </div>
+        @endif
       </div>
     </div>
   </div>

@@ -39,15 +39,15 @@
                 <tbody class="bg-white divide-y divide-gray-200">
                   @forelse( $orders as $order )
                     <tr>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        <a href="{{ route('orders.show', $order) }}">{{ $order->user->name }}</a>
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-bold">
+                        <a href="{{ route('orders.show', $order) }}" class="text-indigo-600 hover:text-indigo-900">{{ $order->user->name }}</a>
                       </td>
                       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         € {{ number_format($order->amount, 2, ',', '.') }}
                       </td>
                       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         @if( $order->isCompleted() )
-                          {{ $order->payed_at->isoFormat('LLL') }}
+                          {{ $order->payed_at->isoFormat('D MMM H:mm') }}
                         @else
                           {{ __($order->status) }}
                         @endif

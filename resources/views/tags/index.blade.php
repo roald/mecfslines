@@ -31,7 +31,7 @@
 			              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
 			                {{ __('Name') }}
 			              </th>
-			              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+			              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">
 			                {{ __('Type') }}
 			              </th>
 			              <th scope="col" class="relative px-6 py-3">
@@ -42,11 +42,11 @@
 			          <tbody class="bg-white divide-y divide-gray-200">
 			          	@forelse( $tags as $tag )
 				            <tr>
-				              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-				                <a href="{{ route('tags.show', $tag) }}">{{ $tag->name }}</a>
+				              <td class="px-6 py-4 whitespace-nowrap text-sm font-bold">
+				                <a href="{{ route('tags.show', $tag) }}" class="text-indigo-600 hover:text-indigo-900">{{ $tag->name }}</a>
 				              </td>
-				              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-				                {{ $tag->type }}
+				              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden md:table-cell">
+				              	{{ __($tag->type) }}
 				              </td>
 				              <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
 				                <a href="{{ route('tags.edit', $tag) }}" class="text-indigo-600 hover:text-indigo-900">{{ __('Edit') }}</a>

@@ -32,10 +32,10 @@
                       {{ __('Title') }}
                     </th>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      {{ __('Type') }}
-                    </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       {{ __('Date') }}
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden md:table-cell">
+                      {{ __('Type') }}
                     </th>
                     <th scope="col" class="relative px-6 py-3">
                       <span class="sr-only">{{ __('Edit') }}</span>
@@ -45,14 +45,14 @@
                 <tbody class="bg-white divide-y divide-gray-200">
                   @forelse( $events as $event )
                     <tr>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        <a href="{{ route('events.show', $event) }}">{{ $event->title }}</a>
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-bold">
+                        <a href="{{ route('events.show', $event) }}" class="text-indigo-600 hover:text-indigo-900">{{ $event->title }}</a>
                       </td>
                       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {{ $event->started_at->isoFormat('ddd D MMM') }}
+                      </td>
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden md:table-cell">
                         {{ $event->type }}
-                      </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {{ $event->started_at->format('D j F') }}
                       </td>
                       <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <a href="{{ route('events.edit', $event) }}" class="text-indigo-600 hover:text-indigo-900">{{ __('Edit') }}</a>

@@ -93,7 +93,7 @@
                 {{ __('Date') }}
               </dt>
               <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ $event->started_at->format('j F Y') }}
+                {{ $event->started_at->isoFormat('dddd D MMMM YYYY') }}
               </dd>
             </div>
             <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -101,7 +101,7 @@
                 {{ __('Time') }}
               </dt>
               <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ $event->started_at->format('H:i') }} - {{ $event->ended_at->format('H:i') }}
+                {{ $event->started_at->isoFormat('H:mm') }} - {{ $event->ended_at->isoFormat('H:mm') }}
               </dd>
             </div>
             <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
