@@ -14,6 +14,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
+        "mailjet/laravel-mailjet": "^3.0",
         "mollie/laravel-mollie": "^2.0",
         "spatie/laravel-medialibrary": "^7.0.0",
         "thiagocordeiro/laravel-translator": "^1.1"
