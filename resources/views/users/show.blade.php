@@ -136,7 +136,12 @@
         @if( env('TALC_ORDERS') )
           <div class="bg-white shadow overflow-hidden sm:rounded-lg">
             <ul class="divide-y divide-gray-200">
-              <li class="bg-gray-50 px-6 py-2 text-lg font-bold text-gray-900">{{ __('Orders') }}</li>
+              <li class="bg-gray-50 px-6 py-2">
+                <div class="flex justify-between items-center">
+                  <span class="text-lg font-bold text-gray-900">{{ __('Orders') }}</span>
+                  <a href="{{ route('users.orders.create', $user) }}" class="inline-flex items-center px-1.5 py-0.5 border border-transparent rounded-md shadow-sm text-xs font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">{{ __('New order') }}</a>
+                </div>
+              </li>
               @forelse( $user->orders as $order )
                 <li>
                   <a href="{{ route('orders.show', $order) }}" class="block hover:bg-gray-50">

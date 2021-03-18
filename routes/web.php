@@ -59,15 +59,19 @@ Route::prefix('admin')->middleware(['verified', 'auth.admin'])->group(function (
     Route::get('payments/{payment}/mollie', [PaymentController::class, 'mollie'])->name('payments.mollie');
     Route::any('products/{product}/tagging', [ProductController::class, 'tagging'])->name('products.tagging');
     Route::get('products/{product}/remove', [ProductController::class, 'remove'])->name('products.remove');
+    Route::get('users/{user}/orders/create', [OrderController::class, 'create'])->name('users.orders.create');
+    Route::post('users/{user}/orders', [OrderController::class, 'store'])->name('users.orders.store');
     Route::get('users/{user}/remove', [UserController::class, 'remove'])->name('users.remove');
     Route::resources([
         'events' => EventController::class,
         'memberships' => MembershipController::class,
-        'orders' => OrderController::class,
         'products' => ProductController::class,
         'tags' => TagController::class,
         'users' => UserController::class
     ]);
+    Route::get('orders/{order}/calculate', [OrderController::class, 'calculate'])->name('orders.calculate');
+    Route::get('orders/{order}/remove', [OrderController::class, 'remove'])->name('orders.remove');
+    Route::resource('orders', OrderController::class)->except(['create']);
     Route::resource('users.subscriptions', SubscriptionController::class)->shallow()->only(['show']);
     Route::resource('orders.payments', PaymentController::class)->shallow()->only(['index', 'show']);
 });

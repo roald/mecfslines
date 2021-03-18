@@ -22,10 +22,10 @@ class OrderRequest extends BaseRequest
     public function rules()
     {
         return [
-            'user_id' => 'required|exists:users,id',
             'amount' => 'required|numeric|min:0',
-            'status' => 'required',
-            'payed_at' => '',
+            'membership_id' => 'nullable|exists:memberships,id',
+            'product_ids' => 'nullable|array',
+            'products_ids.*' => 'if:product_ids|exists:products,id',
         ];
     }
 }
