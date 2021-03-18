@@ -9,7 +9,7 @@ class MembershipController extends Controller
 {
     public function index()
     {
-        $memberships = Membership::orderBy('name', 'asc')->get();
+        $memberships = Membership::orderBy('name', 'asc')->paginate(20);
         return view('memberships.index')->with('memberships', $memberships);
     }
 

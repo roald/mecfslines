@@ -70,6 +70,10 @@
                 </tbody>
               </table>
             </div>
+
+            <div class="mt-6">
+              {{ $memberships->links() }}
+            </div>
           </div>
         </div>
       </div>

@@ -9,7 +9,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::with('subscriptions')->orderBy('name', 'asc')->get();
+        $users = User::with('subscriptions')->orderBy('name', 'asc')->paginate(20);
         return view('users.index')->with('users', $users);
     }
 

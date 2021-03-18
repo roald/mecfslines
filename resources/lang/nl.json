@@ -64,6 +64,7 @@
   "General product properties.": "Algemene product eigenschappen.",
   "General subscription properties.": "Algemene lidmaatschap eigenschappen.",
   "General user properties.": "Algemene gebruiker eigenschappen.",
+  "Go to page :page": "Ga naar pagina :page",
   "Grant": "Toestaan",
   "Heading": "Kop",
   "Image": "Afbeelding",
@@ -106,6 +107,7 @@
   "Page blocks": "Pagina blokken",
   "Page order": "Volgorde",
   "Pages": "Pagina's",
+  "Pagination Navigation": "Paginering",
   "Parent": "Ouder",
   "Password": "Wachtwoord",
   "Pay": "Betaal",
@@ -136,6 +138,7 @@
   "Select your JPG / PNG image to link to this event (max. 10MB).": "Selecteer een JPG / PNG afbeelding om aan dit evenement te koppelen (max. 10MB).",
   "Select your JPG / PNG image to link to this page (max. 10MB).": "Selecteer een JPG / PNG afbeelding om aan deze pagina te koppelen (max. 10MB).",
   "Show page in menu": "Toon pagina in het menu",
+  "Showing": "Toont",
   "Sign in": "Inloggen",
   "Sign up": "Aanmelden",
   "Slug": "Slug",
@@ -190,7 +193,10 @@
   "failed": "mislukt",
   "inactive": "inactief",
   "not": "niet",
+  "of": "van",
   "paid": "betaald",
   "pending": "lopende",
-  "status": "status"
+  "results": "resultaten",
+  "status": "status",
+  "to": "tot"
 }

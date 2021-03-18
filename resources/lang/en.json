@@ -60,6 +60,7 @@
   "General product properties.": "",
   "General subscription properties.": "",
   "General user properties.": "",
+  "Go to page :page": "",
   "Grant": "",
   "Heading": "",
   "Image": "",
@@ -102,6 +103,7 @@
   "Page blocks": "",
   "Page order": "",
   "Pages": "",
+  "Pagination Navigation": "",
   "Parent": "",
   "Password": "",
   "Pay": "",
@@ -132,6 +134,7 @@
   "Select your JPG / PNG image to link to this event (max. 10MB).": "",
   "Select your JPG / PNG image to link to this page (max. 10MB).": "",
   "Show page in menu": "",
+  "Showing": "",
   "Sign in": "",
   "Sign up": "",
   "Slug": "",
@@ -181,5 +184,8 @@
   "Yes": "",
   "events": "",
   "not": "",
-  "status": ""
+  "of": "",
+  "results": "",
+  "status": "",
+  "to": ""
 }

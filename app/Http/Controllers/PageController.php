@@ -9,7 +9,7 @@ class PageController extends Controller
 {
     public function index()
     {
-        $pages = Page::where('type', 'page')->orderBy('order', 'asc')->get();
+        $pages = Page::where('type', 'page')->orderBy('order', 'asc')->paginate(20);
         return view('pages.index')->with('pages', $pages);
     }
 
