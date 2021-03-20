@@ -26,12 +26,15 @@
                 <thead class="bg-gray-50">
                   <tr>
                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      {{ __('Order') }}
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       {{ __('User') }}
                     </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden lg:table-cell">
                       {{ __('Amount') }}
                     </th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">
                       {{ __('Date / time') }}
                     </th>
                   </tr>
@@ -40,12 +43,15 @@
                   @forelse( $orders as $order )
                     <tr>
                       <td class="px-6 py-4 whitespace-nowrap text-sm font-bold">
-                        <a href="{{ route('orders.show', $order) }}" class="text-indigo-600 hover:text-indigo-900">{{ $order->user->name }}</a>
+                        <a href="{{ route('orders.show', $order) }}" class="text-indigo-600 hover:text-indigo-900">#{{ $order->id }}</a>
                       </td>
                       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {{ $order->user->name }}
+                      </td>
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden lg:table-cell">
                         € {{ number_format($order->amount, 2, ',', '.') }}
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden sm:table-cell">
                         @if( $order->isCompleted() )
                           {{ $order->payed_at->isoFormat('D MMM H:mm') }}
                         @else
