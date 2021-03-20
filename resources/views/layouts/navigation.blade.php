@@ -1,10 +1,11 @@
+<!-- Responsive sidebar for mobile -->
 <nav class="md:hidden" x-show="sidebarOpen">
   <div class="fixed inset-0 flex z-40">
     <div @click="sidebarOpen = false" x-show="sidebarOpen" x-transition:enter-start="opacity-0" x-transation:enter-end="opacity-100" x-transition:leave-start="opacity-100" x-transation:leave-end="opacity-0" class="fixed inset-0 transition-opacity ease-linear duration-300">
       <div class="absolute inset-0 bg-gray-600 opacity-75"></div>
     </div>
 
-    <div x-show="sidebarOpen" x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full" class="relative flex-1 flex flex-col max-w-xs w-full bg-white dark:bg-gray-800 transition transform ease-in-out duration-300">
+    <div x-show="sidebarOpen" x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full" class="relative flex-1 flex flex-col max-w-xs w-full pl-safe-area-inset pt-safe-area-inset bg-white dark:bg-gray-800 transition transform ease-in-out duration-300">
       <div class="absolute top-0 right-0 -mr-12 pt-2">
         <button @click="sidebarOpen = false" class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
           <span class="sr-only">Close sidebar</span>
@@ -122,7 +123,7 @@
   <div class="flex flex-col w-64">
     <!-- Sidebar component, swap this element with another sidebar if you like -->
     <div class="flex flex-col h-0 flex-1 border-r border-gray-200 bg-white dark:bg-gray-800">
-      <div class="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
+      <div class="flex-1 flex flex-col pt-5 pb-4 pl-safe-area-inset overflow-y-auto">
         <div class="flex items-center flex-shrink-0 px-4">
           <a href="{{ route('web.home') }}" class="text-4xl font-bold text-green-500 hover:text-green-600">TALC</a>
         </div>
@@ -194,7 +195,7 @@
           @endif
         </nav>
       </div>
-      <div class="flex-shrink-0 flex border-t border-gray-200 dark:border-gray-700 dark:bg-gray-700 p-4">
+      <div class="flex-shrink-0 flex border-t border-gray-200 dark:border-gray-700 dark:bg-gray-700 p-4 pl-safe-area-inset">
         <form method="POST" action="{{ route('logout') }}">
           @csrf
           <a href="{{ route('logout') }}" class="flex-shrink-0 w-full group block" onclick="event.preventDefault(); this.closest('form').submit();">

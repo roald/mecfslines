@@ -1,3 +1,21 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+@layer components {
+  /* SAFE AREA INSETS */
+  .p-safe-area-inset {
+    padding-top: env(safe-area-inset-top);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-padding-right);
+  }
+  .pt-safe-area-inset {
+    padding-top: env(safe-area-inset-top);
+  }
+  .pl-safe-area-inset {
+    padding-left: env(safe-area-inset-left);
+  }
+  .pr-safe-area-inset {
+    padding-right: env(safe-area-inset-right);
+  }
+}
