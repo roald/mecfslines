@@ -90,7 +90,7 @@
       <div class="flex-shrink-0 flex border-t border-gray-200 dark:border-gray-700 dark:bg-gray-700 p-4">
         <form method="POST" action="{{ route('logout') }}">
           @csrf
-          <a href="{{ route('logout') }}" class="flex-shrink-0 group block" onclick="event.preventDefault(); this.closest('form').submit();">
+          <a href="{{ route('logout') }}" class="flex-shrink-0 group block pl-safe-area-inset" onclick="event.preventDefault(); this.closest('form').submit();">
             <div class="flex items-center">
               <div>
                 <span class="inline-block h-9 w-9 rounded-full overflow-hidden bg-gray-100 dark:bg-gray-200">
@@ -195,10 +195,10 @@
           @endif
         </nav>
       </div>
-      <div class="flex-shrink-0 flex border-t border-gray-200 dark:border-gray-700 dark:bg-gray-700 p-4 pl-safe-area-inset">
+      <div class="flex-shrink-0 flex border-t border-gray-200 dark:border-gray-700 dark:bg-gray-700 p-4">
         <form method="POST" action="{{ route('logout') }}">
           @csrf
-          <a href="{{ route('logout') }}" class="flex-shrink-0 w-full group block" onclick="event.preventDefault(); this.closest('form').submit();">
+          <a href="{{ route('logout') }}" class="flex-shrink-0 w-full group block pl-safe-area-inset" onclick="event.preventDefault(); this.closest('form').submit();">
             <div class="flex items-center">
               <div>
                 <span class="inline-block h-9 w-9 rounded-full overflow-hidden bg-gray-100 dark:bg-gray-200">
