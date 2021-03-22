@@ -24,6 +24,8 @@ class WebsiteController extends Controller
 
     public function page(Page $page)
     {
+        if( $page == 'concept' && !(Auth::check() && Auth::user()->isAdmin()) ) abort(404);
+
         $grants = $this->grants($page);
 
         $page->load(['blocks' => function ($query) use ($grants) {
