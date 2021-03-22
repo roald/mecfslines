@@ -41,6 +41,7 @@ Route::prefix('my')->middleware(['auth'])->group(function () {
 });
 
 Route::prefix('admin')->middleware(['verified', 'auth.admin'])->group(function () {
+    Route::redirect('/', '/admin/dashboard')->name('admin');
     Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
 
     Route::get('pages/{page}/remove', [PageController::class, 'remove'])->name('pages.remove');
