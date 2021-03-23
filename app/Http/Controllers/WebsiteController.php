@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\Page;
 use App\Models\Product;
+use App\Models\Project;
 use App\Models\Tag;
 use Auth;
 
@@ -48,6 +49,13 @@ class WebsiteController extends Controller
         if( is_null($product->page) ) return redirect()->route('web.home');
 
         return $this->page($product->page);
+    }
+
+    public function project(Project $project)
+    {
+        if( is_null($project->page) ) return redirect()->route('web.home');
+
+        return $this->page($project->page);
     }
 
     public function tag(Tag $tag)

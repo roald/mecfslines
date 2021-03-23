@@ -11,6 +11,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
@@ -32,6 +33,7 @@ Route::get('/', [WebsiteController::class, 'homepage'])->name('web.home');
 Route::get('page/{page:slug}', [WebsiteController::class, 'page'])->name('web.page');
 Route::get('event/{event:slug}', [WebsiteController::class, 'event'])->name('web.event');
 Route::get('product/{product:slug}', [WebsiteController::class, 'product'])->name('web.product');
+Route::get('project/{project:slug}', [WebsiteController::class, 'project'])->name('web.project');
 Route::get('tag/{tag:slug}', [WebsiteController::class, 'tag'])->name('web.tag');
 
 Route::prefix('my')->middleware(['auth'])->group(function () {
@@ -60,6 +62,9 @@ Route::prefix('admin')->middleware(['verified', 'auth.admin'])->group(function (
     Route::get('payments/{payment}/mollie', [PaymentController::class, 'mollie'])->name('payments.mollie');
     Route::any('products/{product}/tagging', [ProductController::class, 'tagging'])->name('products.tagging');
     Route::get('products/{product}/remove', [ProductController::class, 'remove'])->name('products.remove');
+    Route::get('projects/{project}/blocks/create', [ProjectController::class, 'createBlock'])->name('projects.blocks.create');
+    Route::get('projects/{project}/remove', [ProjectController::class, 'remove'])->name('projects.remove');
+    Route::any('projects/{project}/tagging', [ProjectController::class, 'tagging'])->name('projects.tagging');
     Route::get('users/{user}/orders/create', [OrderController::class, 'create'])->name('users.orders.create');
     Route::post('users/{user}/orders', [OrderController::class, 'store'])->name('users.orders.store');
     Route::get('users/{user}/remove', [UserController::class, 'remove'])->name('users.remove');
@@ -67,6 +72,7 @@ Route::prefix('admin')->middleware(['verified', 'auth.admin'])->group(function (
         'events' => EventController::class,
         'memberships' => MembershipController::class,
         'products' => ProductController::class,
+        'projects' => ProjectController::class,
         'tags' => TagController::class,
         'users' => UserController::class
     ]);
