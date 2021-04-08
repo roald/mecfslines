@@ -22,9 +22,6 @@ class SubscriptionRequest extends BaseRequest
     public function rules()
     {
         return [
-            'membership_id' => 'required|exists:memberships,id',
-            'user_id' => 'required|exists:users,id',
-            'order_id' => 'required|exists:orders,id',
             'started_at' => 'required|date',
             'ended_at' => 'required|date|after:started_at',
         ];

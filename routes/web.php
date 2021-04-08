@@ -79,7 +79,7 @@ Route::prefix('admin')->middleware(['verified', 'auth.admin'])->group(function (
     Route::get('orders/{order}/calculate', [OrderController::class, 'calculate'])->name('orders.calculate');
     Route::get('orders/{order}/remove', [OrderController::class, 'remove'])->name('orders.remove');
     Route::resource('orders', OrderController::class)->except(['create']);
-    Route::resource('users.subscriptions', SubscriptionController::class)->shallow()->only(['show']);
+    Route::resource('users.subscriptions', SubscriptionController::class)->shallow()->only(['show', 'edit', 'update']);
     Route::resource('orders.payments', PaymentController::class)->shallow()->only(['index', 'show']);
 });
 
