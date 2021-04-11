@@ -120,6 +120,26 @@
                 </dd>
               </div>
             @endif
+            @if( $page->type == 'redirect' )
+              <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt class="text-sm font-medium text-gray-500">
+                  {{ __('Redirect') }}
+                </dt>
+                <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                  @php( $action = $page->blocks()->first()->actions()->first() )
+                  <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-indigo-100 text-indigo-800 uppercase">
+                    {{ __($action->type) }}
+                  </span>
+                  <a href="{{ $action->link() }}" class="ml-2 font-medium text-indigo-600 hover:text-indigo-900 hover:underline">
+                    @if( $action->type == 'page' )
+                      {{ $action->page->title }}
+                    @elseif( $action->type == 'url' )
+                      {{ $action->target }}
+                    @endif
+                  </a>
+                </dd>
+              </div>
+            @endif
           </dl>
         </div>
       </div>
@@ -127,75 +147,77 @@
     </div>
   </div>
 
-  <div class="py-6">
-    <div class="max-w-7xl mx-auto">
+  @if( $page->type == 'page' )
+    <div class="py-6">
+      <div class="max-w-7xl mx-auto">
 
-      <div class="bg-white shadow overflow-hidden rounded-md">
-        <ul class="divide-y divide-gray-200">
-          <li class="px-6 py-4">
-            <div class="-ml-4 -mt-4 flex justify-between items-center flex-wrap sm:flex-nowrap">
-              <div class="ml-4 mt-4">
-                <h3 class="text-lg leading-6 font-medium text-gray-900">
-                  {{ __('Page blocks') }}
-                </h3>
-                <p class="mt-1 text-sm text-gray-500">
-                  {{ __('These blocks will provide the content for this page.') }}
-                </p>
+        <div class="bg-white shadow overflow-hidden rounded-md">
+          <ul class="divide-y divide-gray-200">
+            <li class="px-6 py-4">
+              <div class="-ml-4 -mt-4 flex justify-between items-center flex-wrap sm:flex-nowrap">
+                <div class="ml-4 mt-4">
+                  <h3 class="text-lg leading-6 font-medium text-gray-900">
+                    {{ __('Page blocks') }}
+                  </h3>
+                  <p class="mt-1 text-sm text-gray-500">
+                    {{ __('These blocks will provide the content for this page.') }}
+                  </p>
+                </div>
+                <div class="ml-4 mt-4 flex-shrink-0">
+                  <a href="{{ route('pages.blocks.create', $page) }}" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    {{ __('Create new block') }}
+                  </a>
+                </div>
               </div>
-              <div class="ml-4 mt-4 flex-shrink-0">
-                <a href="{{ route('pages.blocks.create', $page) }}" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                  {{ __('Create new block') }}
-                </a>
-              </div>
-            </div>
-          </li>
-          @foreach( $page->blocks()->orderBy('order', 'asc')->get() as $block )
-            <li>
-              <a href="{{ route('blocks.show', $block) }}" class="block hover:bg-gray-50">
-                <div class="px-4 py-4 flex items-center sm:px-6">
-                  <div class="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
-                    <div>
-                      <div class="flex text-sm font-medium text-indigo-600 truncate">
-                        <p>
-                          <span class="mr-2 px-1 py-0.5 rounded text-xs font-medium bg-indigo-100 text-indigo-800">{{ $block->order }}</span>
-                          {{ $block->heading }}
-                        </p>
-                        <p class="ml-1 font-normal text-gray-500">{{ $block->topic }}</p>
+            </li>
+            @foreach( $page->blocks()->orderBy('order', 'asc')->get() as $block )
+              <li>
+                <a href="{{ route('blocks.show', $block) }}" class="block hover:bg-gray-50">
+                  <div class="px-4 py-4 flex items-center sm:px-6">
+                    <div class="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
+                      <div>
+                        <div class="flex text-sm font-medium text-indigo-600 truncate">
+                          <p>
+                            <span class="mr-2 px-1 py-0.5 rounded text-xs font-medium bg-indigo-100 text-indigo-800">{{ $block->order }}</span>
+                            {{ $block->heading }}
+                          </p>
+                          <p class="ml-1 font-normal text-gray-500">{{ $block->topic }}</p>
+                        </div>
+                        <div class="mt-2 flex">
+                          <div class="flex items-center text-sm text-gray-500">
+                            <!-- Heroicon name: document-text -->
+                            <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                            <p>{{ $block->body }}</p>
+                          </div>
+                        </div>
                       </div>
-                      <div class="mt-2 flex">
-                        <div class="flex items-center text-sm text-gray-500">
-                          <!-- Heroicon name: document-text -->
-                          <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                          </svg>
-                          <p>{{ $block->body }}</p>
+                      <div class="mt-4 flex-shrink-0 sm:mt-0">
+                        <div class="flex overflow-hidden">
+                          <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-indigo-100 text-indigo-800">
+                            <svg class="mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8">
+                              <circle cx="4" cy="4" r="3" />
+                            </svg>
+                            {{ $block->type }}
+                          </span>
                         </div>
                       </div>
                     </div>
-                    <div class="mt-4 flex-shrink-0 sm:mt-0">
-                      <div class="flex overflow-hidden">
-                        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-indigo-100 text-indigo-800">
-                          <svg class="mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8">
-                            <circle cx="4" cy="4" r="3" />
-                          </svg>
-                          {{ $block->type }}
-                        </span>
-                      </div>
+                    <div class="ml-5 flex-shrink-0">
+                      <!-- Heroicon name: chevron-right -->
+                      <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                      </svg>
                     </div>
                   </div>
-                  <div class="ml-5 flex-shrink-0">
-                    <!-- Heroicon name: chevron-right -->
-                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                    </svg>
-                  </div>
-                </div>
-              </a>
-            </li>
-          @endforeach
-        </ul>
+                </a>
+              </li>
+            @endforeach
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
+  @endif
 
 </x-app-layout>

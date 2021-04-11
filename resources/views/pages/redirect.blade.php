@@ -48,7 +48,7 @@
                     <svg class="flex-shrink-0 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                       <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                     </svg>
-                    <a href="{{ route('pages.create') }}" aria-current="page" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">{{ __('New page') }}</a>
+                    <a href="{{ route('pages.create') }}" aria-current="page" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">{{ __('New redirect') }}</a>
                   </div>
                 </li>
               @endif
@@ -58,7 +58,7 @@
         <div class="mt-2 md:flex md:items-center md:justify-between">
           <div class="flex-1 min-w-0">
             <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
-              {{ $page->title ?? __('New page') }}
+              {{ $page->title ?? __('New redirect') }}
             </h2>
           </div>
         </div>
@@ -177,44 +177,37 @@
           <div class="bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6">
             <div class="md:grid md:grid-cols-3 md:gap-6">
               <div class="md:col-span-1">
-
-                <h3 class="text-lg font-medium leading-6 text-gray-900">{{ __('Image') }}</h3>
+  
+                <h3 class="text-lg font-medium leading-6 text-gray-900">{{ __('Redirect') }}</h3>
                 <p class="mt-1 text-sm text-gray-500">
-                  {{ __('Linked image for this page.') }}
+                  {{ __('Redirection attributes.') }}
                 </p>
+  
               </div>
               <div class="mt-5 md:mt-0 md:col-span-2">
                 <div class="grid grid-cols-6 gap-6">
-                  @if ($page->hasMedia('media'))
-                    <div class="col-span-6 flex">
-                      <div class="w-full">
-                        <div class="text-sm font-medium text-gray-700">{{ __('Remove media') }}</div>
-                        <div class="flex items-start mt-1">
-                          <div class="h-5 flex items center">
-                            <input type="checkbox" id="page_remove_media" name="remove_media" @if(old('remove_media')) checked @endif class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
-                          </div>
-                          <div class="ml-3 text-sm">
-                            <label for="page_remove_media" class="font-medium text-gray-700">
-                              <span>{{ __('Remove file') }}:</span>
-                              <span class="font-bold">{{ $page->getFirstMedia('media')->file_name }}</span>
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="ml-4 flex-shrink-0">
-                        <img src="{{ $page->getFirstMediaUrl('media', 'thumb') }}" class="h-32 border border-gray-300 rounded-md">
-                      </div>
-                    </div>
-                  @endif
-
                   <div class="col-span-6">
-                    <label for="page_media" class="block text-sm font-medium text-gray-700">{{ __('Upload image') }}</label>
-                    <div class="mt-1 shadow-sm border border-gray-300 block w-full rounded-md">
-                      <input type="file" id="page_media" name="media" class="bg-gray-50 sm:text-sm border-transparent rounded-md">
-                    </div>
-                    <p class="mt-2 text-sm text-gray-500">
-                      {{ __('Select your JPG / PNG image to link to this page (max. 10MB).')}}
-                    </p>
+                    <label for="action_type" class="block text-sm font-medium text-gray-700">{{ __('Type') }}</label>
+                    <select name="redirect[type]" id="action_type" class="mt-1 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                      @foreach(App\Models\Action::$types as $type)
+                        <option value="{{ $type }}" @if(old('type', $page->type) == $type) selected @endif>{{ __($type) }}</option>
+                      @endforeach
+                    </select>
+                  </div>
+  
+                  <div class="col-span-6">
+                    <label for="action_page" class="block text-sm font-medium text-gray-700">{{ __('Page') }}</label>
+                    <select name="redirect[page_id]" id="action_page" class="mt-1 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                      <option value=""></option>
+                      @foreach($pages as $page)
+                        <option value="{{ $page->id }}" @if(old('page_id', $page->page_id) == $page->id) selected @endif>{{ $page->title }}</option>
+                      @endforeach
+                    </select>
+                  </div>
+  
+                  <div class="col-span-6">
+                    <label for="action_target" class="block text-sm font-medium text-gray-700">{{ __('Target') }}</label>
+                    <input type="text" name="redirect[target]" id="action_target" value="{{ old('target', $page->target) }}" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                   </div>
                 </div>
               </div>

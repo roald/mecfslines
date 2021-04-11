@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\PageRequest;
 use App\Models\Page;
 
@@ -9,22 +10,26 @@ class PageController extends Controller
 {
     public function index()
     {
-        $pages = Page::where('type', 'page')->orderBy('order', 'asc')->paginate(20);
+        $pages = Page::whereIn('type', ['page', 'redirect'])->orderBy('order', 'asc')->paginate(20);
         return view('pages.index')->with('pages', $pages);
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $page = new Page([
             'order' => Page::max('order') + 1,
         ]);
-        return view('pages.edit')->with('page', $page);
+        if( $request->has('redirect') ) $page->type = 'redirect';
+        return $this->edit($page);
     }
 
     public function store(PageRequest $request)
     {
-        $page = Page::create($request->allValidated());
+        $pageValues = $request->allValidated();
+        $pageValues['type'] = $request->page_type;
+        $page = Page::create($pageValues);
         if( $request->hasFile('media') ) $page->addMediaFromRequest('media')->toMediaCollection('media');
+        if( $page->type == 'redirect' ) $this->saveRedirect($request, $page);
         return redirect()->route('pages.show', $page);
     }
 
@@ -38,6 +43,7 @@ class PageController extends Controller
 
     public function edit(Page $page)
     {
+        if( $page->type == 'redirect' ) return $this->redirect($page);
         return view('pages.edit')->with('page', $page);
     }
 
@@ -46,6 +52,7 @@ class PageController extends Controller
         $page->fill($request->allValidated())->save();
         if( $request->has('remove_media') ) $page->getFirstMedia('media')->delete();
         if( $request->hasFile('media') ) $page->addMediaFromRequest('media')->toMediaCollection('media');
+        if( $page->type == 'redirect' ) $this->saveRedirect($request, $page);
         return redirect()->route('pages.show', $page);
     }
 
@@ -58,5 +65,35 @@ class PageController extends Controller
     {
         $page->forceDelete();
         return redirect()->route('pages.index');
+    }
+
+    private function redirect(Page $page)
+    {
+        if( !env('TALC_REDIRECTS', false) ) return redirect()->route('pages.index');
+        $pages = Page::where('type', 'page')->where('id', '!=', $page->id)->orderBy('title', 'asc')->get();
+        return view('pages.redirect')->with('page', $page)->with('pages', $pages);
+    }
+
+    private function saveRedirect(PageRequest $request, Page $page)
+    {
+        $block = $page->blocks()->first();
+        if( is_null($block) ) {
+            $block = $page->blocks()->create([
+                'type' => 'redirect',
+                'order' => 1,
+                'heading' => $page->title,
+                'grant' => 'all',
+            ]);
+        }
+
+        $action = $block->actions()->first();
+        if( $action ) {
+            $action->fill($request->get('redirect'))->save();
+        } else {
+            $values = $request->redirect;
+            $values['action'] = __('Redirect');
+            $values['order'] = 1;
+            $block->actions()->create($values);
+        }
     }
 }

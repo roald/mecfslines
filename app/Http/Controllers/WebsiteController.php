@@ -34,6 +34,13 @@ class WebsiteController extends Controller
         }, 'blocks.actions' => function ($query) {
             $query->orderBy('order', 'asc');
         }]);
+
+        // Redirect page targets are defined by the first Action in the first Block
+        if( $page->type == 'redirect' ) {
+            $link = $page->blocks->first()->actions->first()->link();
+            return redirect($link);
+        }
+
         return view('website.page')->with('page', $page);
     }
 

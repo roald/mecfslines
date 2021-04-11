@@ -20,7 +20,7 @@ class ActionController extends Controller
             'block' => $block,
             'order' => $block->actions()->max('order') + 1,
         ]);
-        $pages = Page::orderBy('title', 'asc')->get();
+        $pages = Page::whereIn('type', ['page', 'redirect'])->orderBy('title', 'asc')->get();
         return view('actions.edit')->with('action', $action)->with('pages', $pages);
     }
 
@@ -38,7 +38,7 @@ class ActionController extends Controller
 
     public function edit(Action $action)
     {
-        $pages = Page::orderBy('title', 'asc')->get();
+        $pages = Page::whereIn('type', ['page', 'redirect'])->orderBy('title', 'asc')->get();
         return view('actions.edit')->with('action', $action)->with('pages', $pages);
     }
 
