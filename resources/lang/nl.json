@@ -47,6 +47,7 @@
     "Delete this page": "Verwijder deze pagina",
     "Delete this product": "Verwijder dit product",
     "Delete this project": "Verwijder dit project",
+    "Delete this user": "Verwijder deze gebruiker",
     "Deleting an event is only possible, as long as nobody has participated.": "Het is alleen mogelijk om een evenement te verwijderen als er geen deelnemers zijn.",
     "Description": "Beschrijving",
     "Duration": "Duur",
@@ -219,6 +220,7 @@
     "When deleting a products, all the content in and related to the product will be deleted.": "Als een product wordt verwijderd, dan wordt alle inhoud van het product en gekoppeld aan het product verwijderd.",
     "When deleting a projects, all the content in and related to the project will be deleted.": "Als een project wordt verwijderd, dan wordt alle inhoud van het project en gekoppeld aan het project verwijderd.",
     "When deleting an incomplete order, the user cannot continue anymore and should start over.": "Wanneer een onvoltooide bestelling wordt verwijderd, dan kan de gebruiker niet verder met deze bestelling en moet een nieuwe bestelling aangemaakt worden.",
+    "When removing an user, their activity on the website will also be removed. This will include participation in events or uncompleted orders. Removing an user is not possible anymore when the user has had a subscription or completed orders.": "Als een gebruiker wordt verwijderd, dan wordt de activiteit van de gebruiker op de website ook verwijderd. Dit bevat deelname aan evenementen en onvoltooide bestellingen. Het is niet mogelijk een gebruiker te verwijderen als deze een abonnement heeft gehad of bestellingen heeft gemaakt.",
     "Whoops! Something went wrong.": "Oeps! Er ging iets mis.",
     "Yes": "Ja"
 }

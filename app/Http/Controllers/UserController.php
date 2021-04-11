@@ -42,11 +42,12 @@ class UserController extends Controller
 
     public function remove(User $user)
     {
-        return redirect()->route('users.show', $user);
+        return view('users.remove')->with('user', $user);
     }
 
     public function destroy(User $user)
     {
-        return redirect()->route('users.show', $user);
+        if( $user->removable() ) $user->delete();
+        return redirect()->route('users.index');
     }
 }

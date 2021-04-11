@@ -41,6 +41,7 @@
     "Delete this page": "",
     "Delete this product": "",
     "Delete this project": "",
+    "Delete this user": "",
     "Deleting an event is only possible, as long as nobody has participated.": "",
     "Description": "",
     "Duration": "",
@@ -207,6 +208,7 @@
     "When deleting a products, all the content in and related to the product will be deleted.": "",
     "When deleting a projects, all the content in and related to the project will be deleted.": "",
     "When deleting an incomplete order, the user cannot continue anymore and should start over.": "",
+    "When removing an user, their activity on the website will also be removed. This will include participation in events or uncompleted orders. Removing an user is not possible anymore when the user has had a subscription or completed orders.": "",
     "Whoops! Something went wrong.": "",
     "Yes": ""
 }
