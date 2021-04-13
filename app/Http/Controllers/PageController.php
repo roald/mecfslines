@@ -18,8 +18,8 @@ class PageController extends Controller
     {
         $page = new Page([
             'order' => Page::max('order') + 1,
+            'type' => $request->has('redirect') ? 'redirect' : 'page',
         ]);
-        if( $request->has('redirect') ) $page->type = 'redirect';
         return $this->edit($page);
     }
 
