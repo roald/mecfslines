@@ -66,7 +66,7 @@
                     </tr>
                   @empty
                     <tr>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-center text-gray-500" colspan="4">
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-center text-gray-500" colspan="5">
                         {{ __('There are no memberships') }}
                         <br>
                         <a href="{{ route('memberships.create') }}" class="text-indigo-600 hover:text-indigo-900">{{ __('Create your first membership') }}</a>
