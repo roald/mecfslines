@@ -15,7 +15,7 @@ class Page extends Model implements HasMedia
 
     protected $fillable = ['title', 'slug', 'description', 'order', 'menu', 'status', 'type'];
 
-    public static $stati = ['active', 'concept'];
+    public static $stati = ['active', 'concept', 'user'];
 
     public function actions()
     {

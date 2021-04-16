@@ -26,6 +26,7 @@ class WebsiteController extends Controller
     public function page(Page $page)
     {
         if( $page == 'concept' && !(Auth::check() && Auth::user()->isAdmin()) ) abort(404);
+        if( $page == 'user' && !Auth::check() ) return redirect()->route('login');
 
         $grants = $this->grants($page);
 
