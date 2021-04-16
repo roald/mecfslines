@@ -48,6 +48,7 @@
                   @forelse( $pages as $page )
                     <tr>
                       <td class="px-6 py-4 whitespace-nowrap text-sm font-bold">
+                        @if( $page->type == 'redirect' )<x-heroicon-o-trending-up class="h-5 w-5 text-gray-400 inline-block mr-1"/>@endif
                         <a href="{{ route('pages.show', $page) }}" class="text-indigo-600 hover:text-indigo-900">{{ $page->title }}</a>
                       </td>
                       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
