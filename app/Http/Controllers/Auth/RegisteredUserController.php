@@ -19,7 +19,12 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        if( env('TALC_REGISTERING', false) ) {
+            return view('auth.register');
+        } else {
+            return redirect()->route('login');
+        }
+
     }
 
     /**
