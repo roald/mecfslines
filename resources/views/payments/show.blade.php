@@ -8,10 +8,7 @@
         <div>
           <nav class="sm:hidden" aria-label="Back">
             <a href="{{ route('orders.show', $payment->order) }}" class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700">
-              <!-- Heroicon name: chevron-left -->
-              <svg class="flex-shrink-0 -ml-1 mr-1 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-              </svg>
+              <x-heroicon-s-chevron-left class="flex-shrink-0 -ml-1 mr-1 h-5 w-5 text-gray-400"/>
               {{ __('Back') }}
             </a>
           </nav>
@@ -24,19 +21,13 @@
               </li>
               <li>
                 <div class="flex items-center">
-                  <!-- Heroicon name: chevron-right -->
-                  <svg class="flex-shrink-0 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                  </svg>
+                  <x-heroicon-s-chevron-right class="flex-shrink-0 h-5 w-5 text-gray-400"/>
                   <a href="{{ route('orders.show', $payment->order) }}" aria-current="page" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">{{ __('Order') }} #{{ $payment->order_id }}</a>
                 </div>
               </li>
               <li>
                 <div class="flex items-center">
-                  <!-- Heroicon name: chevron-right -->
-                  <svg class="flex-shrink-0 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                  </svg>
+                  <x-heroicon-s-chevron-right class="flex-shrink-0 h-5 w-5 text-gray-400"/>
                   <a href="{{ route('payments.show', $payment) }}" aria-current="page" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">{{ $payment->created_at->isoFormat('YYYY-MM-DD') }}</a>
                 </div>
               </li>
@@ -118,9 +109,7 @@
                 <dd class="mt-1 text-sm text-indigo-600 hover:underline sm:mt-0 sm:col-span-2">
                   <a href="{{ route('payments.mollie', $payment) }}" target="mollie">
                     <div class="inline-flex items-center space-x-2">
-                      <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
+                      <x-heroicon-o-external-link class="h-5 w-5" />
                       <span>{{ $payment->reference }}</span>
                     </div>
                   </a>

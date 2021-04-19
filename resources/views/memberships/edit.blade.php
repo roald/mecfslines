@@ -8,7 +8,7 @@
         <div>
           <nav class="sm:hidden" aria-label="Back">
             <a href="{{ route('memberships.index') }}" class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700">
-              <x-heroicon-o-chevron-right class="flex-shrink-0 -ml-1 mr-1 h-5 w-5 text-gray-400"/>
+              <x-heroicon-s-chevron-left class="flex-shrink-0 -ml-1 mr-1 h-5 w-5 text-gray-400"/>
               {{ __('Back') }}
             </a>
           </nav>
@@ -22,20 +22,20 @@
               @if( $membership->exists )
                 <li>
                   <div class="flex items-center">
-                    <x-heroicon-o-chevron-right class="flex-shrink-0 h-5 w-5 text-gray-400"/>
+                    <x-heroicon-s-chevron-right class="flex-shrink-0 h-5 w-5 text-gray-400"/>
                     <a href="{{ route('memberships.show', $membership) }}" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">{{ $membership->name }}</a>
                   </div>
                 </li>
                 <li>
                   <div class="flex items-center">
-                    <x-heroicon-o-chevron-right class="flex-shrink-0 h-5 w-5 text-gray-400"/>
+                    <x-heroicon-s-chevron-right class="flex-shrink-0 h-5 w-5 text-gray-400"/>
                     <a href="{{ route('memberships.edit', $membership) }}" aria-current="page" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">{{ __('Edit') }}</a>
                   </div>
                 </li>
               @else
                 <li>
                   <div class="flex items-center">
-                    <x-heroicon-o-chevron-right class="flex-shrink-0 h-5 w-5 text-gray-400"/>
+                    <x-heroicon-s-chevron-right class="flex-shrink-0 h-5 w-5 text-gray-400"/>
                     <a href="{{ route('memberships.create') }}" aria-current="page" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">{{ __('New membership') }}</a>
                   </div>
                 </li>

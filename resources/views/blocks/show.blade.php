@@ -8,10 +8,7 @@
         <div>
           <nav class="sm:hidden" aria-label="Back">
             <a href="{{ route('pages.show', $block->page) }}" class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700">
-              <!-- Heroicon name: chevron-left -->
-              <svg class="flex-shrink-0 -ml-1 mr-1 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-              </svg>
+              <x-heroicon-s-chevron-left class="flex-shrink-0 -ml-1 mr-1 h-5 w-5 text-gray-400"/>
               {{ __('Back') }}
             </a>
           </nav>
@@ -25,10 +22,7 @@
                 </li>
                 <li>
                   <div class="flex items-center">
-                    <!-- Heroicon name: chevron-right -->
-                    <svg class="flex-shrink-0 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                    </svg>
+                    <x-heroicon-s-chevron-right class="flex-shrink-0 h-5 w-5 text-gray-400"/>
                     <a href="{{ route('events.show', $block->page->event) }}" aria-current="page" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">{{ $block->page->event->title }}</a>
                   </div>
                 </li>
@@ -40,20 +34,14 @@
                 </li>
                 <li>
                   <div class="flex items-center">
-                    <!-- Heroicon name: chevron-right -->
-                    <svg class="flex-shrink-0 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                    </svg>
+                    <x-heroicon-s-chevron-right class="flex-shrink-0 h-5 w-5 text-gray-400"/>
                     <a href="{{ route('pages.show', $block->page) }}" aria-current="page" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">{{ $block->page->title }}</a>
                   </div>
                 </li>
               @endif
               <li>
                 <div class="flex items-center">
-                  <!-- Heroicon name: chevron-right -->
-                  <svg class="flex-shrink-0 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                  </svg>
+                  <x-heroicon-s-chevron-right class="flex-shrink-0 h-5 w-5 text-gray-400"/>
                   <a href="{{ route('blocks.show', $block) }}" aria-current="page" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">{{ $block->heading }}</a>
                 </div>
               </li>
@@ -203,19 +191,14 @@
                     <div class="mt-4 flex-shrink-0 sm:mt-0">
                       <div class="flex overflow-hidden">
                         <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-indigo-100 text-indigo-800">
-                          <svg class="mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8">
-                            <circle cx="4" cy="4" r="3" />
-                          </svg>
+                          <svg class="mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8"><circle cx="4" cy="4" r="3" /></svg>
                           {{ $action->type }}
                         </span>
                       </div>
                     </div>
                   </div>
                   <div class="ml-5 flex-shrink-0">
-                    <!-- Heroicon name: chevron-right -->
-                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                      <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                    </svg>
+                    <x-heroicon-s-chevron-right class="flex-shrink-0 h-5 w-5 text-gray-400"/>
                   </div>
                 </div>
               </a>
@@ -261,18 +244,14 @@
                 <img src="{{ $media->getUrl('thumb') }}" alt="{{ $media->name }}" class="h-48 block rounded-t-lg object-cover">
                 <div class="flex w-full rounded-b-lg font-medium text-sm">
                   <a href="{{ route('media.edit', $media) }}" class="px-3 py-2 flex-auto bg-gray-50 text-gray-600 hover:bg-gray-100 flex justify-center">
-                    <svg class="h-4 w-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                    </svg>
+                    <x-heroicon-o-pencil-alt class="h-4 w-4 mr-2"/>
                     {{ __('Edit') }}
                   </a>
                   <form action="{{ route('media.destroy', $media) }}" method="POST" class="flex-auto">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="px-3 py-2 w-full bg-red-50 text-gray-600 hover:bg-red-100 flex justify-center">
-                      <svg class="h-4 w-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                      </svg>
+                      <x-heroicon-o-trash class="h-4 w-4 mr-2"/>
                       {{ __('Delete') }}
                     </button>
                   </form>

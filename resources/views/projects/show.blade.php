@@ -8,10 +8,7 @@
         <div>
           <nav class="sm:hidden" aria-label="Back">
             <a href="{{ route('projects.index') }}" class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700">
-              <!-- Heroicon name: chevron-left -->
-              <svg class="flex-shrink-0 -ml-1 mr-1 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-              </svg>
+              <x-heroicon-s-chevron-left class="flex-shrink-0 -ml-1 mr-1 h-5 w-5 text-gray-400"/>
               {{ __('Back') }}
             </a>
           </nav>
@@ -24,10 +21,7 @@
               </li>
               <li>
                 <div class="flex items-center">
-                  <!-- Heroicon name: chevron-right -->
-                  <svg class="flex-shrink-0 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                  </svg>
+                  <x-heroicon-s-chevron-right class="flex-shrink-0 h-5 w-5 text-gray-400"/>
                   <a href="{{ route('projects.show', $project) }}" aria-current="page" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">{{ $project->title }}</a>
                 </div>
               </li>
@@ -187,10 +181,7 @@
                         </div>
                         <div class="mt-2 flex">
                           <div class="flex items-center text-sm text-gray-500">
-                            <!-- Heroicon name: document-text -->
-                            <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                            </svg>
+                            <x-heroicon-o-document-text class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" />
                             <p>{{ $block->body }}</p>
                           </div>
                         </div>
@@ -198,19 +189,14 @@
                       <div class="mt-4 flex-shrink-0 sm:mt-0">
                         <div class="flex overflow-hidden">
                           <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-indigo-100 text-indigo-800">
-                            <svg class="mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8">
-                              <circle cx="4" cy="4" r="3" />
-                            </svg>
+                            <svg class="mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8"><circle cx="4" cy="4" r="3" /></svg>
                             {{ $block->type }}
                           </span>
                         </div>
                       </div>
                     </div>
                     <div class="ml-5 flex-shrink-0">
-                      <!-- Heroicon name: chevron-right -->
-                      <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                      </svg>
+                      <x-heroicon-s-chevron-right class="h-5 w-5 text-gray-400" />
                     </div>
                   </div>
                 </a>
