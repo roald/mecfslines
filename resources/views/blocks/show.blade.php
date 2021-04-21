@@ -87,13 +87,15 @@
           <dl class="sm:divide-y sm:divide-gray-200">
             <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt class="text-sm font-medium text-gray-500">
-                {{ __('Parent') }}
+                {{ __('Belongs to') }}
               </dt>
               <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                 @if( $block->page->type == 'page' )
                   <a href="{{ route('pages.show', $block->page) }}" class="font-medium text-indigo-600 text-indigo-500">{{ $block->page->title }}</a>
                 @elseif( $block->page->type == 'event' )
                   <a href="{{ route('events.show', $block->page->event) }}" class="font-medium text-indigo-600 text-indigo-500">{{ $block->page->event->title }}</a>
+                @elseif( $block->page->type == 'project' )
+                  <a href="{{ route('projects.show', $block->page->project) }}" class="font-medium text-indigo-600 text-indigo-500">{{ $block->page->project->title }}</a>
                 @endif
               </dd>
             </div>
