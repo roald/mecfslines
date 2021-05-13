@@ -20,6 +20,7 @@ class CheckAdmin
         if( !Auth::check() ) {
             return redirect()->route('login');
         } elseif( Auth::user()->isAdmin() ) {
+            if( session()->get('url.intended', false) ) return redirect()->intended();
             return $next($request);
         }
 

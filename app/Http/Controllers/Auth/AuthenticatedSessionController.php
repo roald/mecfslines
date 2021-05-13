@@ -17,6 +17,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create()
     {
+        if( url()->previous() != url()->route('login') ) session()->put('url.intended', url()->previous());
         return view('auth.login');
     }
 

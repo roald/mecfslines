@@ -42,7 +42,7 @@ Route::prefix('my')->middleware(['auth'])->group(function () {
     Route::get('orders/{order}/pay', [OrderController::class, 'pay'])->name('orders.pay');
 });
 
-Route::prefix('admin')->middleware(['verified', 'auth.admin'])->group(function () {
+Route::prefix('admin')->middleware(['auth.admin', 'verified'])->group(function () {
     Route::redirect('/', '/admin/dashboard')->name('admin');
     Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
 
