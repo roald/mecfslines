@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\BlockRequest;
+use App\Http\Requests\MultimediaStoreRequest;
 use App\Models\Block;
+use App\Models\Multimedia;
 use App\Models\Page;
 
 class BlockController extends Controller
@@ -32,6 +34,9 @@ class BlockController extends Controller
 
     public function show(Block $block)
     {
+        $block->load(['multimedia' => function ($query) {
+            $query->orderBy('order', 'asc');
+        }]);
         return view('blocks.show')->with('block', $block);
     }
 
@@ -55,6 +60,7 @@ class BlockController extends Controller
     {
         $page = $block->page;
         $block->actions()->delete();
+        $block->multimedia()->delete();
         $block->delete();
         return redirect()->route('pages.blocks.index', $page);
     }
@@ -67,9 +73,9 @@ class BlockController extends Controller
         return redirect()->route('blocks.show', $block);
     }
 
-    public function upload(Request $request, Block $block)
+    public function upload(MultimediaStoreRequest $request, Block $block)
     {
-        if( $request->hasFile('media') ) $block->addMediaFromRequest('media')->toMediaCollection('media');
+        Multimedia::build($request, $block);
         return redirect()->route('blocks.show', $block);
     }
 }

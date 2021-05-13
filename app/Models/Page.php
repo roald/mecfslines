@@ -37,6 +37,11 @@ class Page extends Model implements HasMedia
         return $this->hasOne(Event::class);
     }
 
+    public function multimedia()
+    {
+        return $this->morphOne(Multimedia::class, 'model');
+    }
+
     public function parent()
     {
         return $this->belongsTo(Page::class);
@@ -55,6 +60,15 @@ class Page extends Model implements HasMedia
     public function tag()
     {
         return $this->hasOne(Tag::class);
+    }
+
+    public function title()
+    {
+        if( $this->type == 'page' ) return $this->title;
+        elseif( $this->type == 'event' ) return $this->event->title;
+        elseif( $this->type == 'product' ) return $this->product->name;
+        elseif( $this->type == 'project' ) return $this->project->title;
+        else return $this->title;
     }
 
     public function registerMediaCollections(): void

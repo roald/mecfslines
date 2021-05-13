@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\EventRequest;
 use App\Models\Event;
+use App\Models\Multimedia;
 use App\Models\Page;
+use Carbon\Carbon;
 
 class EventController extends Controller
 {
@@ -17,14 +19,17 @@ class EventController extends Controller
 
     public function create()
     {
-        $event = new Event();
+        $event = new Event([
+            'started_at' => Carbon::now(),
+            'ended_at' => Carbon::now(),
+        ]);
         return view('events.edit')->with('event', $event);
     }
 
     public function store(EventRequest $request)
     {
         $event = Event::create($request->allValidated());
-        if( $request->hasFile('media') ) $event->addMediaFromRequest('media')->toMediaCollection('media');
+        if( $request->hasFile('media') ) Multimedia::build($request, $event);
         return redirect()->route('events.show', $event);
     }
 
@@ -40,9 +45,18 @@ class EventController extends Controller
 
     public function update(EventRequest $request, Event $event)
     {
+        // Update event
         $event->fill($request->allValidated())->save();
-        if( $request->has('remove_media') ) $event->getFirstMedia('media')->delete();
-        if( $request->hasFile('media') ) $event->addMediaFromRequest('media')->toMediaCollection('media');
+
+        // Modify media
+        if( $request->hasFile('media') && $event->multimedia ) {
+            $event->multimedia->upload($request);
+        } elseif( $request->hasFile('media') ) {
+            Multimedia::build($request, $event);
+        } elseif( $request->has('remove_media') ) {
+            $event->multimedia->delete();
+        }
+
         return redirect()->route('events.show', $event);
     }
 
@@ -53,6 +67,7 @@ class EventController extends Controller
 
     public function destroy(Event $event)
     {
+        $event->multimedia()->delete();
         $event->forceDelete();
         return redirect()->route('events.index');
     }

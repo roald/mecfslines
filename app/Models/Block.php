@@ -28,6 +28,11 @@ class Block extends Model implements HasMedia
         return $this->hasMany(Action::class);
     }
 
+    public function multimedia()
+    {
+        return $this->morphMany(Multimedia::class, 'model');
+    }
+
     public function page()
     {
         return $this->belongsTo(Page::class);

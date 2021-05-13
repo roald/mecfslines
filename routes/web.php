@@ -7,6 +7,7 @@ use App\Http\Controllers\BlockController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\MembershipController;
+use App\Http\Controllers\MultimediaController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PaymentController;
@@ -76,6 +77,8 @@ Route::prefix('admin')->middleware(['auth.admin', 'verified'])->group(function (
         'tags' => TagController::class,
         'users' => UserController::class
     ]);
+    Route::get('multimedia/{multimedia}/stream', [MultimediaController::class, 'stream'])->name('multimedia.stream');
+    Route::resource('multimedia', MultimediaController::class)->except(['index', 'create', 'store']);
     Route::get('orders/{order}/calculate', [OrderController::class, 'calculate'])->name('orders.calculate');
     Route::get('orders/{order}/remove', [OrderController::class, 'remove'])->name('orders.remove');
     Route::resource('orders', OrderController::class)->except(['create']);

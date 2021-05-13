@@ -127,13 +127,13 @@
                 {{ __($project->status) }}
               </dd>
             </div>
-            @if( $project->getMedia('media')->count() > 0 )
+            @if( $project->multimedia )
               <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt class="text-sm font-medium text-gray-500">
                   {{ __('Image') }}
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  <img src="{{ $project->getFirstMediaUrl('media', 'thumb') }}" alt="{{ $project->getFirstMedia('media')->name }}" class="h-48">
+                  <x-multimedia :multimedia="$project->multimedia" class="h-48 rounded-md" />
                 </dd>
               </div>
             @endif

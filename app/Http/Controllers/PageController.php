@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\PageRequest;
+use App\Models\Multimedia;
 use App\Models\Page;
 
 class PageController extends Controller
@@ -28,7 +29,7 @@ class PageController extends Controller
         $pageValues = $request->allValidated();
         $pageValues['type'] = $request->page_type;
         $page = Page::create($pageValues);
-        if( $request->hasFile('media') ) $page->addMediaFromRequest('media')->toMediaCollection('media');
+        if( $request->hasFile('media') ) Multimedia::build($request, $page);
         if( $page->type == 'redirect' ) $this->saveRedirect($request, $page);
         return redirect()->route('pages.show', $page);
     }
@@ -49,10 +50,21 @@ class PageController extends Controller
 
     public function update(PageRequest $request, Page $page)
     {
+        // Update page
         $page->fill($request->allValidated())->save();
-        if( $request->has('remove_media') ) $page->getFirstMedia('media')->delete();
-        if( $request->hasFile('media') ) $page->addMediaFromRequest('media')->toMediaCollection('media');
+
+        // Modify media
+        if( $request->hasFile('media') && $page->multimedia ) {
+            $page->multimedia->upload($request);
+        } elseif( $request->hasFile('media') ) {
+            Multimedia::build($request, $page);
+        } elseif( $request->has('remove_media') ) {
+            $page->multimedia->delete();
+        }
+
+        // Redirect updates
         if( $page->type == 'redirect' ) $this->saveRedirect($request, $page);
+
         return redirect()->route('pages.show', $page);
     }
 
@@ -63,6 +75,7 @@ class PageController extends Controller
 
     public function destroy(Page $page)
     {
+        $page->multimedia()->delete();
         $page->forceDelete();
         return redirect()->route('pages.index');
     }

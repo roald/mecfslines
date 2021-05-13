@@ -218,7 +218,7 @@
         <div class="px-4 py-5 sm:p-6">
           <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
             <div class="ml-4 mt-2">
-              <h3 class="text-lg leading-6 font-medium text-gray-900">{{ __('Images') }}</h3>
+              <h3 class="text-lg leading-6 font-medium text-gray-900">{{ __('Media') }}</h3>
             </div>
             <div class="ml-4 mt-2 flex-shrink-0">
               <form action="{{ route('blocks.upload', $block) }}" method="POST" enctype="multipart/form-data">
@@ -236,25 +236,35 @@
                   </button>
                 </div>
               </form>
+              @if( $errors->count() )
+                <div class="rounded-md mt-2 bg-red-50 text-sm text-red-700 p-2">
+                  <ul class="list-disc space-y-1 pl-5">
+                    @foreach( $errors->all() as $error )
+                      <li>{{ $error }}</li>
+                    @endforeach
+                  </ul>
+                </div>
+              @endif
             </div>
           </div>
         </div>
-        @if( $block->getMedia('media')->count() > 0 )
-          <div class="px-4 py-5 sm:p-6 flex">
-            @foreach( $block->getMedia('media') as $media )
-              <div class="mr-4 shadow rounded-lg overflow-hidden">
-                <img src="{{ $media->getUrl('thumb') }}" alt="{{ $media->name }}" class="h-48 block rounded-t-lg object-cover">
+        @if( $block->multimedia->count() > 0 )
+          <div class="px-4 py-5 sm:p-6 flex flex-wrap">
+            @foreach( $block->multimedia as $media )
+              <div class="mr-4 mb-4 shadow rounded-lg relative overflow-hidden">
+                <div class="absolute right-0 bg-gray-400 rounded-bl-lg text-white py-1 px-2 text-sm font-bold">{{ $media->order }}</div>
+                <x-multimedia :multimedia="$media" class="h-32 w-36 lg:h-48 lg:w-64 block" />
                 <div class="flex w-full rounded-b-lg font-medium text-sm">
-                  <a href="{{ route('media.edit', $media) }}" class="px-3 py-2 flex-auto bg-gray-50 text-gray-600 hover:bg-gray-100 flex justify-center">
+                  <a href="{{ route('multimedia.edit', $media) }}" class="px-3 py-2 flex-auto bg-green-100 text-gray-600 hover:bg-green-200 flex justify-center">
                     <x-heroicon-o-pencil-alt class="h-4 w-4 mr-2"/>
-                    {{ __('Edit') }}
+                    <span class="hidden lg:inline">{{ __('Edit') }}</span>
                   </a>
-                  <form action="{{ route('media.destroy', $media) }}" method="POST" class="flex-auto">
+                  <form action="{{ route('multimedia.destroy', $media) }}" method="POST" class="flex-auto">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="px-3 py-2 w-full bg-red-50 text-gray-600 hover:bg-red-100 flex justify-center">
+                    <button type="submit" class="px-3 py-2 w-full bg-red-100 text-gray-600 hover:bg-red-200 flex justify-center">
                       <x-heroicon-o-trash class="h-4 w-4 mr-2"/>
-                      {{ __('Delete') }}
+                      <span class="hidden lg:inline">{{ __('Delete') }}</span>
                     </button>
                   </form>
                 </div>

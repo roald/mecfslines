@@ -15,6 +15,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
+        "league/flysystem-aws-s3-v3": "~1.0",
         "mailjet/laravel-mailjet": "^3.0",
         "mollie/laravel-mollie": "^2.0",
         "spatie/laravel-medialibrary": "^7.0.0",

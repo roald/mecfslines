@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\ProjectRequest;
+use App\Models\Multimedia;
 use App\Models\Page;
 use App\Models\Project;
 use Carbon\Carbon;
@@ -25,7 +26,7 @@ class ProjectController extends Controller
     public function store(ProjectRequest $request)
     {
         $project = Project::create($request->allValidated());
-        if( $request->hasFile('media') ) $project->addMediaFromRequest('media')->toMediaCollection('media');
+        if( $request->hasFile('media') ) Multimedia::build($request, $project);
         return redirect()->route('projects.show', $project);
     }
 
@@ -41,9 +42,18 @@ class ProjectController extends Controller
 
     public function update(ProjectRequest $request, Project $project)
     {
+        // Update project
         $project->fill($request->allValidated())->save();
-        if( $request->has('remove_media') ) $project->getFirstMedia('media')->delete();
-        if( $request->hasFile('media') ) $project->addMediaFromRequest('media')->toMediaCollection('media');
+
+        // Modify media
+        if( $request->hasFile('media') && $project->multimedia ) {
+            $project->multimedia->upload($request);
+        } elseif( $request->hasFile('media') ) {
+            Multimedia::build($request, $project);
+        } elseif( $request->has('remove_media') ) {
+            $project->multimedia->delete();
+        }
+        
         return redirect()->route('projects.show', $project);
     }
 
@@ -54,6 +64,7 @@ class ProjectController extends Controller
 
     public function destroy(Project $project)
     {
+        $project->multimedia()->delete();
         $project->forceDelete();
         return redirect()->route('projects.index');
     }

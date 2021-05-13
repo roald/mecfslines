@@ -34,6 +34,8 @@ class WebsiteController extends Controller
             $query->whereIn('grant', $grants)->orderBy('order', 'asc');
         }, 'blocks.actions' => function ($query) {
             $query->orderBy('order', 'asc');
+        }, 'blocks.multimedia' => function ($query) {
+            $query->orderBy('order', 'asc');
         }]);
 
         // Redirect page targets are defined by the first Action in the first Block

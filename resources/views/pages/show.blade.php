@@ -104,13 +104,13 @@
                 {{ $page->description }}
               </dd>
             </div>
-            @if( $page->getMedia('media')->count() > 0 )
+            @if( $page->multimedia )
               <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                 <dt class="text-sm font-medium text-gray-500">
                   {{ __('Image') }}
                 </dt>
                 <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  <img src="{{ $page->getFirstMediaUrl('media', 'thumb') }}" alt="{{ $page->getFirstMedia('media')->name }}" class="h-48">
+                  <x-multimedia :multimedia="$page->multimedia" class="h-48 rounded-md" />
                 </dd>
               </div>
             @endif

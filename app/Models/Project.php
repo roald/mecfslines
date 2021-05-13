@@ -22,6 +22,11 @@ class Project extends Model implements HasMedia
     public static $stati = ['active', 'draft'];
     public static $types = ['default'];
 
+    public function multimedia()
+    {
+        return $this->morphOne(Multimedia::class, 'model');
+    }
+
     public function page()
     {
         return $this->belongsTo(Page::class);

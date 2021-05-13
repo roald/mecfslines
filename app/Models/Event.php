@@ -22,6 +22,11 @@ class Event extends Model implements HasMedia
 
     public static $types = ['default'];
 
+    public function multimedia()
+    {
+        return $this->morphOne(Multimedia::class, 'model');
+    }
+
     public function orders()
     {
         return $this->belongsToMany(Order::class);
