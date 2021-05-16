@@ -172,7 +172,7 @@
               </div>
               <div class="mt-5 md:mt-0 md:col-span-2">
                 <div class="grid grid-cols-6 gap-6">
-                  @if ($project->hasMedia('media'))
+                  @if ($project->multimedia)
                     <div class="col-span-6 flex">
                       <div class="w-full">
                         <div class="text-sm font-medium text-gray-700">{{ __('Remove media') }}</div>
@@ -183,13 +183,13 @@
                           <div class="ml-3 text-sm">
                             <label for="page_remove_media" class="font-medium text-gray-700">
                               <span>{{ __('Remove file') }}:</span>
-                              <span class="font-bold">{{ $project->getFirstMedia('media')->file_name }}</span>
+                              <span class="font-bold">{{ $project->multimedia->fileName() }}</span>
                             </label>
                           </div>
                         </div>
                       </div>
                       <div class="ml-4 flex-shrink-0">
-                        <img src="{{ $project->getFirstMediaUrl('media', 'thumb') }}" class="h-32 border border-gray-300 rounded-md">
+                        <x-multimedia :multimedia="$project->multimedia" class="h-32 border border-gray-300 rounded-md" />
                       </div>
                     </div>
                   @endif
