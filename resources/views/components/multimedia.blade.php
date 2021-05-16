@@ -1,5 +1,3 @@
-@props(['multimedia'])
-
 @if( $multimedia->type == 'image' )
 
   @php
