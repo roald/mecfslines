@@ -18,6 +18,7 @@ class PageController extends Controller
     public function create(Request $request)
     {
         $page = new Page([
+            'title' => '',
             'order' => Page::max('order') + 1,
             'type' => $request->has('redirect') ? 'redirect' : 'page',
         ]);
