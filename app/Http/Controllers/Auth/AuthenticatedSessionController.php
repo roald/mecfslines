@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -17,7 +18,10 @@ class AuthenticatedSessionController extends Controller
      */
     public function create()
     {
-        if( url()->previous() != url()->route('login') ) session()->put('url.intended', url()->previous());
+        // Set the previous url that we came from to redirect to after successful login but only if is internal
+        if( url()->previous() != url()->route('login') && Str::startsWith(url()->previous(), url()->to('/')) ) {
+            session()->put('url.intended', url()->previous());
+        }
         return view('auth.login');
     }
 
@@ -33,7 +37,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect()->intended(RouteServiceProvider::HOME);
     }
 
     /**
