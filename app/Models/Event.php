@@ -57,4 +57,9 @@ class Event extends Model implements HasMedia
                 $this->addMediaConversion('large')->width('1000')->height('1000');
             });
     }
+
+    public function participate(User $user)
+    {
+        $this->users()->syncWithoutDetaching($user->id);
+    }
 }

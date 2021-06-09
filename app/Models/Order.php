@@ -54,5 +54,10 @@ class Order extends Model
         foreach( $this->subscriptions as $subscription ) {
             $subscription->activate();
         }
+
+        // Link events
+        foreach( $this->events as $event ) {
+            $event->participate($this->user);
+        }
     }
 }
