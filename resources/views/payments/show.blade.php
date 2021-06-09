@@ -106,13 +106,21 @@
                 <dt class="text-sm font-medium text-gray-500">
                   Mollie ID
                 </dt>
-                <dd class="mt-1 text-sm text-indigo-600 hover:underline sm:mt-0 sm:col-span-2">
-                  <a href="{{ route('payments.mollie', $payment) }}" target="mollie">
+                <dd class="mt-1 text-sm text-indigo-600 sm:mt-0 sm:col-span-2">
+                  <a href="{{ route('payments.mollie', $payment) }}" target="mollie" class="hover:underline">
                     <div class="inline-flex items-center space-x-2">
                       <x-heroicon-o-external-link class="h-5 w-5" />
                       <span>{{ $payment->reference }}</span>
                     </div>
                   </a>
+                  @if( !$payment->isCompleted() )
+                    <a href="{{ route('payments.refresh', $payment) }}" class="ml-4 hover:underline">
+                      <div class="inline-flex items-center space-x-2">
+                        <x-heroicon-o-refresh class="h-5 w-5" />
+                        <span>{{ __('refresh') }}</span>
+                      </div>
+                    </a>
+                  @endif
                 </dd>
               </div>
             @endif

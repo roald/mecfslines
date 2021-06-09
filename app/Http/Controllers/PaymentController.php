@@ -27,4 +27,10 @@ class PaymentController extends Controller
         $mollie = mollie()->payments()->get($payment->reference);
         return redirect($mollie->_links->dashboard->href);
     }
+
+    public function refresh(Payment $payment)
+    {
+        $payment->syncStatus();
+        return redirect()->route('payments.show', $payment);
+    }
 }

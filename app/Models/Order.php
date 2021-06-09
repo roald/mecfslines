@@ -45,4 +45,14 @@ class Order extends Model
     {
         return $this->status == 'paid';
     }
+
+    public function complete()
+    {
+        if( !$this->isCompleted() ) return false;
+
+        // Activate subscriptions
+        foreach( $this->subscriptions as $subscription ) {
+            $subscription->activate();
+        }
+    }
 }

@@ -37,7 +37,7 @@ class Payment extends Model
                 'sequenceType' => 'oneoff',
                 'description' => $this->description,
                 'redirectUrl' => route('orders.detail', $this->order),
-                'webhookUrl'  => route('webhooks.mollie'),
+                'webhookUrl'  => \App::environment('production') ? route('webhooks.mollie') : null,
                 'metadata'    => [
                     'payment_id' => $this->id,
                 ],
@@ -46,7 +46,34 @@ class Payment extends Model
             $this->save();
 
             return $mollie->getCheckoutUrl();
-
         }
+    }
+
+    public function isCompleted()
+    {
+        return in_array($this->status, ['paid', 'canceled', 'expired', 'failed']);
+    }
+
+    public function syncStatus($mollie = null)
+    {
+        // Get Mollie status
+        if( empty($this->reference) ) abort(500);
+        if( is_null($mollie) ) $mollie = mollie()->payments()->get($this->reference);
+        if( !$mollie ) abort(500);
+
+        // Update Payment
+        $this->status = $mollie->status;
+        $this->method = $mollie->method;
+        if( $this->isClean() ) return; // Only continue on changes
+        $this->save();
+
+        // Push updates onto Order
+        $order = $this->order;
+        if( !$order->isCompleted() ) {
+            $order->status = $mollie->status;
+            if( $order->isCompleted() ) $order->payed_at = $mollie->paidAt;
+            $order->save();
+        }
+        if( $order->isCompleted() ) $order->complete();
     }
 }
