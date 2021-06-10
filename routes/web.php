@@ -82,7 +82,7 @@ Route::prefix('admin')->middleware(['auth.admin', 'verified'])->group(function (
     Route::get('orders/{order}/calculate', [OrderController::class, 'calculate'])->name('orders.calculate');
     Route::get('orders/{order}/remove', [OrderController::class, 'remove'])->name('orders.remove');
     Route::resource('orders', OrderController::class)->except(['create']);
-    Route::resource('users.subscriptions', SubscriptionController::class)->shallow()->only(['show', 'edit', 'update']);
+    Route::resource('subscriptions', SubscriptionController::class)->only(['show', 'edit', 'update']);
     Route::get('payments/{payment}/refresh', [PaymentController::class, 'refresh'])->name('payments.refresh');
     Route::resource('orders.payments', PaymentController::class)->shallow()->only(['index', 'show']);
 });
