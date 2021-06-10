@@ -18,7 +18,7 @@ class Order extends Model
 
     public function events()
     {
-        return $this->belongsToMany(Order::class);
+        return $this->belongsToMany(Event::class);
     }
 
     public function payments()
