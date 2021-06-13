@@ -69,4 +69,9 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->save();
         return $this->mollie_id;
     }
+
+    public function findOpenOrder()
+    {
+        return $this->orders()->where('status', 'open')->doesntHave('payments')->orderBy('created_at', 'asc')->first();
+    }
 }

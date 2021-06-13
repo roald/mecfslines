@@ -58,6 +58,25 @@ class Event extends Model implements HasMedia
             });
     }
 
+    public function buy(Order $order = null)
+    {
+        // User as to be signed in
+        if( !Auth::check() ) abort(401);
+
+        // Create Order
+        if( is_null($order) ) {
+            $order = Auth::user()->orders()->create(['status' => 'open', 'amount' => 0]);
+        }
+
+        // Add Event to Order
+        $order->events()->attach($this->id);
+
+        // Calculate amount
+        $order->calculate();
+
+        return $order;
+    }
+
     public function participate(User $user)
     {
         $this->users()->syncWithoutDetaching($user->id);

@@ -60,4 +60,14 @@ class Order extends Model
             $event->participate($this->user);
         }
     }
+
+    public function calculate()
+    {
+        // Precondition failed
+        if( $this->isCompleted() ) abort(412);
+
+        $this->amount = $this->subscriptions->sum(function($subscription) { return $subscription->membership->price; });
+        $this->amount += $this->products->sum('price');
+        $this->save();
+    }
 }
