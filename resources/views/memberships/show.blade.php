@@ -97,10 +97,16 @@
             </div>
             <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt class="text-sm font-medium text-gray-500">
-                {{ __('Repeatable / auto renew') }}
+                {{ __('Extending') }}
               </dt>
               <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {{ __('This membership will :check automatically renew', ['check' => ($membership->repeatable ? '' : __('not'))])}}
+                @if( is_null($membership->extend) )
+                  {{ __('This membership will not be extended') }}
+                @elseif( $membership->extend_id == $membership->id )
+                  {{ __('This membership will be automatically extended') }}
+                @else
+                  {{ __('This membership will be extended with') }} {{ $membership->extend->name }}
+                @endif
               </dd>
             </div>
             <div class="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">

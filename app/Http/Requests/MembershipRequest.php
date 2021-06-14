@@ -17,18 +17,6 @@ class MembershipRequest extends BaseRequest
     }
 
     /**
-     * Prepare the data for validation
-     *
-     * @return void
-     */
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'repeatable' => !empty($this->repeatable),
-        ]);
-    }
-
-    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -41,7 +29,7 @@ class MembershipRequest extends BaseRequest
             'duration' => 'required|in:'. join(',', Membership::$durations),
             'price' => 'required|min:0',
             'status' => 'required|in:'. join(',', Membership::$stati),
-            'repeatable' => 'required|boolean',
+            'extend_id' => 'nullable|exists:memberships,id',
         ];
     }
 }

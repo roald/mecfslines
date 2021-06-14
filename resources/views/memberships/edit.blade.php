@@ -141,15 +141,13 @@
                   </div>
 
                   <div class="col-span-6">
-                    <div class="text-sm font-medium text-gray-700">{{ __('Repeatable') }}</div>
-                    <div class="flex items-start mt-1">
-                      <div class="h-5 flex items center">
-                        <input type="checkbox" id="membership_repeatable" name="repeatable" @if(old('repeatable', $membership->repeatable)) checked @endif class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
-                      </div>
-                      <div class="ml-3 text-sm">
-                        <label for="membership_repeatable" class="font-medium text-gray-700">{{ __('This memberships will automatically renew') }}</label>
-                      </div>
-                    </div>
+                    <label for="membership_extend" class="block text-sm font-medium text-gray-700">{{ __('Extending') }}</label>
+                    <select name="extend_id" id="membership_extend" class="mt-1 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md">
+                      <option value="">-</option>
+                      @foreach(App\Models\Membership::orderBy('name')->get() as $extension)
+                        <option value="{{ $extension->id }}" @if(old('extend_id', $membership->extend_id) == $extension->id) selected @endif>{{ __($extension->name) }}</option>
+                      @endforeach
+                    </select>
                   </div>
                 </div>
               </div>

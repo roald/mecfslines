@@ -11,11 +11,16 @@ class Membership extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['name', 'description', 'duration', 'price', 'status', 'repeatable'];
+    protected $fillable = ['name', 'description', 'duration', 'price', 'status', 'extend_id'];
 
     public static $durations = ['1 month', '3 months', '1 year'];
 
     public static $stati = ['active', 'inactive'];
+
+    public function extend()
+    {
+        return $this->belongsTo(Membership::class);
+    }
 
     public function subscriptions()
     {
