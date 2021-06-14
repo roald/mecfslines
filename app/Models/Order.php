@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use App\Notifications\OrderPaid;
+use App\Notifications\PaymentReceipt;
+
 class Order extends Model
 {
     use HasFactory, SoftDeletes;
@@ -54,11 +57,21 @@ class Order extends Model
         foreach( $this->subscriptions as $subscription ) {
             $subscription->activate();
         }
-
+        
         // Link events
         foreach( $this->events as $event ) {
             $event->participate($this->user);
         }
+
+        // Send payment receipt
+        $this->user->notify(new PaymentReceipt($this));
+        if( env('TALC_NOTIFY_USERS', false) ) {
+            $adminIds = explode(',', env('TALC_NOTIFY_USERS'));
+            $admins = User::whereIn('id', $adminIds)->get();
+            foreach( $admins as $admin ) $admin->notify(new OrderPaid($this));
+        }
+        
+        return true;
     }
 
     public function calculate()
