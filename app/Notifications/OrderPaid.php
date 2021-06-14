@@ -46,10 +46,13 @@ class OrderPaid extends Notification
     {
         return (new MailMessage)
                     ->subject('TALC: Betaling ontvangen')
+                    ->success()
                     ->greeting('Hallo!')
                     ->line('Er is een bestelling betaald.')
+                    ->line('Bestelling #'. $this->order->id)
+                    ->line('Bedrag €'. number_format($this->order->amount, 2, ',', '.'))
+                    ->line('Door '. $this->order->user->name)
                     ->action('Bekijk bestelling', route('orders.show', $this->order))
-                    ->line('Bestelling #'. $this->order->id .': €'. number_format($this->order->amount, 2, ',', '.'))
                     ->salutation('Groeten, TALC');
     }
 

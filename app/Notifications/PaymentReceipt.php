@@ -46,11 +46,11 @@ class PaymentReceipt extends Notification
     {
         return (new MailMessage)
                     ->subject('TALC: Betalingsbewijs')
-                    ->success()
                     ->greeting('Bedankt!')
                     ->line('Bedankt voor deze bestelling. De betaling is goed ontvangen en verwerkt.')
+                    ->line('Bestelling #'. $this->order->id)
+                    ->line('Bedrag €'. number_format($this->order->amount, 2, ',', '.'))
                     ->action('Bekijk bestelling', route('orders.detail', $this->order))
-                    ->line('Bestelling #'. $this->order->id .': €'. number_format($this->order->amount, 2, ',', '.'))
                     ->salutation('Groeten, TALC');
     }
 
