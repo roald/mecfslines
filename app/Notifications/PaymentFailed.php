@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notification;
 
 use App\Models\Order;
 
-class PaymentReceipt extends Notification
+class PaymentFailed extends Notification
 {
     use Queueable;
 
@@ -45,14 +45,13 @@ class PaymentReceipt extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('TALC: Betalingsbewijs')
-            ->greeting('Bedankt!')
-            ->line('Bedankt voor deze bestelling. De betaling is goed ontvangen en verwerkt.')
-            ->line('Bestelling #'. $this->order->id)
-            ->line('Bedrag €'. number_format($this->order->amount, 2, ',', '.'))
+            ->subject('TALC: Betaling niet gelukt')
+            ->greeting('Beste '. $this->order->user->name)
+            ->line('Bedankt voor bestelling #'. $this->order->id .'.')
+            ->line('De betaling is echter niet gelukt. Je kan bij de bestelling een nieuwe betaling starten, of de bestelling annuleren.')
             ->action('Bekijk bestelling', route('orders.detail', $this->order))
             ->salutation('Groeten, TALC');
-    }
+}
 
     /**
      * Get the array representation of the notification.

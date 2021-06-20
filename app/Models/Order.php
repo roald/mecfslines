@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 use App\Notifications\OrderPaid;
+use App\Notifications\PaymentFailed;
 use App\Notifications\PaymentReceipt;
 
 class Order extends Model
@@ -44,14 +45,14 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function isCompleted()
+    public function isPaid()
     {
         return $this->status == 'paid';
     }
 
     public function complete()
     {
-        if( !$this->isCompleted() ) return false;
+        if( !$this->isPaid() ) return false;
 
         // Activate subscriptions
         foreach( $this->subscriptions as $subscription ) {
@@ -74,10 +75,21 @@ class Order extends Model
         return true;
     }
 
+    public function paymentFailed()
+    {
+        if( $this->isPaid() ) return;
+
+        // Deactivate subscriptions
+        $this->subscriptions()->update(['started_at' => null, 'ended_at' => null]);
+
+        // Send payment failed notification
+        $this->user->notify(new PaymentFailed($this));
+    }
+
     public function calculate()
     {
         // Precondition failed
-        if( $this->isCompleted() ) abort(412);
+        if( $this->isPaid() ) abort(412);
 
         $this->amount = $this->subscriptions->sum(function($subscription) { return $subscription->membership->price; });
         $this->amount += $this->products->sum('price');

@@ -52,7 +52,7 @@
                         € {{ number_format($order->amount, 2, ',', '.') }}
                       </td>
                       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden sm:table-cell">
-                        @if( $order->isCompleted() )
+                        @if( $order->isPaid() )
                           {{ $order->payed_at->isoFormat('D MMM H:mm') }}
                         @else
                           {{ __($order->status) }}

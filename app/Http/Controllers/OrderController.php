@@ -53,13 +53,13 @@ class OrderController extends Controller
 
     public function edit(Order $order)
     {
-        if( $order->isCompleted() ) abort(403);
+        if( $order->isPaid() ) abort(403);
         return view('orders.edit')->with('order', $order);
     }
 
     public function update(OrderRequest $request, Order $order)
     {
-        if( $order->isCompleted() ) abort(403);
+        if( $order->isPaid() ) abort(403);
 
         // Update Order
         $order->amount = $request->amount;
@@ -96,13 +96,13 @@ class OrderController extends Controller
 
     public function remove(Order $order)
     {
-        if( $order->isCompleted() ) abort(403);
+        if( $order->isPaid() ) abort(403);
         return view('orders.remove')->with('order', $order);
     }
 
     public function destroy(Order $order)
     {
-        if( $order->isCompleted() ) abort(403);
+        if( $order->isPaid() ) abort(403);
         if( $order->subscriptions()->whereNotNull('started_at')->count() > 0 ) abort(403);
         $order->subscriptions()->delete();
         $order->products()->detach();
@@ -127,7 +127,7 @@ class OrderController extends Controller
     {
         // Verify access
         if( Auth::user()->id != $order->user_id ) abort(403);
-        if( $order->isCompleted() ) return redirect()->route('orders.detail', $order);
+        if( $order->isPaid() ) return redirect()->route('orders.detail', $order);
 
         // Check active payments
         foreach( $order->payments as $payment ) {
@@ -148,7 +148,7 @@ class OrderController extends Controller
 
     public function calculate(Order $order)
     {
-        if( $order->isCompleted() ) abort(403);
+        if( $order->isPaid() ) abort(403);
 
         $order->amount = $order->subscriptions->sum(function($subscription) { return $subscription->membership->price; });
         $order->amount += $order->products->sum('price');

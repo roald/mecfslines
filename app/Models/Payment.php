@@ -54,6 +54,16 @@ class Payment extends Model
         return in_array($this->status, ['paid', 'canceled', 'expired', 'failed']);
     }
 
+    public function isSuccessful()
+    {
+        return $this->status == 'paid';
+    }
+
+    public function isUnsuccessful()
+    {
+        return in_array($this->status, ['canceled', 'expired', 'failed']);
+    }
+
     public function syncStatus($mollie = null)
     {
         // Get Mollie status
@@ -69,11 +79,12 @@ class Payment extends Model
 
         // Push updates onto Order
         $order = $this->order;
-        if( !$order->isCompleted() ) {
+        if( !$order->isPaid() ) {
             $order->status = $mollie->status;
-            if( $order->isCompleted() ) $order->payed_at = $mollie->paidAt;
+            if( $order->isPaid() ) $order->payed_at = $mollie->paidAt;
             $order->save();
         }
-        if( $order->isCompleted() ) $order->complete();
+        if( $this->isSuccessful() ) $order->complete();
+        if( $this->isUnsuccessful() ) $order->paymentFailed();
     }
 }

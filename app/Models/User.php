@@ -70,6 +70,12 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->mollie_id;
     }
 
+    public function hasMandate()
+    {
+        $mandates = mollie()->mandates()->listForId($this->mollie());
+        return $mandates->count > 0;
+    }
+
     public function findOpenOrder()
     {
         return $this->orders()->where('status', 'open')->doesntHave('payments')->orderBy('created_at', 'asc')->first();
