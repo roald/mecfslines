@@ -101,7 +101,7 @@ class ExtendSubscriptions extends Command
         $mollie = mollie()->payments()->create([
             'amount' => [
                 'currency' => 'EUR',
-                'value' => $payment->amount,
+                'value' => number_format($payment->amount, 2),
             ],    
             'customerId'  => $order->user->mollie(),
             'sequenceType' => 'recurring',
