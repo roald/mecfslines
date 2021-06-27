@@ -22,3 +22,22 @@ Alpine.js offers you the reactive and declarative nature of big frameworks like 
 You get to keep your DOM, and sprinkle in behavior as you see fit.  
 Think of it like Tailwind for JavaScript.
 
+
+## Creating new website based on TALC
+
+Clone TALC to new website  
+```
+git clone git@github.com:roald/talc.git website
+```
+
+Go into directory and rename upstream to TALC
+```
+git remote rename origin talc
+```
+
+Add new repository as origin remote
+```
+git branch -M main
+git remote add origin git@github.com:USER/REPO.git
+git push -u origin main
+```
