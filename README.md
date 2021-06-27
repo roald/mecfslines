@@ -25,19 +25,33 @@ Think of it like Tailwind for JavaScript.
 
 ## Creating new website based on TALC
 
-Clone TALC to new website  
+### Clone TALC to new website 
 ```
 git clone git@github.com:roald/talc.git website
 ```
-
 Go into directory and rename upstream to TALC
 ```
 git remote rename origin talc
 ```
-
 Add new repository as origin remote
 ```
 git branch -M main
 git remote add origin git@github.com:USER/REPO.git
 git push -u origin main
+```
+
+### Setting up new website
+1. Install dependencies
+```
+composer install
+npm install
+```
+2. Create database
+3. Configure application: (name, database, TALC modules)
+```
+cp .env.example .env
+```
+4. Set application key
+```
+php artisan key:generate
 ```
