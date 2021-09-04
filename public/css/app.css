@@ -1,4 +1,4 @@
-/*! tailwindcss v2.1.1 | MIT License | https://tailwindcss.com *//*! modern-normalize v1.0.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
+/*! tailwindcss v2.2.9 | MIT License | https://tailwindcss.com *//*! modern-normalize v1.1.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
 
 /*
 Document
@@ -10,8 +10,8 @@ Use a better box model (opinionated).
 */
 
 *,
-*::before,
-*::after {
+::before,
+::after {
 	box-sizing: border-box;
 }
 
@@ -19,7 +19,7 @@ Use a better box model (opinionated).
 Use a more readable tab size (opinionated).
 */
 
-:root {
+html {
 	-moz-tab-size: 4;
 	-o-tab-size: 4;
 	   tab-size: 4;
@@ -328,16 +328,6 @@ button {
   background-image: none;
 }
 
-/**
- * Work around a Firefox/IE bug where the transparent `button` background
- * results in a loss of the default `button` focus styles.
- */
-
-button:focus {
-  outline: 1px dotted;
-  outline: 5px auto -webkit-focus-ring-color;
-}
-
 fieldset {
   margin: 0;
   padding: 0;
@@ -409,7 +399,7 @@ body {
   box-sizing: border-box; /* 1 */
   border-width: 0; /* 2 */
   border-style: solid; /* 2 */
-  border-color: #e5e7eb; /* 2 */
+  border-color: currentColor; /* 2 */
 }
 
 /*
@@ -457,6 +447,18 @@ textarea::placeholder {
 button,
 [role="button"] {
   cursor: pointer;
+}
+
+/**
+ * Override legacy focus reset from Normalize with modern Firefox focus styles.
+ *
+ * This is actually an improvement over the new defaults in Firefox in our testing,
+ * as it triggers the better focus styles even for links, which still use a dotted
+ * outline in Firefox by default.
+ */
+ 
+:-moz-focusring {
+	outline: auto;
 }
 
 table {
@@ -516,11 +518,20 @@ samp {
 }
 
 /**
- * Make replaced elements `display: block` by default as that's
- * the behavior you want almost all of the time. Inspired by
- * CSS Remedy, with `svg` added as well.
+ * 1. Make replaced elements `display: block` by default as that's
+ *    the behavior you want almost all of the time. Inspired by
+ *    CSS Remedy, with `svg` added as well.
  *
- * https://github.com/mozdevs/cssremedy/issues/14
+ *    https://github.com/mozdevs/cssremedy/issues/14
+ * 
+ * 2. Add `vertical-align: middle` to align replaced elements more
+ *    sensibly by default when overriding `display` by adding a
+ *    utility like `inline`.
+ *
+ *    This can trigger a poorly considered linting error in some
+ *    tools but is included by design.
+ * 
+ *    https://github.com/jensimmons/cssremedy/issues/14#issuecomment-634934210
  */
 
 img,
@@ -531,8 +542,8 @@ audio,
 iframe,
 embed,
 object {
-  display: block;
-  vertical-align: middle;
+  display: block; /* 1 */
+  vertical-align: middle; /* 2 */
 }
 
 /**
@@ -548,7 +559,27 @@ video {
   height: auto;
 }
 
-* {
+/**
+ * Ensure the default browser behavior of the `hidden` attribute.
+ */
+
+[hidden] {
+  display: none;
+}
+
+*, ::before, ::after {
+	--tw-translate-x: 0;
+	--tw-translate-y: 0;
+	--tw-rotate: 0;
+	--tw-skew-x: 0;
+	--tw-skew-y: 0;
+	--tw-scale-x: 1;
+	--tw-scale-y: 1;
+	--tw-transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+	--tw-border-opacity: 1;
+	border-color: rgba(229, 231, 235, var(--tw-border-opacity));
+	--tw-ring-offset-shadow: 0 0 #0000;
+	--tw-ring-shadow: 0 0 #0000;
 	--tw-shadow: 0 0 #0000;
 	--tw-ring-inset: var(--tw-empty,/*!*/ /*!*/);
 	--tw-ring-offset-width: 0px;
@@ -556,6 +587,7 @@ video {
 	--tw-ring-color: rgba(59, 130, 246, 0.5);
 	--tw-ring-offset-shadow: 0 0 #0000;
 	--tw-ring-shadow: 0 0 #0000;
+	--tw-shadow: 0 0 #0000;
 }
 
 [type='text'],[type='email'],[type='url'],[type='password'],[type='number'],[type='date'],[type='datetime-local'],[type='month'],[type='search'],[type='tel'],[type='time'],[type='week'],[multiple],textarea,select {
@@ -745,14 +777,14 @@ select {
 .pointer-events-none {
 	pointer-events: none;
 }
-.relative {
-	position: relative;
+.fixed {
+	position: fixed;
 }
 .absolute {
 	position: absolute;
 }
-.fixed {
-	position: fixed;
+.relative {
+	position: relative;
 }
 .inset-0 {
 	top: 0px;
@@ -1049,16 +1081,6 @@ select {
 .flex-shrink-0 {
 	flex-shrink: 0;
 }
-.transform {
-	--tw-translate-x: 0;
-	--tw-translate-y: 0;
-	--tw-rotate: 0;
-	--tw-skew-x: 0;
-	--tw-skew-y: 0;
-	--tw-scale-x: 1;
-	--tw-scale-y: 1;
-	transform: translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
 .origin-top-left {
 	transform-origin: top left;
 }
@@ -1070,17 +1092,24 @@ select {
 }
 .-translate-x-full {
 	--tw-translate-x: -100%;
+	transform: var(--tw-transform);
 }
 .translate-x-0 {
 	--tw-translate-x: 0px;
+	transform: var(--tw-transform);
 }
 .scale-95 {
 	--tw-scale-x: .95;
 	--tw-scale-y: .95;
+	transform: var(--tw-transform);
 }
 .scale-100 {
 	--tw-scale-x: 1;
 	--tw-scale-y: 1;
+	transform: var(--tw-transform);
+}
+.transform {
+	transform: var(--tw-transform);
 }
 .cursor-default {
 	cursor: default;
@@ -1103,23 +1132,23 @@ select {
 .flex-wrap {
 	flex-wrap: wrap;
 }
-.items-center {
-	align-items: center;
-}
 .items-start {
 	align-items: flex-start;
+}
+.items-center {
+	align-items: center;
 }
 .items-baseline {
 	align-items: baseline;
 }
-.justify-between {
-	justify-content: space-between;
+.justify-end {
+	justify-content: flex-end;
 }
 .justify-center {
 	justify-content: center;
 }
-.justify-end {
-	justify-content: flex-end;
+.justify-between {
+	justify-content: space-between;
 }
 .gap-6 {
 	gap: 1.5rem;
@@ -1444,11 +1473,11 @@ select {
 .pl-10 {
 	padding-left: 2.5rem;
 }
-.text-center {
-	text-align: center;
-}
 .text-left {
 	text-align: left;
+}
+.text-center {
+	text-align: center;
 }
 .text-right {
 	text-align: right;
@@ -1663,9 +1692,6 @@ select {
 }
 .duration-75 {
 	transition-duration: 75ms;
-}
-.duration {
-	transition-duration: 150ms;
 }
 .duration-300 {
 	transition-duration: 300ms;
@@ -1998,16 +2024,16 @@ select {
 		align-items: center;
 	}
 
-	.sm\:justify-between {
-		justify-content: space-between;
-	}
-
 	.sm\:justify-start {
 		justify-content: flex-start;
 	}
 
 	.sm\:justify-center {
 		justify-content: center;
+	}
+
+	.sm\:justify-between {
+		justify-content: space-between;
 	}
 
 	.sm\:gap-4 {
@@ -2145,12 +2171,12 @@ select {
 		align-items: center;
 	}
 
-	.md\:justify-between {
-		justify-content: space-between;
-	}
-
 	.md\:justify-start {
 		justify-content: flex-start;
+	}
+
+	.md\:justify-between {
+		justify-content: space-between;
 	}
 
 	.md\:gap-6 {
