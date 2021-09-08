@@ -21,6 +21,7 @@ class Block extends Model implements HasMedia
         'events' => ['event-list', 'event-detail'],
         'products' => ['product-list', 'product-detail'],
         'memberships' => ['membership-list'],
+        'form' => ['contact'],
     ];
 
     public function actions()

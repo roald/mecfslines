@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActionController;
 use App\Http\Controllers\BlockController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\FormController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\MultimediaController;
@@ -36,6 +37,8 @@ Route::get('event/{event:slug}', [WebsiteController::class, 'event'])->name('web
 Route::get('product/{product:slug}', [WebsiteController::class, 'product'])->name('web.product');
 Route::get('project/{project:slug}', [WebsiteController::class, 'project'])->name('web.project');
 Route::get('tag/{tag:slug}', [WebsiteController::class, 'tag'])->name('web.tag');
+
+Route::post('page/{page:slug}/contact', [FormController::class, 'contact'])->name('form.contact');
 
 Route::prefix('my')->middleware(['auth'])->group(function () {
     Route::get('orders', [OrderController::class, 'mine'])->name('orders.mine');
