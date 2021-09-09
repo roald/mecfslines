@@ -15,6 +15,10 @@
 
   <!-- Scripts -->
   <script src="{{ asset('js/app.js') }}" defer></script>
+  
+  @if( env('TALC_GOOGLE_ANALYTICS', false) )
+    <x-google-analytics :code="env('TALC_GOOGLE_ANALYTICS')" />
+  @endif
 </head>
 <body class="font-sans antialiased bg-gray-50">
 
