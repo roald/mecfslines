@@ -18,6 +18,7 @@
         "league/flysystem-aws-s3-v3": "~1.0",
         "mailjet/laravel-mailjet": "^3.0",
         "mollie/laravel-mollie": "^2.0",
+        "spatie/laravel-cookie-consent": "^2.12",
         "spatie/laravel-medialibrary": "^7.0.0",
         "thiagocordeiro/laravel-translator": "^1.1"
     },
