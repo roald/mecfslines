@@ -11,7 +11,7 @@ class Action extends Model
 
     protected $fillable = ['block', 'type', 'action', 'target', 'page_id', 'order', 'role'];
 
-    public static $types = ['page', 'url'];
+    public static $types = ['page', 'url', 'email'];
 
     public function block()
     {
@@ -29,6 +29,8 @@ class Action extends Model
             return $this->target;
         } elseif( $this->type == 'page' ) {
             return route('web.page', $this->page);
+        } elseif( $this->type == 'email' ) {
+            return 'mailto:'. $this->target;
         } else {
             abort(404);
         }

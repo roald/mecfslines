@@ -23,11 +23,12 @@ class ActionRequest extends BaseRequest
      */
     public function rules()
     {
+        $emailTarget = ($this->type == 'email' ? '|email:rfc,dns' : '');
         return [
             'page_id' => 'required_if:type,page|nullable|exists:pages,id',
             'type' => 'required|in:'. join(',', Action::$types),
             'action' => 'required|min:2',
-            'target' => 'required_if:type,url',
+            'target' => 'required_if:type,url,email' . $emailTarget,
             'order' => 'required|integer|min:1',
             'role' => '',
         ];
