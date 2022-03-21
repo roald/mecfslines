@@ -10,6 +10,14 @@ use Auth;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            if( env('TALC_ORDERS', false) ) return $next($request);
+            return redirect()->route('web.home');
+        });
+    }
+    
     public function index()
     {
         $orders = Order::orderBy('created_at', 'desc')->paginate(20);
