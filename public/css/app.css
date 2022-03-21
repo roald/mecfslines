@@ -831,13 +831,13 @@ select {
 	margin-left: auto;
 	margin-right: auto;
 }
-.my-20 {
-	margin-top: 5rem;
-	margin-bottom: 5rem;
-}
 .-my-2 {
 	margin-top: -0.5rem;
 	margin-bottom: -0.5rem;
+}
+.my-20 {
+	margin-top: 5rem;
+	margin-bottom: 5rem;
 }
 .my-10 {
 	margin-top: 2.5rem;
@@ -1401,10 +1401,6 @@ select {
 .bg-gray-800 {
 	--tw-bg-opacity: 1;
 	background-color: rgba(31, 41, 55, var(--tw-bg-opacity));
-}
-.bg-green-50 {
-	--tw-bg-opacity: 1;
-	background-color: rgba(236, 253, 245, var(--tw-bg-opacity));
 }
 .fill-current {
 	fill: currentColor;
@@ -2022,14 +2018,14 @@ select {
 		color: rgba(209, 213, 219, var(--tw-text-opacity));
 	}
 
-	.group:hover .dark\:group-hover\:text-white {
-		--tw-text-opacity: 1;
-		color: rgba(255, 255, 255, var(--tw-text-opacity));
-	}
-
 	.group:hover .dark\:group-hover\:text-gray-300 {
 		--tw-text-opacity: 1;
 		color: rgba(209, 213, 219, var(--tw-text-opacity));
+	}
+
+	.group:hover .dark\:group-hover\:text-white {
+		--tw-text-opacity: 1;
+		color: rgba(255, 255, 255, var(--tw-text-opacity));
 	}
 
 	.group:hover .dark\:group-hover\:text-gray-200 {
