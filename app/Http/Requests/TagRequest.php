@@ -24,7 +24,7 @@ class TagRequest extends BaseRequest
     public function rules()
     {
         $uniqueSlug = 'unique:tags';
-        if($this->tag) $uniqueSlug .= ',tags,'. $this->tag->id;
+        if($this->tag) $uniqueSlug .= ',slug,'. $this->tag->id;
 
         return [
             'name' => 'required|min:3',
