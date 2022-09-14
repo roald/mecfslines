@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use League\CommonMark\CommonMarkConverter;
 use Spatie\MediaLibrary\Models\Media;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
@@ -42,6 +43,14 @@ class Block extends Model implements HasMedia
     public function tags()
     {
         return $this->morphToMany(Tag::class, 'taggable');
+    }
+
+    public function markdown()
+    {
+        if( empty($this->body) ) return "";
+
+        $converter = new CommonMarkConverter();
+        return $converter->convert($this->body);
     }
 
     public function registerMediaCollections(): void
