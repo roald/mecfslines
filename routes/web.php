@@ -14,6 +14,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\RosterController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
@@ -69,6 +70,7 @@ Route::prefix('admin')->middleware(['auth.admin', 'verified'])->group(function (
     Route::get('projects/{project}/blocks/create', [ProjectController::class, 'createBlock'])->name('projects.blocks.create');
     Route::get('projects/{project}/remove', [ProjectController::class, 'remove'])->name('projects.remove');
     Route::any('projects/{project}/tagging', [ProjectController::class, 'tagging'])->name('projects.tagging');
+    Route::get('rosters/{roster}/remove', [RosterController::class, 'remove'])->name('rosters.remove');
     Route::get('users/{user}/orders/create', [OrderController::class, 'create'])->name('users.orders.create');
     Route::post('users/{user}/orders', [OrderController::class, 'store'])->name('users.orders.store');
     Route::get('users/{user}/remove', [UserController::class, 'remove'])->name('users.remove');
@@ -77,6 +79,7 @@ Route::prefix('admin')->middleware(['auth.admin', 'verified'])->group(function (
         'memberships' => MembershipController::class,
         'products' => ProductController::class,
         'projects' => ProjectController::class,
+        'rosters' => RosterController::class,
         'tags' => TagController::class,
         'users' => UserController::class
     ]);
