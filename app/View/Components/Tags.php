@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use Illuminate\Support\Str;
 use Illuminate\View\Component;
 use App\Models\Tag;
 
@@ -19,7 +20,7 @@ class Tags extends Component
     public function __construct($object)
     {
         $this->object = $object;
-        $this->route = strtolower(class_basename($object)). 's.tagging';
+        $this->route = strtolower(Str::plural(class_basename($object))). '.tagging';
         $this->tags = Tag::whereNotIn('id', $object->tags()->pluck('id'))->orderBy('name', 'asc')->get();
     }
 

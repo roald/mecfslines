@@ -47,6 +47,11 @@ class Page extends Model implements HasMedia
         return $this->belongsTo(Page::class);
     }
 
+    public function person()
+    {
+        return $this->hasOne(Person::class);
+    }
+
     public function product()
     {
         return $this->hasOne(Product::class);
@@ -68,6 +73,7 @@ class Page extends Model implements HasMedia
         elseif( $this->type == 'event' ) return $this->event->title;
         elseif( $this->type == 'product' ) return $this->product->name;
         elseif( $this->type == 'project' ) return $this->project->title;
+        elseif( $this->type == 'person' ) return $this->person->name;
         else return $this->title;
     }
 

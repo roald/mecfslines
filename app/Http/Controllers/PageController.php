@@ -39,6 +39,7 @@ class PageController extends Controller
     {
         if( $page->type == 'event' ) return redirect()->route('events.show', $page->event);
         elseif( $page->type == 'project' ) return redirect()->route('projects.show', $page->project);
+        elseif( $page->type == 'person' ) return redirect()->route('people.show', $page->person);
 
         return view('pages.show')->with('page', $page);
     }

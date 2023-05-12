@@ -12,6 +12,7 @@ use App\Http\Controllers\MultimediaController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PersonController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RosterController;
@@ -35,6 +36,7 @@ use App\Http\Controllers\WebsiteController;
 Route::get('/', [WebsiteController::class, 'homepage'])->name('web.home');
 Route::get('page/{page:slug}', [WebsiteController::class, 'page'])->name('web.page');
 Route::get('event/{event:slug}', [WebsiteController::class, 'event'])->name('web.event');
+Route::get('person/{person:slug}', [WebsiteController::class, 'person'])->name('web.person');
 Route::get('product/{product:slug}', [WebsiteController::class, 'product'])->name('web.product');
 Route::get('project/{project:slug}', [WebsiteController::class, 'project'])->name('web.project');
 Route::get('tag/{tag:slug}', [WebsiteController::class, 'tag'])->name('web.tag');
@@ -67,6 +69,9 @@ Route::prefix('admin')->middleware(['auth.admin', 'verified'])->group(function (
     Route::get('payments/{payment}/mollie', [PaymentController::class, 'mollie'])->name('payments.mollie');
     Route::any('products/{product}/tagging', [ProductController::class, 'tagging'])->name('products.tagging');
     Route::get('products/{product}/remove', [ProductController::class, 'remove'])->name('products.remove');
+    Route::get('people/{person}/blocks/create', [PersonController::class, 'createBlock'])->name('people.blocks.create');
+    Route::get('people/{person}/remove', [PersonController::class, 'remove'])->name('people.remove');
+    Route::any('people/{person}/tagging', [PersonController::class, 'tagging'])->name('people.tagging');
     Route::get('projects/{project}/blocks/create', [ProjectController::class, 'createBlock'])->name('projects.blocks.create');
     Route::get('projects/{project}/remove', [ProjectController::class, 'remove'])->name('projects.remove');
     Route::any('projects/{project}/tagging', [ProjectController::class, 'tagging'])->name('projects.tagging');
@@ -77,6 +82,7 @@ Route::prefix('admin')->middleware(['auth.admin', 'verified'])->group(function (
     Route::resources([
         'events' => EventController::class,
         'memberships' => MembershipController::class,
+        'people' => PersonController::class,
         'products' => ProductController::class,
         'projects' => ProjectController::class,
         'rosters' => RosterController::class,
