@@ -91,6 +91,9 @@
         <x-dashboard-stat :head="__('Event roster')" :status="env('TALC_ROSTER', false) ? 'on' : 'off'">
           {{ env('TALC_ROSTER', false) ? __('On') : __('Off') }}
         </x-dashboard-stat>
+        <x-dashboard-stat :head="__('People')" :status="env('TALC_PEOPLE', false) ? 'on' : 'off'">
+          {{ env('TALC_PEOPLE', false) ? __('On') : __('Off') }}
+        </x-dashboard-stat>
         <x-dashboard-stat :head="__('Redirects pages')" :status="env('TALC_REDIRECTS', false) ? 'on' : 'off'">
           {{ env('TALC_REDIRECTS', false) ? __('On') : __('Off') }}
         </x-dashboard-stat>
