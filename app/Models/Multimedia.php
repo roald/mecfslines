@@ -100,8 +100,8 @@ class Multimedia extends Model implements HasMedia
             ->acceptsMimeTypes(['image/jpeg', 'image/png'])
             ->singleFile()
             ->registerMediaConversions(function (Media $media) {
-                $this->addMediaConversion('thumb')->width('400')->height('400');
-                $this->addMediaConversion('large')->width('1000')->height('1000');
+                $this->addMediaConversion('thumb')->width('400')->height('400')->keepOriginalImageFormat();
+                $this->addMediaConversion('large')->width('1000')->height('1000')->keepOriginalImageFormat();
             });
 
         $this->addMediaCollection('video')
