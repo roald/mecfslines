@@ -29,7 +29,7 @@ class PersonRequest extends BaseRequest
         return [
             'name' => 'required|min:3',
             'slug' => 'required|'. $uniqueSlug,
-            'role' => 'nullable',
+            'role' => 'required',
             'order' => 'required|integer|min:1',
             'information' => 'nullable',
         ];
