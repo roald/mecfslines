@@ -7,15 +7,17 @@ use Illuminate\View\Component;
 class Multimedia extends Component
 {
     public $multimedia;
+    public $size;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($multimedia)
+    public function __construct($multimedia, $size = 'thumb')
     {
         $this->multimedia = $multimedia;
+        $this->size = $size;
     }
 
     /**

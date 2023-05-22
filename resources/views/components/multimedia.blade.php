@@ -4,7 +4,7 @@
     $classes = 'object-cover';
   @endphp
 
-  <img src="{{ $multimedia->imageUrl('thumb') }}" alt="{{ $multimedia->name }}" {{ $attributes->merge(['class' => $classes]) }} />
+  <img src="{{ $multimedia->imageUrl($size) }}" alt="{{ $multimedia->name }}" {{ $attributes->merge(['class' => $classes]) }} />
 
 @elseif( $multimedia->type == 'video' )
 
