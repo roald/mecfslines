@@ -18,7 +18,7 @@ class Block extends Model implements HasMedia
     public static $grants = ['all', 'public', 'user'];
 
     public static $types = [
-        'general' => ['header', 'text', 'footer'],
+        'general' => ['header', 'text', 'gallery', 'footer'],
         'events' => ['event-list', 'event-detail'],
         'products' => ['product-list', 'product-detail'],
         'memberships' => ['membership-list'],

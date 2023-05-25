@@ -1,5 +1,5 @@
 <div class="my-10 mx-4">
-  <div class="max-w-5xl mx-auto text-gray-700">
+  <div class="max-w-5xl mx-auto">
     <h2 class="text-4xl mb-6">{{ $block->heading }}</h2>
 
     <p class="text-base">
