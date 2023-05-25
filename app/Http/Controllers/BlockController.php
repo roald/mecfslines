@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\BlockRequest;
+use App\Http\Requests\MultimediaEmbedRequest;
 use App\Http\Requests\MultimediaStoreRequest;
 use App\Models\Block;
 use App\Models\Multimedia;
@@ -76,6 +77,12 @@ class BlockController extends Controller
     public function upload(MultimediaStoreRequest $request, Block $block)
     {
         Multimedia::build($request, $block);
+        return redirect()->route('blocks.show', $block);
+    }
+
+    public function embed(MultimediaEmbedRequest $request, Block $block)
+    {
+        Multimedia::embed($request, $block);
         return redirect()->route('blocks.show', $block);
     }
 }

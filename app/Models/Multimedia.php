@@ -7,18 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Cohensive\OEmbed\Facades\OEmbed;
 
 class Multimedia extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
 
-    protected $fillable = ['type', 'name', 'order'];
+    protected $fillable = ['type', 'name', 'order', 'parameters'];
 
     protected $casts = [
         'parameters' => 'array',
     ];
 
-    public static $types = ['image', 'video'];
+    public static $types = ['image', 'video', 'embed'];
     public static $mimetypes = [
         'image/jpeg' => 'image',
         'image/png' => 'image',
@@ -45,6 +46,26 @@ class Multimedia extends Model implements HasMedia
         ]);
 
         if( $request->hasFile('media') ) $multimedia->upload($request);
+
+        return $multimedia;
+    }
+
+    public static function embed($request, $model)
+    {
+        $embed = OEmbed::get($request->embed);
+        if( !$embed ) return redirect()->back()->withInput()->with('errors', collect([__('Cannot find media to embed')]));
+
+        $data = $embed->data();
+        $type = 'embed';
+        $multimedia = $model->multimedia()->create([
+            'type' => $type,
+            'order' => $model->multimedia()->max('order') + 1,
+            'name' => $data['title'],
+            'parameters' => [
+                'provider' => $data['provider_name'],
+                'source' => $request->embed,
+            ],
+        ]);
 
         return $multimedia;
     }
@@ -91,7 +112,16 @@ class Multimedia extends Model implements HasMedia
 
     public function posterImage()
     {
+        $embed = $this->oembed();
+        if( $embed && $embed->hasThumbnail() ) return $embed->thumbnail()['url'];
+
         return false;
+    }
+
+    public function oembed()
+    {
+        if( $this->type != 'embed' ) return null;
+        return OEmbed::get($this->parameters['source']);
     }
 
     public function registerMediaCollections(): void

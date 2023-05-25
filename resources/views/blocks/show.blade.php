@@ -250,6 +250,38 @@
             </div>
           </div>
         </div>
+        @if( env('TALC_MEDIA_EMBED', false) )
+          <div class="px-4 py-5 sm:p-6">
+            <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
+              <div class="ml-4 mt-2">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">{{ __('Embed media') }}</h3>
+              </div>
+              <div class="ml-4 mt-2 flex-shrink-0">
+                <form action="{{ route('blocks.embed', $block) }}" method="POST">
+                  @csrf
+                  <div class="flex justify-between flex-wrap sm:flex-nowrap text-sm font-medium">
+                    <label for="page_media" class="text-gray-700">{{ __('Link media') }}</label>
+                  </div>
+                  <div class="mt-1 flex">
+                    <input type="text" name="embed" id="media_embed" value="{{ old('embed') }}" class="focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:text-sm border-gray-300 rounded-l-md" placeholder="{{ __('URL') }}">
+                    <button type="submit" class="-ml-px px-3 py-1 border-border-gray-300 bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 text-sm font-medium rounded-r-md text-white">
+                      {{ __('Embed') }}
+                    </button>
+                  </div>
+                </form>
+                @if( $errors->count() )
+                  <div class="rounded-md mt-2 bg-red-50 text-sm text-red-700 p-2">
+                    <ul class="list-disc space-y-1 pl-5">
+                      @foreach( $errors->all() as $error )
+                        <li>{{ $error }}</li>
+                      @endforeach
+                    </ul>
+                  </div>
+                @endif
+              </div>
+            </div>
+          </div>
+        @endif
         @if( $block->multimedia->count() > 0 )
           <div class="px-4 py-5 sm:p-6 flex flex-wrap">
             @foreach( $block->multimedia as $media )

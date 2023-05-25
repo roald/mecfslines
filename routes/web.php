@@ -55,6 +55,7 @@ Route::prefix('admin')->middleware(['auth.admin', 'verified'])->group(function (
 
     Route::get('pages/{page}/remove', [PageController::class, 'remove'])->name('pages.remove');
     Route::resource('pages', PageController::class);
+    Route::post('blocks/{block}/embed', [BlockController::class, 'embed'])->name('blocks.embed');
     Route::get('blocks/{block}/remove', [BlockController::class, 'remove'])->name('blocks.remove');
     Route::any('blocks/{block}/tagging', [BlockController::class, 'tagging'])->name('blocks.tagging');
     Route::post('blocks/{block}/upload', [BlockController::class, 'upload'])->name('blocks.upload');
