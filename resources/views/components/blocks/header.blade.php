@@ -1,5 +1,5 @@
-<div class="px-4 bg-green-200">
-  <div class="max-w-5xl mx-auto text-gray-700">
+<div class="mb-10 mx-4">
+  <div class="max-w-5xl mx-auto">
     <h1 class="text-5xl font-bold py-16">{{ $block->heading }}</h1>
 
     <p class="text-base">
