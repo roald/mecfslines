@@ -26,24 +26,32 @@ Think of it like Tailwind for JavaScript.
 ## Creating new website based on TALC
 
 ### Clone TALC to new website 
-```
+```sh
 git clone git@github.com:roald/talc.git website
 ```
 Go into directory and rename upstream to TALC
-```
+```sh
 git remote rename origin talc
 ```
 Add new repository as origin remote
-```
+```sh
 git branch -M main
 git remote add origin git@github.com:USER/REPO.git
 git push -u origin main
 ```
+Disable Dependabot for new site
+```sh
+git rm .github/dependabot.yml
+git commit -m 'Disable Dependabot'
+git push
+```
 
 ### Setting up new website
 1. Install dependencies
-```
+```sh
 composer install
+```
+```sh
 npm install
 ```
 2. Create database
