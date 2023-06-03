@@ -68,7 +68,7 @@
   {{ $slot }}
 
   @if( env('TALC_COOKIE_CONSENT') )
-    @include('cookieConsent::index')
+    @include('cookie-consent::index')
   @endif
 </body>
 </html>
