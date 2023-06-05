@@ -97,8 +97,8 @@
         <x-dashboard-stat :head="__('Redirects pages')" :status="env('TALC_REDIRECTS', false) ? 'on' : 'off'">
           {{ env('TALC_REDIRECTS', false) ? __('On') : __('Off') }}
         </x-dashboard-stat>
-        <x-dashboard-stat :head="__('Allow user registration')" :status="env('TALC_REGISTRATION', false) ? 'on' : 'off'">
-          {{ env('TALC_REGISTRATION', false) ? __('On') : __('Off') }}
+        <x-dashboard-stat :head="__('Allow user registration')" :status="env('TALC_REGISTERING', false) ? 'on' : 'off'">
+          {{ env('TALC_REGISTERING', false) ? __('On') : __('Off') }}
         </x-dashboard-stat>
         <x-dashboard-stat :head="__('Cookie consent for GDPR')" :status="env('TALC_COOKIE_CONSENT', false) ? 'on' : 'off'">
           {{ env('TALC_COOKIE_CONSENT', false) ? __('On') : __('Off') }}

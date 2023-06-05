@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use App\Http\Requests\UserRequest;
+use App\Mail\UserInvitation;
 use App\Models\User;
 
 class UserController extends Controller
@@ -15,12 +18,19 @@ class UserController extends Controller
 
     public function create()
     {
-        return redirect()->route('users.index');
+        $user = new User();
+        return view('users.edit')->with('user', $user);
     }
 
     public function store(UserRequest $request)
     {
-        $user = User::create($request->allValidated());
+        $user = new User($request->allValidated());
+        $user->password = Str::random(20);
+        $user->invitation_token = Str::random(30);
+        $user->save();
+
+        Mail::send(new UserInvitation($user));
+
         return redirect()->route('users.show', $user);
     }
 
@@ -49,5 +59,12 @@ class UserController extends Controller
     {
         if( $user->removable() ) $user->delete();
         return redirect()->route('users.index');
+    }
+
+    public function reinvite(User $user)
+    {
+        if( $user->invitation_token == '' ) abort(400);
+        Mail::send(new UserInvitation($user));
+        return redirect()->route('users.show', $user);
     }
 }

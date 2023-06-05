@@ -36,7 +36,7 @@
                 <li>
                   <div class="flex items-center">
                     <x-heroicon-s-chevron-right class="flex-shrink-0 h-5 w-5 text-gray-400"/>
-                    <a href="{{ route('users.create') }}" aria-current="page" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">{{ __('New user') }}</a>
+                    <a href="{{ route('users.create') }}" aria-current="page" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">{{ __('Invite user') }}</a>
                   </div>
                 </li>
               @endif
@@ -46,7 +46,7 @@
         <div class="mt-2 md:flex md:items-center md:justify-between">
           <div class="flex-1 min-w-0">
             <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
-              {{ $user->name ?? __('New user') }}
+              {{ $user->name ?? __('Invite user') }}
             </h2>
           </div>
         </div>
@@ -135,7 +135,7 @@
               {{ __('Cancel') }}
             </a>
             <button type="submit" class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-              {{ __('Save') }}
+              {{ $user->exists ? __('Save') : __('Invite') }}
             </button>
           </div>
         </div>

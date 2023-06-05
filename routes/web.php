@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Auth\InvitedUserController;
 use App\Http\Controllers\ActionController;
 use App\Http\Controllers\BlockController;
 use App\Http\Controllers\EventController;
@@ -79,6 +80,7 @@ Route::prefix('admin')->middleware(['auth.admin', 'verified'])->group(function (
     Route::get('rosters/{roster}/remove', [RosterController::class, 'remove'])->name('rosters.remove');
     Route::get('users/{user}/orders/create', [OrderController::class, 'create'])->name('users.orders.create');
     Route::post('users/{user}/orders', [OrderController::class, 'store'])->name('users.orders.store');
+    Route::get('users/{user}/reinvite', [UserController::class, 'reinvite'])->name('users.reinvite');
     Route::get('users/{user}/remove', [UserController::class, 'remove'])->name('users.remove');
     Route::resources([
         'events' => EventController::class,
@@ -101,5 +103,8 @@ Route::prefix('admin')->middleware(['auth.admin', 'verified'])->group(function (
 });
 
 Route::any('webhooks/mollie', [WebhookController::class, 'mollie'])->name('webhooks.mollie');
+
+Route::get('/invitation/accept', [InvitedUserController::class, 'edit'])->middleware('guest', 'signed')->name('invitation.accept');
+Route::post('/invitation/accept', [InvitedUserController::class, 'update'])->middleware('guest', 'signed');
 
 require __DIR__.'/auth.php';
