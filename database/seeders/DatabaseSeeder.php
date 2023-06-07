@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +15,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $admin = User::create([
+            'name' => __('Administrator'),
+            'email' => 'admin@talc.nl',
+            'role' => 'admin',
+            'password' => Hash::make('getstarted'),
+        ]);
+        $admin->markEmailAsVerified();
     }
 }
