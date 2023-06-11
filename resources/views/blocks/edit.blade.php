@@ -149,7 +149,7 @@
                     <label for="block_body" class="block text-sm font-medium text-gray-700">{{ __('Body') }}</label>
                     <textarea id="block_body" name="body" rows="4" class="mt-1 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="">{{ old('body', $block->body) }}</textarea>
                     @if( env('TALC_MARKDOWN', false) )
-                      <div class="mt-1" x-data="{markdown: true}">
+                      <div class="mt-1" x-data="{markdown: false}">
                         <div class="text-sm leading-6 text-gray-600 cursor-pointer" @click="markdown = !markdown">
                           <span class="hover:underline">{{ __('Markdown styling information') }}</span>
                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 inline-block" x-show="!markdown">
