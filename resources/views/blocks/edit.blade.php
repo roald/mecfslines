@@ -148,6 +148,32 @@
                   <div class="col-span-6">
                     <label for="block_body" class="block text-sm font-medium text-gray-700">{{ __('Body') }}</label>
                     <textarea id="block_body" name="body" rows="4" class="mt-1 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="">{{ old('body', $block->body) }}</textarea>
+                    @if( env('TALC_MARKDOWN', false) )
+                      <div class="mt-1" x-data="{markdown: true}">
+                        <div class="text-sm leading-6 text-gray-600 cursor-pointer" @click="markdown = !markdown">
+                          <span class="hover:underline">{{ __('Markdown styling information') }}</span>
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 inline-block" x-show="!markdown">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                          </svg>
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 inline-block" x-show="markdown">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/>
+                          </svg>
+                        </div>
+                        <div class="border border-gray-300 rounded-md py-1 px-2" x-show="markdown">
+                          <div class="italic">*{{ __('italic') }}*</div>
+                          <div class="font-bold">**{{ __('bold') }}**</div>
+                          <div class="italic font-bold">***{{ __('italic & bold') }}***</div>
+                          <div class=""><strong>[</strong>{{ __('link text') }}<strong>](</strong>{{ __('URL') }}<strong>)</strong></div>
+                          <div class="">- {{ __('list item') }}</div>
+                          <div class="text-right"><a href="https://www.markdownguide.org/basic-syntax/" class="hover:underline text-gray-700 text-sm" target="_blank">
+                            <span>{{ __('more options') }}</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 inline-block">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                            </svg>
+                          </a></div>
+                        </div>
+                      </div>
+                    @endif
                   </div>
 
                   <div class="col-span-6">
