@@ -33,6 +33,7 @@ class InvitedUserController extends Controller
         $user->password = Hash::make($request->get('password'));
         $user->invitation_token = '';
         $user->save();
+        $user->markEmailAsVerified();
 
         event(new Registered($user));
 
