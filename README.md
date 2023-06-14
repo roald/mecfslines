@@ -54,16 +54,32 @@ composer install
 ```sh
 npm install
 ```
+
 2. Create database
-3. Configure application: (name, database, TALC modules, mail)
-```
+
+3. Configure application
+```sh
 cp .env.example .env
 ```
+
+Configure the following:
+- name
+- TALC modules
+- database
+- mail
+- `start.sh` script
+
 4. Set application key
-```
+```sh
 php artisan key:generate
 ```
+
 5. Run migrations
-```
+```sh
 php artisan migrate --step
+```
+
+And add the initial admin
+```sh
+php artisan db:seed
 ```
