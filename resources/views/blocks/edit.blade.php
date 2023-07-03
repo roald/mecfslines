@@ -147,7 +147,17 @@
 
                   <div class="col-span-6">
                     <label for="block_body" class="block text-sm font-medium text-gray-700">{{ __('Body') }}</label>
-                    <textarea id="block_body" name="body" rows="4" class="mt-1 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="">{{ old('body', $block->body) }}</textarea>
+                    <textarea x-data="{
+                        resize () {
+                          $el.style.height = '0px';
+                          $el.style.height = $el.scrollHeight + 'px'
+                        }
+                      }"
+                      x-init="resize()"
+                      @input="resize()"
+                      type="text" id="block_body" name="body" rows="4"
+                      class="mt-1 w-full min-h-[80px] shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md"
+                      placeholder="">{{ old('body', $block->body) }}</textarea>
                     @if( env('TALC_MARKDOWN', false) )
                       <div class="mt-1" x-data="{markdown: false}">
                         <div class="text-sm leading-6 text-gray-600 cursor-pointer flex items-center gap-1" @click="markdown = !markdown">
