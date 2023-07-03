@@ -119,6 +119,70 @@
   </div>
 
   <div class="py-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="bg-white shadow overflow-hidden rounded-md">
+        <ul class="divide-y divide-gray-200">
+          <li class="px-6 py-4">
+            <div class="-ml-4 -mt-4 flex justify-between items-center flex-wrap sm:flex-nowrap">
+              <div class="ml-4 mt-4">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                  {{ __('Product blocks') }}
+                </h3>
+                <p class="mt-1 text-sm text-gray-500">
+                  {{ __('These blocks will provide the content for this product.') }}
+                </p>
+              </div>
+              <div class="ml-4 mt-4 flex-shrink-0">
+                <a href="{{ route('products.blocks.create', $product) }}" class="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                  {{ __('Create new block') }}
+                </a>
+              </div>
+            </div>
+          </li>
+          @if( $product->page )
+            @foreach( $product->page->blocks()->orderBy('order', 'asc')->get() as $block )
+              <li>
+                <a href="{{ route('blocks.show', $block) }}" class="block hover:bg-gray-50">
+                  <div class="px-4 py-4 flex items-center sm:px-6">
+                    <div class="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
+                      <div>
+                        <div class="flex text-sm font-medium text-indigo-600 truncate">
+                          <p>
+                            <span class="mr-2 px-1 py-0.5 rounded text-xs font-medium bg-indigo-100 text-indigo-800">{{ $block->order }}</span>
+                            {{ $block->heading }}
+                          </p>
+                          <p class="ml-1 font-normal text-gray-500">{{ $block->topic }}</p>
+                        </div>
+                        <div class="mt-2 flex">
+                          <div class="flex items-center text-sm text-gray-500">
+                            <x-heroicon-o-document-text class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" />
+                            <p>{{ $block->body }}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="mt-4 flex-shrink-0 sm:mt-0">
+                        <div class="flex overflow-hidden">
+                          <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-indigo-100 text-indigo-800">
+                            <svg class="mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8"><circle cx="4" cy="4" r="3" /></svg>
+                            {{ $block->type }}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="ml-5 flex-shrink-0">
+                      <x-heroicon-s-chevron-right class="h-5 w-5 text-gray-400" />
+                    </div>
+                  </div>
+                </a>
+              </li>
+            @endforeach
+          @endif
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="py-6">
     <x-tags :object="$product"></x-tags>
   </div>
 

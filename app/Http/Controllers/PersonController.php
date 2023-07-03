@@ -18,7 +18,9 @@ class PersonController extends Controller
 
     public function create()
     {
-        $person = new Person();
+        $person = new Person([
+            'order' => Person::max('order') + 1,
+        ]);
         return view('people.edit')->with('person', $person);
     }
 

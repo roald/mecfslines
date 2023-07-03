@@ -69,6 +69,7 @@ Route::prefix('admin')->middleware(['auth.admin', 'verified'])->group(function (
     Route::any('events/{event}/tagging', [EventController::class, 'tagging'])->name('events.tagging');
     Route::get('memberships/{membership}/remove', [MembershipController::class, 'remove'])->name('memberships.remove');
     Route::get('payments/{payment}/mollie', [PaymentController::class, 'mollie'])->name('payments.mollie');
+    Route::get('products/{product}/blocks/create', [ProductController::class, 'createBlock'])->name('products.blocks.create');
     Route::any('products/{product}/tagging', [ProductController::class, 'tagging'])->name('products.tagging');
     Route::get('products/{product}/remove', [ProductController::class, 'remove'])->name('products.remove');
     Route::get('people/{person}/blocks/create', [PersonController::class, 'createBlock'])->name('people.blocks.create');

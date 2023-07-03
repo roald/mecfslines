@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
+use App\Models\Page;
 use App\Models\Product;
 
 class ProductController extends Controller
@@ -51,6 +52,22 @@ class ProductController extends Controller
     {
         $product->delete();
         return redirect()->route('products.index');
+    }
+
+    public function createBlock(Product $product)
+    {
+        if( is_null($product->page) ) {
+            $page = Page::create([
+                'title' => $product->name,
+                'slug' => 'product_'. $product->id,
+                'order' => 1,
+                'type' => 'product',
+            ]);
+            $page->product()->save($product);
+            $product->refresh();
+        }
+
+        return redirect()->route('pages.blocks.create', $product->page);
     }
 
     public function tagging(Request $request, Product $product)
