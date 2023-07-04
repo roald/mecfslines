@@ -160,8 +160,8 @@
                       placeholder="">{{ old('body', $block->body) }}</textarea>
                     @if( env('TALC_MARKDOWN', false) )
                       <div class="mt-1" x-data="{markdown: false}">
-                        <div class="text-sm leading-6 text-gray-600 cursor-pointer flex items-center gap-1" @click="markdown = !markdown">
-                          <div class="hover:underline">{{ __('Markdown styling information') }}</div>
+                        <div class="text-sm leading-6 text-gray-600 cursor-pointer flex items-center gap-1 group" @click="markdown = !markdown">
+                          <div class="group-hover:underline">{{ __('Markdown styling information') }}</div>
                           <div :class="{ 'rotate-90': markdown }" class="relative flex items-center justify-center w-2.5 h-2.5 duration-300 ease-out">
                             <div class="absolute w-0.5 h-full bg-gray-600 rounded-full"></div>
                             <div :class="{ 'rotate-90': markdown }" class="absolute w-full h-0.5 ease duration-500 bg-gray-600 rounded-full"></div>

@@ -1908,6 +1908,9 @@ select {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
 }
+.group:hover .group-hover\:underline {
+  text-decoration-line: underline;
+}
 @media (prefers-color-scheme: dark) {
 
   .dark\:border-gray-700 {
