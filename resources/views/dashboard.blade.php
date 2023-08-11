@@ -69,18 +69,25 @@
     </div>
 
     <div x-show="configOpen">
-      <dl class="mt-5 grid grid-cols-1 rounded-lg bg-white overflow-hidden shadow divide-y divide-gray-200 md:grid-cols-3 md:divide-y-0 md:divide-x">
-        <x-dashboard-stat :head="__('Events')" :status="env('TALC_EVENTS', false) ? 'on' : 'off'">
-          {{ env('TALC_EVENTS', false) ? __('On') : __('Off') }}
+      <h4 class="mt-5 text-lg text-center font-bold text-gray-900">{{ __('TALC modules') }}</h4>
+      <dl class="grid grid-cols-1 rounded-lg bg-white overflow-hidden shadow divide-y divide-gray-200 md:grid-cols-3 md:divide-y-0 md:divide-x">
+        <x-dashboard-stat :head="__('Tags')" :status="env('TALC_TAGS', false) ? 'on' : 'off'">
+          {{ env('TALC_TAGS', false) ? __('On') : __('Off') }}
         </x-dashboard-stat>
         <x-dashboard-stat :head="__('Projects')" :status="env('TALC_PROJECTS', false) ? 'on' : 'off'">
           {{ env('TALC_PROJECTS', false) ? __('On') : __('Off') }}
         </x-dashboard-stat>
-        <x-dashboard-stat :head="__('Tags')" :status="env('TALC_TAGS', false) ? 'on' : 'off'">
-          {{ env('TALC_TAGS', false) ? __('On') : __('Off') }}
+        <x-dashboard-stat :head="__('People')" :status="env('TALC_PEOPLE', false) ? 'on' : 'off'">
+          {{ env('TALC_PEOPLE', false) ? __('On') : __('Off') }}
         </x-dashboard-stat>
         <x-dashboard-stat :head="__('Products')" :status="env('TALC_PRODUCTS', false) ? 'on' : 'off'">
           {{ env('TALC_PRODUCTS', false) ? __('On') : __('Off') }}
+        </x-dashboard-stat>
+        <x-dashboard-stat :head="__('Events')" :status="env('TALC_EVENTS', false) ? 'on' : 'off'">
+          {{ env('TALC_EVENTS', false) ? __('On') : __('Off') }}
+        </x-dashboard-stat>
+        <x-dashboard-stat :head="__('Event roster')" :status="env('TALC_ROSTER', false) ? 'on' : 'off'">
+          {{ env('TALC_ROSTER', false) ? __('On') : __('Off') }}
         </x-dashboard-stat>
         <x-dashboard-stat :head="__('Memberships')" :status="env('TALC_MEMBERSHIPS', false) ? 'on' : 'off'">
           {{ env('TALC_MEMBERSHIPS', false) ? __('On') : __('Off') }}
@@ -88,20 +95,21 @@
         <x-dashboard-stat :head="__('Orders & payments')" :status="env('TALC_ORDERS', false) ? 'on' : 'off'">
           {{ env('TALC_ORDERS', false) ? __('On') : __('Off') }}
         </x-dashboard-stat>
-        <x-dashboard-stat :head="__('Event roster')" :status="env('TALC_ROSTER', false) ? 'on' : 'off'">
-          {{ env('TALC_ROSTER', false) ? __('On') : __('Off') }}
-        </x-dashboard-stat>
-        <x-dashboard-stat :head="__('People')" :status="env('TALC_PEOPLE', false) ? 'on' : 'off'">
-          {{ env('TALC_PEOPLE', false) ? __('On') : __('Off') }}
+      </dl>
+
+      <h4 class="mt-5 text-lg text-center font-bold text-gray-900">{{ __('TALC settings') }}</h4>
+      <dl class="grid grid-cols-1 rounded-lg bg-white overflow-hidden shadow divide-y divide-gray-200 md:grid-cols-3 md:divide-y-0 md:divide-x">
+        <x-dashboard-stat :head="__('Allow user registration')" :status="env('TALC_REGISTERING', false) ? 'on' : 'off'">
+          {{ env('TALC_REGISTERING', false) ? __('On') : __('Off') }}
         </x-dashboard-stat>
         <x-dashboard-stat :head="__('Redirects pages')" :status="env('TALC_REDIRECTS', false) ? 'on' : 'off'">
           {{ env('TALC_REDIRECTS', false) ? __('On') : __('Off') }}
         </x-dashboard-stat>
-        <x-dashboard-stat :head="__('Allow user registration')" :status="env('TALC_REGISTERING', false) ? 'on' : 'off'">
-          {{ env('TALC_REGISTERING', false) ? __('On') : __('Off') }}
-        </x-dashboard-stat>
         <x-dashboard-stat :head="__('Cookie consent for GDPR')" :status="env('TALC_COOKIE_CONSENT', false) ? 'on' : 'off'">
           {{ env('TALC_COOKIE_CONSENT', false) ? __('On') : __('Off') }}
+        </x-dashboard-stat>
+        <x-dashboard-stat :head="__('Matomo analytics')" :status="env('TALC_MATOMO', false) ? 'on' : 'off'">
+          {{ env('TALC_MATOMO', false) ? __('On') : __('Off') }}
         </x-dashboard-stat>
         <x-dashboard-stat :head="__('Google Analytics')" :status="env('TALC_GOOGLE_ANALYTICS', false) ? 'on' : 'off'">
           {{ env('TALC_GOOGLE_ANALYTICS', false) ? __('On') : __('Off') }}
