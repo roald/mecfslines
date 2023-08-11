@@ -19,6 +19,9 @@
   @if( env('TALC_GOOGLE_ANALYTICS', false) )
     <x-google-analytics :code="env('TALC_GOOGLE_ANALYTICS')" />
   @endif
+  @if( env('TALC_MATOMO', false) )
+    <x-matomo :container="env('TALC_MATOMO')" />
+  @endif
 </head>
 <body class="font-sans antialiased bg-gray-50">
 
