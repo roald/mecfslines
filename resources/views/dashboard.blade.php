@@ -125,8 +125,8 @@
         </x-dashboard-stat>
       </dl>
       <h4 class="mt-5 text-lg font-bold text-gray-900">{{ __('TALC version') }}</h4>
-      @php( $version = exec('git describe --tags --abbrev=0') )
-      <p>{{ __('The current version of your TALC system is:') }} <strong>{{ $version }}</strong></p>
+      {{-- @php( $version = exec('git describe --tags --abbrev=0') ) --}}
+      {{-- <p>{{ __('The current version of your TALC system is:') }} <strong>{{ $version }}</strong></p> --}}
       <p class="mt-6">
         {{ __('If you are interested in an extra feature, please contact me for more information.') }}
         <a href="mailto:roald.dijkstra@babbletics.nl?subject=TALC%20functionaliteit" class="align-middle ml-2 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
