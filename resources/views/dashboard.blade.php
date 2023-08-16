@@ -69,7 +69,6 @@
     </div>
 
     <div x-show="configOpen">
-      <h4 class="mt-5 text-lg text-center font-bold text-gray-900">{{ __('TALC modules') }}</h4>
       <dl class="grid grid-cols-1 rounded-lg bg-white overflow-hidden shadow divide-y divide-gray-200 md:grid-cols-3 md:divide-y-0 md:divide-x">
         <x-dashboard-stat :head="__('Tags')" :status="env('TALC_TAGS', false) ? 'on' : 'off'">
           {{ env('TALC_TAGS', false) ? __('On') : __('Off') }}
@@ -97,7 +96,7 @@
         </x-dashboard-stat>
       </dl>
 
-      <h4 class="mt-5 text-lg text-center font-bold text-gray-900">{{ __('TALC settings') }}</h4>
+      <h4 class="mt-5 text-lg font-bold text-gray-900">{{ __('Additional settings') }}</h4>
       <dl class="grid grid-cols-1 rounded-lg bg-white overflow-hidden shadow divide-y divide-gray-200 md:grid-cols-3 md:divide-y-0 md:divide-x">
         <x-dashboard-stat :head="__('Allow user registration')" :status="env('TALC_REGISTERING', false) ? 'on' : 'off'">
           {{ env('TALC_REGISTERING', false) ? __('On') : __('Off') }}
@@ -125,6 +124,9 @@
           {{ env('TALC_MEDIA_AMAZON', false) ? __('On') : __('Off') }}
         </x-dashboard-stat>
       </dl>
+      <h4 class="mt-5 text-lg font-bold text-gray-900">{{ __('TALC version') }}</h4>
+      @php( $version = exec('git describe --tags --abbrev=0') )
+      <p>{{ __('The current version of your TALC system is:') }} <strong>{{ $version }}</strong></p>
       <p class="mt-6">
         {{ __('If you are interested in an extra feature, please contact me for more information.') }}
         <a href="mailto:roald.dijkstra@babbletics.nl?subject=TALC%20functionaliteit" class="align-middle ml-2 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
