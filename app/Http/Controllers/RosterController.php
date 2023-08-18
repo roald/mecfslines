@@ -11,7 +11,7 @@ class RosterController extends Controller
     public function index()
     {
         $current = Roster::where('ended_at', '>', Carbon::now())->orderBy('weekday', 'asc')->orderBy('start_time', 'asc')->get();
-        $archive = Roster::where('ended_at', '<', Carbon::now())->orderBy('started_at', 'asc')->orderBy('ended_at', 'asc')->get();
+        $archive = Roster::where('ended_at', '<', Carbon::now())->orderBy('started_at', 'desc')->orderBy('ended_at', 'desc')->get();
         return view('rosters.index')->with('current', $current)->with('archive', $archive);
     }
 
