@@ -10,8 +10,9 @@ class RosterController extends Controller
 {
     public function index()
     {
-        $rosters = Roster::orderBy('weekday', 'asc')->orderBy('start_time', 'asc')->paginate(20);;
-        return view('rosters.index')->with('rosters', $rosters);
+        $current = Roster::where('ended_at', '>', Carbon::now())->orderBy('weekday', 'asc')->orderBy('start_time', 'asc')->get();
+        $archive = Roster::where('ended_at', '<', Carbon::now())->orderBy('started_at', 'asc')->orderBy('ended_at', 'asc')->get();
+        return view('rosters.index')->with('current', $current)->with('archive', $archive);
     }
 
     public function create()
