@@ -16,9 +16,6 @@
   <!-- Scripts -->
   <script src="{{ asset('js/app.js') }}" defer></script>
   
-  @if( env('TALC_GOOGLE_ANALYTICS', false) )
-    <x-google-analytics :code="env('TALC_GOOGLE_ANALYTICS')" />
-  @endif
   @if( env('TALC_MATOMO', false) )
     <x-matomo :container="env('MATOMO_CONTAINER_URL')" />
   @endif

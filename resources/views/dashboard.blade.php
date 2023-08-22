@@ -110,9 +110,6 @@
         <x-dashboard-stat :head="__('Matomo analytics')" :status="env('TALC_MATOMO', false) ? 'on' : 'off'">
           {{ env('TALC_MATOMO', false) ? __('On') : __('Off') }}
         </x-dashboard-stat>
-        <x-dashboard-stat :head="__('Google Analytics')" :status="env('TALC_GOOGLE_ANALYTICS', false) ? 'on' : 'off'">
-          {{ env('TALC_GOOGLE_ANALYTICS', false) ? __('On') : __('Off') }}
-        </x-dashboard-stat>
         <x-dashboard-stat :head="__('Sending notifications')" :status="env('TALC_NOTIFY_USERS', false) ? 'on' : 'off'">
           @forelse( App\Models\User::find(explode(',', env('TALC_NOTIFY_USERS', 0))) as $user )
             <a href="{{ route('users.show', $user) }}" class="text-indigo-600 hover:text-indigo-900">{{ $user->name }}</a><br/>
