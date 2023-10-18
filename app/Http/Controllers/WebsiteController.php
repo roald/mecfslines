@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\Page;
 use App\Models\Person;
+use App\Models\Post;
 use App\Models\Product;
 use App\Models\Project;
 use App\Models\Tag;
@@ -61,6 +62,14 @@ class WebsiteController extends Controller
 
         return $this->page($person->page);
     }
+
+    public function post(Post $post)
+    {
+        if( is_null($post->page) ) return redirect()->route('web.home');
+
+        return $this->page($post->page);
+    }
+
     public function product(Product $product)
     {
         if( is_null($product->page) ) return redirect()->route('web.home');
