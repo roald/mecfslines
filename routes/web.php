@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\InvitedUserController;
 use App\Http\Controllers\ActionController;
 use App\Http\Controllers\BlockController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\MediaController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PersonController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RosterController;
@@ -38,6 +40,7 @@ Route::get('/', [WebsiteController::class, 'homepage'])->name('web.home');
 Route::get('page/{page:slug}', [WebsiteController::class, 'page'])->name('web.page');
 Route::get('event/{event:slug}', [WebsiteController::class, 'event'])->name('web.event');
 Route::get('person/{person:slug}', [WebsiteController::class, 'person'])->name('web.person');
+Route::get('post/{post:slug}', [WebsiteController::class, 'post'])->name('web.post');
 Route::get('product/{product:slug}', [WebsiteController::class, 'product'])->name('web.product');
 Route::get('project/{project:slug}', [WebsiteController::class, 'project'])->name('web.project');
 Route::get('tag/{tag:slug}', [WebsiteController::class, 'tag'])->name('web.tag');
@@ -62,6 +65,8 @@ Route::prefix('admin')->middleware(['auth.admin', 'verified'])->group(function (
     Route::post('blocks/{block}/upload', [BlockController::class, 'upload'])->name('blocks.upload');
     Route::resource('pages.blocks', BlockController::class)->shallow();
     Route::resource('blocks.actions', ActionController::class)->shallow();
+    Route::get('comments/{comment}/remove', [CommentController::class, 'remove'])->name('comments.remove');
+    Route::resource('posts.comments', CommentController::class)->shallow();
     Route::resource('media', MediaController::class)->except(['index', 'create', 'store']);
 
     Route::get('events/{event}/blocks/create', [EventController::class, 'createBlock'])->name('events.blocks.create');
@@ -75,6 +80,9 @@ Route::prefix('admin')->middleware(['auth.admin', 'verified'])->group(function (
     Route::get('people/{person}/blocks/create', [PersonController::class, 'createBlock'])->name('people.blocks.create');
     Route::get('people/{person}/remove', [PersonController::class, 'remove'])->name('people.remove');
     Route::any('people/{person}/tagging', [PersonController::class, 'tagging'])->name('people.tagging');
+    Route::get('posts/{post}/blocks/create', [PostController::class, 'createBlock'])->name('posts.blocks.create');
+    Route::get('posts/{post}/remove', [PostController::class, 'remove'])->name('posts.remove');
+    Route::any('posts/{post}/tagging', [PostController::class, 'tagging'])->name('posts.tagging');
     Route::get('projects/{project}/blocks/create', [ProjectController::class, 'createBlock'])->name('projects.blocks.create');
     Route::get('projects/{project}/remove', [ProjectController::class, 'remove'])->name('projects.remove');
     Route::any('projects/{project}/tagging', [ProjectController::class, 'tagging'])->name('projects.tagging');
@@ -87,6 +95,7 @@ Route::prefix('admin')->middleware(['auth.admin', 'verified'])->group(function (
         'events' => EventController::class,
         'memberships' => MembershipController::class,
         'people' => PersonController::class,
+        'posts' => PostController::class,
         'products' => ProductController::class,
         'projects' => ProjectController::class,
         'rosters' => RosterController::class,
