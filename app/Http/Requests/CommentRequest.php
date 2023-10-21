@@ -22,8 +22,8 @@ class CommentRequest extends BaseRequest
     public function rules()
     {
         return [
-            'user_id' => ['nullable', 'exists:users,id'],
-            'name' => ['required', 'min:3'],
+            'user_id' => ['required_without:name', 'nullable', 'exists:users,id'],
+            'name' => ['required_without:user_id', 'nullable', 'min:3'],
             'message' => ['required', 'min:3'],
             'commented_at' => ['required', 'date'],
         ];

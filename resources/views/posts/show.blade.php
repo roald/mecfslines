@@ -195,7 +195,7 @@
               <a href="{{ route('comments.edit', $comment) }}" class="block hover:bg-gray-50">
                 <div class="px-6 py-4 flex justify-between items-center">
                   <div class="flex-1">
-                    <span class="font-medium text-indigo-600">{{ $comment->name }}</span>
+                    <span class="font-medium text-indigo-600">{{ $comment->user ? $comment->user->name : $comment->name }}</span>
                     <span class="text-sm ml-2 text-gray-500">{{ $comment->commented_at->isoFormat('D MMM') }}</span>
                   </div>
                   <div class="ml-5 flex-shrink-0">

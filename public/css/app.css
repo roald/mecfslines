@@ -432,6 +432,11 @@ input::placeholder,textarea::placeholder {
 
 ::-webkit-date-and-time-value {
   min-height: 1.5em;
+  text-align: inherit;
+}
+
+::-webkit-datetime-edit {
+  display: inline-flex;
 }
 
 ::-webkit-datetime-edit,::-webkit-datetime-edit-year-field,::-webkit-datetime-edit-month-field,::-webkit-datetime-edit-day-field,::-webkit-datetime-edit-hour-field,::-webkit-datetime-edit-minute-field,::-webkit-datetime-edit-second-field,::-webkit-datetime-edit-millisecond-field,::-webkit-datetime-edit-meridiem-field {
@@ -1833,6 +1838,10 @@ select {
 .last\:border-none:last-child {
   border-style: none;
 }
+.hover\:bg-emerald-300:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(110 231 183 / var(--tw-bg-opacity));
+}
 .hover\:bg-emerald-600:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(5 150 105 / var(--tw-bg-opacity));
@@ -2038,6 +2047,11 @@ select {
     border-bottom-color: rgb(6 95 70 / var(--tw-border-opacity));
   }
 
+  .dark\:bg-emerald-700 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(4 120 87 / var(--tw-bg-opacity));
+  }
+
   .dark\:bg-emerald-950 {
     --tw-bg-opacity: 1;
     background-color: rgb(2 44 34 / var(--tw-bg-opacity));
@@ -2081,6 +2095,11 @@ select {
   .dark\:text-zinc-300 {
     --tw-text-opacity: 1;
     color: rgb(212 212 216 / var(--tw-text-opacity));
+  }
+
+  .dark\:hover\:bg-emerald-600:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgb(5 150 105 / var(--tw-bg-opacity));
   }
 
   .dark\:hover\:bg-gray-700:hover {
