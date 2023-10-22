@@ -125,7 +125,20 @@
                   <div class="col-span-6">
                     <label for="post_content" class="block text-sm font-medium text-gray-700">{{ __('Content') }}</label>
                     <div class="mt-1">
-                      <textarea id="post_content" name="content" rows="4" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="">{{ old('content', $post->content) }}</textarea>
+                      <textarea 
+                        x-data="{
+                          resize () {
+                            $el.style.height = '0px';
+                            $el.style.height = $el.scrollHeight + 'px'
+                          }
+                        }"
+                        x-init="resize()"
+                        @input="resize()"
+                        id="post_content"
+                        name="content"
+                        rows="4"
+                        class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" placeholder=""
+                      >{{ old('content', $post->content) }}</textarea>
                     </div>
                   </div>
 
