@@ -199,7 +199,7 @@
                 <div class="px-6 py-4 flex justify-between items-center">
                   <div class="flex-1">
                     <span class="font-medium text-indigo-600">{{ $comment->user ? $comment->user->name : $comment->name }}</span>
-                    <span class="text-sm ml-2 text-gray-500">{{ $comment->commented_at->isoFormat('D MMM') }}</span>
+                    <span class="text-sm ml-2 text-gray-500">{{ $comment->commented_at->isoFormat('D MMM YYYY, HH:mm') }}</span>
                   </div>
                   <div class="ml-5 flex-shrink-0">
                     <x-heroicon-s-chevron-right class="h-5 w-5 text-gray-400"/>

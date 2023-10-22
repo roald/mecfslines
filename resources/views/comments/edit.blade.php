@@ -164,7 +164,7 @@
 
                   <div class="col-span-6">
                     <label for="comment_commented_at" class="block text-sm font-medium text-gray-700">{{ __('Published at') }}</label>
-                    <input type="date" name="commented_at" id="comment_commented_at" value="{{ old('commented_at', $comment->commented_at->isoFormat('YYYY-MM-DD')) }}" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="{{ Carbon\Carbon::now()->isoFormat('YYYY-MM-DD') }}">
+                    <input type="datetime-local" name="commented_at" id="comment_commented_at" value="{{ old('commented_at', $comment->commented_at->isoFormat('YYYY-MM-DD\THH:mm')) }}" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="{{ Carbon\Carbon::now()->isoFormat('YYYY-MM-DD') }}">
                   </div>
                 </div>
               </div>
