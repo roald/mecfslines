@@ -96,6 +96,8 @@
                   <a href="{{ route('events.show', $block->page->event) }}" class="font-medium text-indigo-600 text-indigo-500">{{ $block->page->event->title }}</a>
                 @elseif( $block->page->type == 'person' )
                   <a href="{{ route('people.show', $block->page->person) }}" class="font-medium text-indigo-600 text-indigo-500">{{ $block->page->person->name }}</a>
+                @elseif( $block->page->type == 'post' )
+                  <a href="{{ route('posts.show', $block->page->post) }}" class="font-medium text-indigo-600 text-indigo-500">{{ $block->page->post->title }}</a>
                 @elseif( $block->page->type == 'product' )
                   <a href="{{ route('products.show', $block->page->product) }}" class="font-medium text-indigo-600 text-indigo-500">{{ $block->page->product->name }}</a>
                 @elseif( $block->page->type == 'project' )

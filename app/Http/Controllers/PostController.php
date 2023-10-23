@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\PostRequest;
+use App\Models\Page;
 use App\Models\Post;
 use Carbon\Carbon;
 
@@ -111,5 +113,28 @@ class PostController extends Controller
         $post->multimedia()->delete();
         $post->delete();
         return redirect()->route('posts.index');
+    }
+
+    public function createBlock(Post $post)
+    {
+        if( is_null($post->page) ) {
+            $page = Page::create([
+                'title' => $post->title,
+                'slug' => 'post_'. $post->id,
+                'order' => 1,
+                'type' => 'post',
+            ]);
+            $page->post()->save($post);
+            $post->refresh();
+        }
+        return redirect()->route('pages.blocks.create', $post->page);
+    }
+
+    public function tagging(Request $request, Post $post)
+    {
+        $request->validate(['tag_id' => 'required|exists:tags,id']);
+        if( $request->method() == 'POST' ) $post->tags()->attach($request->tag_id);
+        elseif( $request->method() == 'DELETE' ) $post->tags()->detach($request->tag_id);
+        return redirect()->route('posts.show', $post);
     }
 }

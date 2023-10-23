@@ -52,6 +52,11 @@ class Page extends Model implements HasMedia
         return $this->hasOne(Person::class);
     }
 
+    public function post()
+    {
+        return $this->hasOne(Post::class);
+    }
+
     public function product()
     {
         return $this->hasOne(Product::class);
