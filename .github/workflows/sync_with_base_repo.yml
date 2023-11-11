@@ -4,6 +4,7 @@ on:
   schedule:
     # Runs at 11:00 on the first of every month
     - cron: '0 11 1 * *'
+  workflow_dispatch:
 
 jobs:
   sync_with_base_repo:
@@ -13,7 +14,7 @@ jobs:
     steps:
       # Step 1: Check out the current repository
       - name: Check out the current repo
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
