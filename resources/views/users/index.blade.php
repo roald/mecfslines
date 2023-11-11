@@ -46,7 +46,12 @@
                   @forelse( $users as $user )
                     <tr>
                       <td class="px-6 py-4 whitespace-nowrap text-sm font-bold">
-                        <a href="{{ route('users.show', $user) }}" class="text-indigo-600 hover:text-indigo-900">{{ $user->name }}</a>
+                        <a href="{{ route('users.show', $user) }}" class="text-indigo-600 hover:text-indigo-900 whitespace-nowrap">
+                          <div class="rounded-full inline-block h-6 w-6 overflow-hidden align-middle mr-1">
+                            <img src="{{ $user->gravatar(48) }}" alt="" class="w-full">
+                          </div>
+                          {{ $user->name }}
+                        </a>
                       </td>
                       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 hidden md:table-cell">
                         {{ $user->email }}

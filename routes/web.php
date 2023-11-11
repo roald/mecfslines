@@ -56,6 +56,9 @@ Route::prefix('my')->middleware(['auth'])->group(function () {
 Route::prefix('admin')->middleware(['auth.admin', 'verified'])->group(function () {
     Route::redirect('/', '/admin/dashboard')->name('admin');
     Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
+    Route::get('profile', [UserController::class, 'profile'])->name('admin.profile');
+    Route::get('profile/edit', [UserController::class, 'editProfile'])->name('admin.profile.edit');
+    Route::patch('profile', [UserController::class, 'updateProfile']);
 
     Route::get('pages/{page}/remove', [PageController::class, 'remove'])->name('pages.remove');
     Route::resource('pages', PageController::class);

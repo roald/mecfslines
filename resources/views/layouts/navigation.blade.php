@@ -126,28 +126,23 @@
         </nav>
       </div>
       <div class="flex-shrink-0 flex border-t border-gray-200 dark:border-gray-700 dark:bg-gray-700 p-4">
-        <form method="POST" action="{{ route('logout') }}">
-          @csrf
-          <a href="{{ route('logout') }}" class="flex-shrink-0 group block pl-safe-area-inset" onclick="event.preventDefault(); this.closest('form').submit();">
-            <div class="flex items-center">
-              <div>
-                <span class="inline-block h-9 w-9 rounded-full overflow-hidden bg-gray-100 dark:bg-gray-200">
-                  <svg class="h-full w-full text-gray-300 dark:text-gray-400" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                  </svg>
-                </span>
-              </div>
-              <div class="ml-3">
-                <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900 dark:text-white dark:group-hover:text-white">
-                  {{ Auth::user()->name }}
-                </p>
-                <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700 dark:text-gray-400 dark:group-hover:text-gray-300">
-                  {{ __('Log out') }}
-                </p>
-              </div>
+        <a href="{{ route('admin.profile') }}" class="flex-shrink-0 group block pl-safe-area-inset">
+          <div class="flex items-center">
+            <div>
+              <span class="inline-block h-9 w-9 rounded-full overflow-hidden bg-gray-100 dark:bg-gray-200">
+                <img src="{{ Auth::user()->gravatar() }}" alt="" class="h-full w-full">
+              </span>
             </div>
-          </a>
-        </form>
+            <div class="ml-3">
+              <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900 dark:text-white dark:group-hover:text-white">
+                {{ Auth::user()->name }}
+              </p>
+              <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700 dark:text-gray-400 dark:group-hover:text-gray-300">
+                {{ __('Profile / log out') }}
+              </p>
+            </div>
+          </div>
+        </a>
       </div>
     </div>
     <div class="flex-shrink-0 w-14">
@@ -272,27 +267,23 @@
         </nav>
       </div>
       <div class="flex-shrink-0 flex border-t border-gray-200 dark:border-gray-700 dark:bg-gray-700 p-4">
-        <form method="POST" action="{{ route('logout') }}">
-          @csrf
-          <a href="{{ route('logout') }}" class="flex-shrink-0 w-full group block pl-safe-area-inset" onclick="event.preventDefault(); this.closest('form').submit();">
-            <div class="flex items-center">
-              <div>
-                <span class="inline-block h-9 w-9 rounded-full overflow-hidden bg-gray-100 dark:bg-gray-200">
-                  <svg class="h-full w-full text-gray-300 dark:text-gray-400" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                  </svg>
-                </span>
-              </div>
-              <div class="ml-3">
-                <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900 dark:text-white dark:group-hover:text-white">
-                  {{ Auth::user()->name }}
-                </p>
-                <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700 dark:text-gray-300 dark:group-hover:text-gray-200">
-                  {{ __('Log out') }}
-                </p>
-              </div>
+        <a href="{{ route('admin.profile') }}" class="flex-shrink-0 w-full group block pl-safe-area-inset">
+          <div class="flex items-center">
+            <div>
+              <span class="inline-block h-9 w-9 rounded-full overflow-hidden bg-gray-100 dark:bg-gray-200">
+                <img src="{{ Auth::user()->gravatar() }}" alt="" class="h-full w-full">
+              </span>
             </div>
-          </a>
+            <div class="ml-3">
+              <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900 dark:text-white dark:group-hover:text-white">
+                {{ Auth::user()->name }}
+              </p>
+              <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700 dark:text-gray-400 dark:group-hover:text-gray-300">
+                {{ __('Profile / log out') }}
+              </p>
+            </div>
+          </div>
+        </a>
         </form>
       </div>
     </div>

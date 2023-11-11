@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\UserRequest;
 use App\Mail\UserInvitation;
 use App\Models\User;
+use Auth;
 
 class UserController extends Controller
 {
@@ -66,5 +69,29 @@ class UserController extends Controller
         if( $user->invitation_token == '' ) abort(400);
         Mail::send(new UserInvitation($user));
         return redirect()->route('users.show', $user);
+    }
+
+    public function profile()
+    {
+        $user = Auth::user();
+        return view('users.profile')->with('user', $user);
+    }
+
+    public function editProfile()
+    {
+        $user = Auth::user();
+        return view('users.profile-edit')->with('user', $user);
+    }
+
+    public function updateProfile(ProfileRequest $request)
+    {
+        $user = Auth::user();
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+        if( $request->filled('password') ) {
+            $user->password = Hash::make($request->get('password'));
+        }
+        $user->save();
+        return redirect()->route('admin.profile');
     }
 }

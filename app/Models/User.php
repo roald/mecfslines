@@ -80,4 +80,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->orders()->where('status', 'open')->doesntHave('payments')->orderBy('created_at', 'asc')->first();
     }
+
+    public function gravatar($size = 200)
+    {
+        return 'https://www.gravatar.com/avatar/' . md5(strtolower(trim($this->email))) . '?d=mp&s=' . $size;
+    }
 }
