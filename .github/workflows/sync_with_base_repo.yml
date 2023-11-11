@@ -1,0 +1,54 @@
+name: Sync with base repository
+
+on:
+  schedule:
+    # Runs at 11:00 on the first of every month
+    - cron: '0 11 1 * *'
+
+jobs:
+  sync_with_base_repo:
+    runs-on: ubuntu-latest
+    # This condition checks if the current repository is NOT the base repository
+    if: ${{ github.repository != 'roald/talc' }}
+    steps:
+      # Step 1: Check out the current repository
+      - name: Check out the current repo
+        uses: actions/checkout@v4.1.1
+        with:
+          fetch-depth: 0
+
+      # Step 2: Configure user for Git
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+      # Step 3: Create a new branch for the changes
+      - name: Create a new branch
+        run: |
+          BRANCH_NAME="talc-update-$(date +'%Y%m%d')"
+          git checkout -b $BRANCH_NAME
+
+      # Step 4: Pull changes from the base repository
+      - name: Pull changes from the base repository
+        run: |
+          git pull https://github.com/roald/talc.git main
+
+      # Step 5: Push the branch to the remote
+      - name: Push the branch
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: $BRANCH_NAME
+
+      # Step 6: Create a pull request
+      - name: Create Pull Request
+        uses: repo-sync/pull-request@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          source_branch: $BRANCH_NAME
+          destination_branch: "main"
+          pr_title: "TALC update from base repository"
+          pr_body: "This is an automated pull request to update from the TALC base repository."
+          pr_reviewer: "roald"
+          pr_label: "talc"
