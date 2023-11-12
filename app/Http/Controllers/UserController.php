@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
-use App\Http\Requests\ProfileRequest;
+use App\Http\Requests\AdminProfileRequest;
 use App\Http\Requests\UserRequest;
 use App\Mail\UserInvitation;
 use App\Models\User;
@@ -83,7 +83,7 @@ class UserController extends Controller
         return view('users.profile-edit')->with('user', $user);
     }
 
-    public function updateProfile(ProfileRequest $request)
+    public function updateProfile(AdminProfileRequest $request)
     {
         $user = Auth::user();
         $user->name = $request->get('name');
