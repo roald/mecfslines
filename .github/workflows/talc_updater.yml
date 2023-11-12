@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  sync_with_base_repo:
+  talc_update:
     runs-on: ubuntu-latest
     # This condition checks if the current repository is NOT the base repository
     if: ${{ github.repository != 'roald/talc' }}
