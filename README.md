@@ -83,3 +83,12 @@ And add the initial admin
 ```sh
 php artisan db:seed
 ```
+
+### Setting up automatic updates
+The `.github/workflows/talc_updater.yml` Github action will create monthly updates from the TALC main branch. This should retrieve all security updates and new functionality. A PR will be created with these updates, so there will not be any automatic additions.
+
+To make this work, a Github PAT (Personal Access Token) has to be added as a secret. In Github to `Settings > Secrets and variables > Actions` and add there a secret with name:
+```
+TALC_ACCESS_TOKEN
+```
+The key should be stored in your password vault.
