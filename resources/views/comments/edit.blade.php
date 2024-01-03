@@ -134,7 +134,7 @@
                       x-init="resize()"
                       @input="resize()"
                       type="text" id="comment_message" name="message" rows="4"
-                      class="mt-1 w-full min-h-[80px] shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md"
+                      class="mt-1 w-full min-h-20 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md"
                       placeholder="">{{ old('message', $comment->message) }}</textarea>
                     @if( env('TALC_MARKDOWN', false) )
                       <div class="mt-1" x-data="{markdown: false}">
