@@ -43,6 +43,10 @@
   @apply text-3xl mb-2;
 }
 
+.subkop {
+  @apply text-2xl text-magenta -mt-2 mb-4;
+}
+
 .button {
   @apply bg-oranje text-white font-normal py-3 px-8 rounded-xl text-nowrap;
 }

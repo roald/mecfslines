@@ -39,4 +39,49 @@ class Person extends Model implements HasMedia
                 $this->addMediaConversion('large')->width('1000')->height('1000');
             });
     }
+
+    public function buildPage()
+    {
+        $page = new Page([
+            'name' => $this->name,
+            'slug' => $this->slug,
+            'type' => 'person',
+            'status' => 'active',
+        ]);
+
+        $headerBlock = new Block([
+            'type' => 'header-image',
+            'grant' => 'all',
+            'heading' => $this->name,
+        ]);
+        $detailBlock = new Block([
+            'type' => 'person-info',
+            'grant' => 'all',
+            'heading' => $this->name,
+            'body' => $this->information,
+        ]);
+        $detailBlock->tags = $this->tags()->where('type', 'person')->get();
+        $peopleBlock = new Block([
+            'type' => 'people-list',
+            'grant' => 'all',
+            'heading' => 'Meer leden',
+        ]);
+        $partnerBlock = new Block([
+            'type' => 'partners',
+            'grant' => 'all',
+            'heading' => 'Partners',
+        ]);
+        $page->blocks = collect([$headerBlock, $detailBlock, $peopleBlock, $partnerBlock]);
+
+        return $page;
+    }
+
+    public function shortInformation()
+    {
+        if( $this->tags()->where('type', 'person')->count() > 0 ) {
+            $tag = $this->tags()->where('type', 'person')->first();
+            return $tag->description;
+        }
+        return $this->information;
+    }
 }

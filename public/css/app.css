@@ -1992,6 +1992,14 @@ select {
   font-size: 1.875rem;
   line-height: 2.25rem;
 }
+.subkop {
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  --tw-text-opacity: 1;
+  color: rgb(154 23 102 / var(--tw-text-opacity));
+}
 .button {
   text-wrap: nowrap;
   border-radius: 0.75rem;

@@ -58,7 +58,7 @@ class WebsiteController extends Controller
 
     public function person(Person $person)
     {
-        if( is_null($person->page) ) return redirect()->route('web.home');
+        if( is_null($person->page) ) return $this->page($person->buildPage());
 
         return $this->page($person->page);
     }

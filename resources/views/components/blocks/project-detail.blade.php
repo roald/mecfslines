@@ -15,7 +15,13 @@
               @endif
               <div class="color-lines w-48 h-48 absolute -top-16 -right-32"></div>
               <h2 class="kop">{{ $tag->name }}</h2>
+              @if( !empty($person) )
+                <div class="subkop">{{ $person->role }}</div>
+              @endif
               <p>{!! nl2br($tag->description) !!}</p>
+              <div class="buttonbar mt-6">
+                <a href="{{ route('web.person', $person) }}" class="button">Lees meer</a>
+              </div>
             </div>
           @endif  
 
