@@ -18,11 +18,11 @@ class Block extends Model implements HasMedia
     public static $grants = ['all', 'public', 'user'];
 
     public static $types = [
-        'general' => ['header', 'text', 'gallery', 'footer'],
-        'events' => ['event-list', 'event-detail'],
-        'products' => ['product-list', 'product-detail'],
-        'memberships' => ['membership-list'],
-        'form' => ['contact'],
+        'text' => ['block', 'center', 'columns', 'text-image'],
+        'general' => ['header-text', 'header-image', 'partners'],
+        'banner' => ['text-banner', 'image-banner'],
+        'people' => ['people-list', 'person-info'],
+        'project' => ['projects-list', 'project-detail'],
     ];
 
     public function actions()
@@ -51,6 +51,14 @@ class Block extends Model implements HasMedia
 
         $converter = new CommonMarkConverter();
         return $converter->convert($this->body);
+    }
+
+    public function markdownHeading()
+    {
+        if( empty($this->heading) ) return "";
+
+        $converter = new CommonMarkConverter();
+        return $converter->convert($this->heading);
     }
 
     public function registerMediaCollections(): void

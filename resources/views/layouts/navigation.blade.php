@@ -17,7 +17,7 @@
       </div>
       <div class="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
         <div class="flex-shrink-0 flex items-center px-4">
-          <a href="{{ route('web.home') }}" class="text-4xl font-bold text-green-500 hover:text-green-600">TALC</a>
+          <a href="{{ route('web.home') }}" class="text-4xl font-bold text-green-500 hover:text-green-600">MECFS Lines</a>
         </div>
         <nav class="mt-5 px-2 space-y-1">
           <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
@@ -158,7 +158,7 @@
     <div class="flex flex-col h-0 flex-1 border-r border-gray-200 bg-white dark:bg-gray-800">
       <div class="flex-1 flex flex-col pt-5 pb-4 pl-safe-area-inset overflow-y-auto">
         <div class="flex items-center flex-shrink-0 px-4">
-          <a href="{{ route('web.home') }}" class="text-4xl font-bold text-green-500 hover:text-green-600">TALC</a>
+          <a href="{{ route('web.home') }}" class="text-4xl font-bold text-green-500 hover:text-green-600">MECFS Lines</a>
         </div>
         <nav class="mt-5 flex-1 px-2 bg-white dark:bg-gray-800 space-y-1">
           <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">

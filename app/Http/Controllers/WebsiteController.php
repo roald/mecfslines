@@ -79,7 +79,7 @@ class WebsiteController extends Controller
 
     public function project(Project $project)
     {
-        if( is_null($project->page) ) return redirect()->route('web.home');
+        if( is_null($project->page) ) return $this->page($project->buildPage());
 
         return $this->page($project->page);
     }

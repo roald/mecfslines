@@ -16,4 +16,52 @@
   .pr-safe-area-inset {
     padding-right: env(safe-area-inset-right);
   }
+
+}
+
+/***********************************\
+* ADDED MECFS LINES STYLING         *
+\***********************************/
+
+.logo {
+  @apply bg-contain bg-no-repeat bg-center bg-[url('/images/lines-color.png')] dark:bg-[url('/images/lines-white.png')];
+}
+
+.overlay {
+  @apply fixed w-full h-full top-0 left-0 bg-blauw-donker bg-opacity-50 dark:bg-black dark:bg-opacity-50 z-50;
+}
+
+.title {
+  @apply text-5xl font-normal mb-4;
+}
+
+.title em {
+  @apply not-italic text-groen;
+}
+
+.kop {
+  @apply text-3xl mb-2;
+}
+
+.button {
+  @apply bg-oranje text-white font-normal py-3 px-8 rounded-xl text-nowrap;
+}
+.button.external {
+  @apply bg-groen;
+}
+.buttonbar {
+  @apply flex flex-wrap gap-4;
+}
+
+.corner-lines {
+  @apply bg-no-repeat bg-contain bg-[url('/images/lines-color.png')];
+}
+.color-lines {
+  @apply bg-[url('/images/lines-color.png')] bg-no-repeat bg-contain;
+}
+.circle-magenta {
+  @apply bg-[url('/images/circle-magenta.png')] dark:bg-[url('/images/circle-blauw.png')] bg-no-repeat bg-left bg-contain;
+}
+.white-lines {
+  @apply bg-[url('/images/lines-white.png')] bg-no-repeat bg-contain;
 }

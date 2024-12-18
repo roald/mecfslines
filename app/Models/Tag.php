@@ -11,7 +11,7 @@ class Tag extends Model
 
     protected $fillable = ['name', 'type', 'description', 'slug'];
 
-    public static $types = ['keyword'];
+    public static $types = ['color', 'person'];
 
     public function blocks()
     {
@@ -33,9 +33,9 @@ class Tag extends Model
         return $this->belongsTo(Page::class);
     }
 
-    public function person()
+    public function people()
     {
-        return $this->belongsTo(Person::class);
+        return $this->morphedByMany(Person::class, 'taggable');
     }
 
     public function products()

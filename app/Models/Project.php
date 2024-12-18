@@ -47,4 +47,49 @@ class Project extends Model implements HasMedia
                 $this->addMediaConversion('large')->width('1000')->height('1000');
             });
     }
+
+    public function buildPage()
+    {
+        $page = new Page([
+            'name' => $this->title,
+            'slug' => $this->slug,
+            'type' => 'project',
+            'status' => 'active',
+        ]);
+
+        $headerBlock = new Block([
+            'type' => 'header-image',
+            'grant' => 'all',
+            'heading' => $this->title,
+        ]);
+        $detailBlock = new Block([
+            'type' => 'project-detail',
+            'grant' => 'all',
+            'heading' => $this->title,
+            'body' => $this->description,
+        ]);
+        $detailBlock->tags = $this->tags()->where('type', 'person')->get();
+        if( !empty($this->link) ) {
+            $infoAction = new Action([
+                'action' => 'Meer informatie',
+                'type' => 'url',
+                'target' => $this->link,
+                'order' => 1,
+            ]);
+            $detailBlock->actions = collect([$infoAction]);
+        }
+        $projectsListBlock = new Block([
+            'type' => 'projects-list',
+            'grant' => 'all',
+            'heading' => 'Meer projecten',
+        ]);
+        $partnerBlock = new Block([
+            'type' => 'partners',
+            'grant' => 'all',
+            'heading' => 'Partners',
+        ]);
+        $page->blocks = collect([$headerBlock, $detailBlock, $projectsListBlock, $partnerBlock]);
+
+        return $page;
+    }
 }

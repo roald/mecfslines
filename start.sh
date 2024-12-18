@@ -1,1 +1,1 @@
-php artisan serve --host=talc.test
+php artisan serve --host=mecfslines.test
